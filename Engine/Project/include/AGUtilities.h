@@ -1,36 +1,52 @@
 #pragma once
 
-#include "Utilities.h"
+#include "AGTypes.h"
 
 //------------------------------------------------------------------------------------------------------------------------------
-//------------------------------------------------------------------------------------------------------------------------------
-class AGSingleton
-{
-public:
-	AGSingleton				()	{};
-	virtual ~AGSingleton	()	{};
-};
+#define SAFE_DELETE(p)		\
+{							\
+	if (p)					\
+	{						\
+		delete p;			\
+		p = NULL;			\
+	}						\
+}
 
 //------------------------------------------------------------------------------------------------------------------------------
-//------------------------------------------------------------------------------------------------------------------------------
-#define DeclareSingleton(Singleton)			\
-private :									\
-	static Singleton*	_mInstance;			\
-	Singleton	() {};						\
-	~Singleton	() { DestroySingleton(); };	\
-											\
-public :									\
-	inline static Singleton* GetSingleton()	\
-	{										\
-		SAFE_NEW(_mInstance, Singleton);	\
-		return _mInstance;					\
-	}										\
-											\
-	static void DestroySingleton()			\
-	{										\
-		SAFE_DELETE(_mInstance);			\
-	}
+#define SAFE_RELEASE(p)		\
+{							\
+	if (p)					\
+	{						\
+		p->Release();		\
+		p = NULL;			\
+	}						\
+}
 
 //------------------------------------------------------------------------------------------------------------------------------
-#define InitSingleton(Singleton)			\
-Singleton* Singleton::_mInstance = NULL;
+#define SAFE_NEW(p, type)	\
+{							\
+	if (!p)					\
+	{						\
+		p = new type;		\
+	}						\
+}
+
+//------------------------------------------------------------------------------------------------------------------------------
+#include <vector>
+
+#define DefineVectorIterator(type, name)	typedef std::vector< type* >::iterator name
+
+//------------------------------------------------------------------------------------------------------------------------------
+#ifdef UNICODE
+#undef UNICODE
+#endif
+
+bool Warning(bool _test, cStr _str);
+
+#define WarningReturn(test, msg)	\
+{									\
+	if (Warning(test, msg))			\
+	{								\
+		return;						\
+	}								\
+}
