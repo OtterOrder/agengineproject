@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)..\Extern&quot;"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)include&quot;;&quot;$(SolutionDir)..\Extern&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -166,6 +166,38 @@
 	<References>
 	</References>
 	<Files>
+		<Filter
+			Name="Core"
+			>
+			<File
+				RelativePath=".\src\System.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\System.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Misc"
+			>
+			<File
+				RelativePath=".\include\Singleton.h"
+				>
+			</File>
+			<File
+				RelativePath=".\include\Types.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\Utilities.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\Utilities.h"
+				>
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>
