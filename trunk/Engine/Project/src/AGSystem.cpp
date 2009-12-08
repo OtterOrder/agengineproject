@@ -7,11 +7,13 @@ extern	AGGame* gGame;
 //------------------------------------------------------------------------------------------------------------------------------
 void AGSystem::Init( void )
 {
+	_mDestroy = false;
+
 	gGame->Init();
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
-void AGSystem::Shutdown( void )
+void AGSystem::Destroy( void )
 {
 	gGame->Destroy();
 	delete gGame;
@@ -20,7 +22,7 @@ void AGSystem::Shutdown( void )
 //------------------------------------------------------------------------------------------------------------------------------
 void AGSystem::MainLoop( void )
 {
-	while (true)
+	while (!_mDestroy)
 	{
 		gGame->Update();
 	}
@@ -32,5 +34,5 @@ void main ()
 {
 	AGSystem::GetSingleton()->Init();
 	AGSystem::GetSingleton()->MainLoop();
-	AGSystem::GetSingleton()->Shutdown();
+	AGSystem::GetSingleton()->Destroy();
 }
