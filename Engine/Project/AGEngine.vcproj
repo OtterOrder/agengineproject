@@ -181,6 +181,66 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="Entities"
+			>
+			<File
+				RelativePath=".\src\AG2DEntity.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\AG2DEntity.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\AG2DGraphicEntity.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\AG2DGraphicEntity.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\AG2DGroup.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\AG2DGroup.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\AG3DEntity.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\AG3DEntity.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\AG3DGraphicEntity.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\AG3DGraphicEntity.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\AG3DGroup.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\AG3DGroup.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\AGEntity.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\AGEntity.h"
+				>
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>
