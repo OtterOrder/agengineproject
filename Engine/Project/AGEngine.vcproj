@@ -185,54 +185,6 @@
 			Name="Entities"
 			>
 			<File
-				RelativePath=".\src\AG2DEntity.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\include\AG2DEntity.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\AG2DGraphicEntity.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\include\AG2DGraphicEntity.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\AG2DGroup.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\include\AG2DGroup.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\AG3DEntity.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\include\AG3DEntity.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\AG3DGraphicEntity.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\include\AG3DGraphicEntity.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\AG3DGroup.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\include\AG3DGroup.h"
-				>
-			</File>
-			<File
 				RelativePath=".\src\AGEntity.cpp"
 				>
 			</File>
@@ -240,6 +192,70 @@
 				RelativePath=".\include\AGEntity.h"
 				>
 			</File>
+			<File
+				RelativePath=".\src\AGGraphicEntity.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\AGGraphicEntity.h"
+				>
+			</File>
+			<Filter
+				Name="2D"
+				>
+				<File
+					RelativePath=".\src\AG2DEntity.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\AG2DEntity.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\AG2DGraphicEntity.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\AG2DGraphicEntity.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\AG2DGroup.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\AG2DGroup.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="3D"
+				>
+				<File
+					RelativePath=".\src\AG3DEntity.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\AG3DEntity.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\AG3DGraphicEntity.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\AG3DGraphicEntity.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\AG3DGroup.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\AG3DGroup.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 	</Files>
 	<Globals>
