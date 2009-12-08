@@ -63,7 +63,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="AGEngine.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="J:\Techno\AGEngine\Engine\Project\Debug"
+				AdditionalLibraryDirectories=""
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"
