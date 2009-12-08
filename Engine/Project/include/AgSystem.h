@@ -4,14 +4,19 @@
 #include "AGSingleton.h"
 
 //------------------------------------------------------------------------------------------------------------------------------
-class AGSystem : public AGSingleton
+class AGSystem : public AGSingleton<AGSystem>
 {
-DeclareSingleton(AGSystem);
+friend class AGSingleton<AGSystem>;
+
+protected:
+	AGSystem	()	{};
+	~AGSystem	()	{};
+
+private:
+	bool	_mDestroy;
 
 public:
 	void	Init		();
-	void	Shutdown	();
+	void	Destroy		();
 	void	MainLoop	();
 };
-
-InitSingleton(AGSystem);

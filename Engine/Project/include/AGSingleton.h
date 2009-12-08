@@ -4,33 +4,29 @@
 
 //------------------------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------------
+template< typename T >
 class AGSingleton
 {
-public:
-	AGSingleton				()	{};
+private:
+	static T*	_mInstance;
+
+protected:
+			 AGSingleton	()	{};
 	virtual ~AGSingleton	()	{};
+
+public:
+	static inline T* GetSingleton()
+	{
+		SAFE_NEW(_mInstance, T);
+		return _mInstance;
+	};
+
+	static void DestroySingleton()
+	{
+		SAFE_DELETE(_mInstance);
+	};
 };
 
 //------------------------------------------------------------------------------------------------------------------------------
-//------------------------------------------------------------------------------------------------------------------------------
-#define DeclareSingleton(Singleton)			\
-private :									\
-	static Singleton*	_mInstance;			\
-	Singleton	() {};						\
-	~Singleton	() { DestroySingleton(); };	\
-											\
-public :									\
-	inline static Singleton* GetSingleton()	\
-	{										\
-		SAFE_NEW(_mInstance, Singleton);	\
-		return _mInstance;					\
-	}										\
-											\
-	static void DestroySingleton()			\
-	{										\
-		SAFE_DELETE(_mInstance);			\
-	}
-
-//------------------------------------------------------------------------------------------------------------------------------
-#define InitSingleton(Singleton)			\
-Singleton* Singleton::_mInstance = NULL;
+template< typename T >
+T* AGSingleton< T >::_mInstance = NULL;
