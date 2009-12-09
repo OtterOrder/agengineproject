@@ -12,7 +12,7 @@
     <node id="n0">
       <data key="d3">
         <y:UMLClassNode>
-          <y:Geometry height="49.15277777777783" width="80.0" x="13.0" y="-26.0"/>
+          <y:Geometry height="49.15277777777783" width="80.0" x="13.0" y="-123.16839024390242"/>
           <y:Fill color="#FFCC00" transparent="false"/>
           <y:BorderStyle color="#000000" type="line" width="1.0"/>
           <y:NodeLabel alignment="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="13" fontStyle="bold" hasBackgroundColor="false" hasLineColor="false" height="19.92626953125" modelName="internal" modelPosition="c" textColor="#000000" visible="true" width="63.95361328125" x="8.023193359375" y="3.0">AGObject</y:NodeLabel>
@@ -358,8 +358,8 @@ AG2DAnimPlayer* _mpAnimPlayer</y:AttributeLabel>
       <data key="d6">
         <y:PolyLineEdge>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="-15.0">
-            <y:Point x="-482.5" y="-46.0"/>
-            <y:Point x="442.712962962963" y="-46.0"/>
+            <y:Point x="-482.5" y="-143.16839024390242"/>
+            <y:Point x="442.712962962963" y="-143.16839024390242"/>
             <y:Point x="442.712962962963" y="41.0"/>
             <y:Point x="321.0" y="41.0"/>
           </y:Path>
@@ -388,6 +388,18 @@ AG2DAnimPlayer* _mpAnimPlayer</y:AttributeLabel>
           <y:Path sx="0.0" sy="0.0" tx="0.0" ty="29.989604467960145">
             <y:Point x="-307.5" y="155.96875"/>
             <y:Point x="-67.35416666666669" y="155.96875"/>
+          </y:Path>
+          <y:LineStyle color="#000000" type="line" width="1.0"/>
+          <y:Arrows source="none" target="standard"/>
+          <y:BendStyle smoothed="false"/>
+        </y:PolyLineEdge>
+      </data>
+    </edge>
+    <edge id="e11" source="n5" target="n0">
+      <data key="d6">
+        <y:PolyLineEdge>
+          <y:Path sx="0.0" sy="0.0" tx="0.0" ty="17.015513550135495">
+            <y:Point x="53.0" y="-11.0"/>
           </y:Path>
           <y:LineStyle color="#000000" type="line" width="1.0"/>
           <y:Arrows source="none" target="standard"/>
