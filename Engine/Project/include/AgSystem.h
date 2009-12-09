@@ -13,10 +13,12 @@ protected:
 	~AGSystem	()	{};
 
 private:
-	bool	_mDestroy;
+	bool	_mShutDown;
 
 public:
 	void	Init		();
 	void	Destroy		();
 	void	MainLoop	();
+
+	void	ShutDown	()	{ _mShutDown = true; };
 };
