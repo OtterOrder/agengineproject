@@ -257,6 +257,42 @@
 				</File>
 			</Filter>
 		</Filter>
+		<Filter
+			Name="Resources"
+			>
+			<File
+				RelativePath=".\src\AGMesh.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\AGMesh.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\AGResource.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\AGResource.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\AGSound.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\AGSound.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\AGTexture.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\AGTexture.h"
+				>
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>
