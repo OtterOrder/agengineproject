@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AGTypes.h"
+#include "AGSingleton.h"
 
 #include <d3d9.h>
 #include <d3dx9.h>
@@ -14,7 +15,7 @@ typedef		LPDIRECT3DDEVICE9				AGPDevice;
 //--------------------------------------------------------------
 typedef		LPDIRECT3DVERTEXBUFFER9			AGPVertexBuffer;
 typedef		LPDIRECT3DINDEXBUFFER9			AGPIndexBuffer;
-typedef		LPDIRECT3DVERTEXDECLARATION9	AGVertexDeclaration;
+typedef		LPDIRECT3DVERTEXDECLARATION9	AGPVertexDeclaration;
 typedef		D3DVERTEXELEMENT9				AGVertexElement;
 #define		AGMaxDecLength					MAXD3DDECLLENGTH
 
@@ -38,7 +39,7 @@ typedef		D3DXMATRIX						AGMatrix;
 #define		AGMatrixInverse					D3DXMatrixInverse
 #define		AGMatrixTranspose				D3DXMatrixTranspose
 
-//--------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------------
 typedef		D3DXVECTOR2				AGVector2f;
 typedef		D3DXVECTOR3				AGVector3f;
 typedef		D3DXVECTOR4				AGVector4f;
@@ -56,5 +57,11 @@ struct AGVector2i
 	void	 operator = (const AGVector2i& _v)		{ x = _v.x; y = _v.y; };
 };
 
-
 //------------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------------
+class AGDeviceManager : public AGSingleton <AGDeviceManager>
+{
+public:
+	AGDeviceManager		();
+	~AGDeviceManager	();
+};
