@@ -310,6 +310,14 @@
 			Name="Entities"
 			>
 			<File
+				RelativePath=".\src\AGCamera.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\AGCamera.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\AGEntity.cpp"
 				>
 			</File>
@@ -328,6 +336,14 @@
 			<Filter
 				Name="2D"
 				>
+				<File
+					RelativePath=".\src\AG2DCamera.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\AG2DCamera.h"
+					>
+				</File>
 				<File
 					RelativePath=".\src\AG2DEntity.cpp"
 					>
@@ -356,6 +372,14 @@
 			<Filter
 				Name="3D"
 				>
+				<File
+					RelativePath=".\src\AG3DCamera.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\AG3DCamera.h"
+					>
+				</File>
 				<File
 					RelativePath=".\src\AG3DEntity.cpp"
 					>
