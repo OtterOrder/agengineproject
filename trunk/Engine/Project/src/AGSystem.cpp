@@ -33,9 +33,17 @@ void AGSystem::MainLoop( void )
 
 //------------------------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------------
+#include "AGDeviceManager.h"
+
+
 void main ()
 {
 	AGSystem::GetSingleton()->Init();
+
+#ifdef AGMaxDecLength
+	OutputDebugStr("Device = DirectX 9");
+#endif
+
 	AGSystem::GetSingleton()->MainLoop();
 	AGSystem::GetSingleton()->Destroy();
 

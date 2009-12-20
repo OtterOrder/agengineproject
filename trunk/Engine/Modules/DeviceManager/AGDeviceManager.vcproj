@@ -2,9 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="AGEngine"
-	ProjectGUID="{F9B41440-FD3A-4789-BAC0-DE005E70EB36}"
-	RootNamespace="AGEngine"
+	Name="AGDeviceManager"
+	ProjectGUID="{434328D1-1AFA-4FBC-BF5E-155016D62508}"
+	RootNamespace="AGDeviceManager"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="196613"
 	>
@@ -41,8 +41,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories=".\include;.\..\Extern;.\..\Modules\DeviceManager\include"
-				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
+				AdditionalIncludeDirectories="..\..\Project\include;&quot;$(DXSDK_DIR)Include&quot;"
+				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -61,6 +61,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
+				AdditionalLibraryDirectories="$(DXSDK_DIR)Lib\x86"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -105,8 +106,8 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories=".\include;.\..\Extern;.\..\Modules\DeviceManager\include"
-				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
+				AdditionalIncludeDirectories="..\..\Project\include;&quot;$(DXSDK_DIR)Include&quot;"
+				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
@@ -124,6 +125,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
+				AdditionalLibraryDirectories="$(DXSDK_DIR)Lib\x86"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -166,8 +168,8 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories=".\include;.\..\Extern;.\..\Modules\DeviceManager\include"
-				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;AGDX9"
+				AdditionalIncludeDirectories="..\..\Project\include;&quot;$(DXSDK_DIR)Include&quot;"
+				PreprocessorDefinitions="WIN32;_DEBUG;_LIB"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
@@ -186,6 +188,8 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
+				AdditionalDependencies="d3d9.lib"
+				AdditionalLibraryDirectories="$(DXSDK_DIR)Lib\x86"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -230,8 +234,8 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories=".\include;.\..\Extern;.\..\Modules\DeviceManager\include"
-				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;AGDX9"
+				AdditionalIncludeDirectories="..\..\Project\include;&quot;$(DXSDK_DIR)Include&quot;"
+				PreprocessorDefinitions="WIN32;NDEBUG;_LIB"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="0"
@@ -249,6 +253,8 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
+				AdditionalDependencies="d3d9.lib"
+				AdditionalLibraryDirectories="$(DXSDK_DIR)Lib\x86"
 			/>
 			<Tool
 				Name="VCALinkTool"
@@ -271,153 +277,29 @@
 	</References>
 	<Files>
 		<Filter
-			Name="Core"
+			Name="DX"
 			>
-			<File
-				RelativePath=".\include\AGGame.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\AGSystem.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\include\AgSystem.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="Misc"
-			>
-			<File
-				RelativePath=".\include\AGSingleton.h"
-				>
-			</File>
-			<File
-				RelativePath=".\include\AGTypes.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\AGUtilities.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\include\AGUtilities.h"
-				>
-			</File>
-		</Filter>
-		<Filter
-			Name="Entities"
-			>
-			<File
-				RelativePath=".\src\AGEntity.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\include\AGEntity.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\AGGraphicEntity.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\include\AGGraphicEntity.h"
-				>
-			</File>
 			<Filter
-				Name="2D"
+				Name="9"
 				>
 				<File
-					RelativePath=".\src\AG2DEntity.cpp"
+					RelativePath=".\src\AGDeviceManagerDX9.cpp"
 					>
 				</File>
 				<File
-					RelativePath=".\include\AG2DEntity.h"
-					>
-				</File>
-				<File
-					RelativePath=".\src\AG2DGraphicEntity.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\include\AG2DGraphicEntity.h"
-					>
-				</File>
-				<File
-					RelativePath=".\src\AG2DGroup.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\include\AG2DGroup.h"
-					>
-				</File>
-			</Filter>
-			<Filter
-				Name="3D"
-				>
-				<File
-					RelativePath=".\src\AG3DEntity.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\include\AG3DEntity.h"
-					>
-				</File>
-				<File
-					RelativePath=".\src\AG3DGraphicEntity.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\include\AG3DGraphicEntity.h"
-					>
-				</File>
-				<File
-					RelativePath=".\src\AG3DGroup.cpp"
-					>
-				</File>
-				<File
-					RelativePath=".\include\AG3DGroup.h"
+					RelativePath=".\include\AGDeviceManagerDX9.h"
 					>
 				</File>
 			</Filter>
 		</Filter>
-		<Filter
-			Name="Resources"
+		<File
+			RelativePath=".\src\AGDeviceManager.cpp"
 			>
-			<File
-				RelativePath=".\src\AGMesh.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\include\AGMesh.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\AGResource.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\include\AGResource.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\AGSound.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\include\AGSound.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\AGTexture.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\include\AGTexture.h"
-				>
-			</File>
-		</Filter>
+		</File>
+		<File
+			RelativePath=".\include\AGDeviceManager.h"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

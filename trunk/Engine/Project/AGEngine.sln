@@ -3,16 +3,22 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AGEngine", "AGEngine.vcproj", "{F9B41440-FD3A-4789-BAC0-DE005E70EB36}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AGDeviceManager", "..\Modules\DeviceManager\AGDeviceManager.vcproj", "{434328D1-1AFA-4FBC-BF5E-155016D62508}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Win32 = Debug|Win32
-		Release|Win32 = Release|Win32
+		DebugDX9|Win32 = DebugDX9|Win32
+		ReleaseDX9|Win32 = ReleaseDX9|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{F9B41440-FD3A-4789-BAC0-DE005E70EB36}.Debug|Win32.ActiveCfg = Debug|Win32
-		{F9B41440-FD3A-4789-BAC0-DE005E70EB36}.Debug|Win32.Build.0 = Debug|Win32
-		{F9B41440-FD3A-4789-BAC0-DE005E70EB36}.Release|Win32.ActiveCfg = Release|Win32
-		{F9B41440-FD3A-4789-BAC0-DE005E70EB36}.Release|Win32.Build.0 = Release|Win32
+		{F9B41440-FD3A-4789-BAC0-DE005E70EB36}.DebugDX9|Win32.ActiveCfg = DebugDX9|Win32
+		{F9B41440-FD3A-4789-BAC0-DE005E70EB36}.DebugDX9|Win32.Build.0 = DebugDX9|Win32
+		{F9B41440-FD3A-4789-BAC0-DE005E70EB36}.ReleaseDX9|Win32.ActiveCfg = ReleaseDX9|Win32
+		{F9B41440-FD3A-4789-BAC0-DE005E70EB36}.ReleaseDX9|Win32.Build.0 = ReleaseDX9|Win32
+		{434328D1-1AFA-4FBC-BF5E-155016D62508}.DebugDX9|Win32.ActiveCfg = DebugDX9|Win32
+		{434328D1-1AFA-4FBC-BF5E-155016D62508}.DebugDX9|Win32.Build.0 = DebugDX9|Win32
+		{434328D1-1AFA-4FBC-BF5E-155016D62508}.ReleaseDX9|Win32.ActiveCfg = ReleaseDX9|Win32
+		{434328D1-1AFA-4FBC-BF5E-155016D62508}.ReleaseDX9|Win32.Build.0 = ReleaseDX9|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
