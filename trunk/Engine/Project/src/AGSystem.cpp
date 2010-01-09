@@ -1,6 +1,5 @@
 #include "AGSystem.h"
 #include "AGGame.h"
-#include "AGCRC.h"
 
 extern	AGGame* gGame;
 

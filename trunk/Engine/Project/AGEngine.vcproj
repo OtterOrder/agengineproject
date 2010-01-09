@@ -290,14 +290,6 @@
 			Name="Misc"
 			>
 			<File
-				RelativePath=".\src\AGCRC.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\include\AGCRC.h"
-				>
-			</File>
-			<File
 				RelativePath=".\include\AGSingleton.h"
 				>
 			</File>

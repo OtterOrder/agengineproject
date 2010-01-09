@@ -15,15 +15,16 @@ AGResource::~AGResource()
 
 //------------------------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------------
-bool AGResource::Release()
+u32 AGResource::DecRefCount()
 {
 	--_mRefCount;
 
 	if(_mRefCount<=0)
 	{
+		Release ();
+
 		delete this;
-		return true;
 	}
 
-	return false;
+	return _mRefCount;
 }
