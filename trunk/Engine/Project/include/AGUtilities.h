@@ -43,11 +43,11 @@
 #undef UNICODE
 #endif
 
-bool Warning(bool _test, cStr _str);
+bool AGWarning(bool _test, cStr _str);
 
-#define WarningReturn(test, msg)	\
+#define AGWarningReturn(test, msg)	\
 {									\
-	if (Warning(test, msg))			\
+	if (AGWarning(test, msg))			\
 	{								\
 		return;						\
 	}								\
