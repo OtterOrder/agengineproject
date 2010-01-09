@@ -1,6 +1,5 @@
 #pragma once
 
-//------------------------------------------------------------------------------------------------------------------------------
 #include "AGSingleton.h"
 
 //------------------------------------------------------------------------------------------------------------------------------
@@ -8,15 +7,15 @@ class AGSystem : public AGSingleton<AGSystem>
 {
 friend class AGSingleton<AGSystem>;
 
+private:
+	bool	_mShutDown;
+
 protected:
 	AGSystem	()	{};
 	~AGSystem	()	{};
 
-private:
-	bool	_mShutDown;
-
 public:
-	void	Init		();
+	void	Initializze	();
 	void	Destroy		();
 	void	MainLoop	();
 

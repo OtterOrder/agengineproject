@@ -1,13 +1,16 @@
 #include "AGSystem.h"
 #include "AGGame.h"
+#include "AGCRC.h"
 
 extern	AGGame* gGame;
 
 //------------------------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------------
-void AGSystem::Init( void )
+void AGSystem::Initializze( void )
 {
 	_mShutDown = false;
+
+	CRC::Initialize();
 
 	gGame->Init();
 }
@@ -35,7 +38,7 @@ void AGSystem::MainLoop( void )
 //------------------------------------------------------------------------------------------------------------------------------
 void main ()
 {
-	AGSystem::GetSingleton()->Init();
+	AGSystem::GetSingleton()->Initializze();
 	AGSystem::GetSingleton()->MainLoop();
 	AGSystem::GetSingleton()->Destroy();
 

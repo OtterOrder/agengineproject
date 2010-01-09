@@ -282,13 +282,21 @@
 				>
 			</File>
 			<File
-				RelativePath=".\include\AgSystem.h"
+				RelativePath=".\include\AGSystem.h"
 				>
 			</File>
 		</Filter>
 		<Filter
 			Name="Misc"
 			>
+			<File
+				RelativePath=".\src\AGCRC.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\AGCRC.h"
+				>
+			</File>
 			<File
 				RelativePath=".\include\AGSingleton.h"
 				>
@@ -439,6 +447,18 @@
 			</File>
 			<File
 				RelativePath=".\include\AGTexture.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Managers"
+			>
+			<File
+				RelativePath=".\src\AGResourceManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\AGResourceManager.h"
 				>
 			</File>
 		</Filter>
