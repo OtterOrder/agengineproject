@@ -9,6 +9,8 @@ void AGSystem::Initializze( void )
 {
 	_mShutDown = false;
 
+	mTimer.Initialize();
+
 	CRC::Initialize();
 
 	gGame->Init();
@@ -27,6 +29,8 @@ void AGSystem::MainLoop( void )
 {
 	while (!_mShutDown)
 	{
+		mTimer.Update();
+
 		gGame->Update();
 	}
 }
