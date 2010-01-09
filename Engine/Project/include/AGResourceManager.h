@@ -43,14 +43,14 @@ public:
 			T* pResource	= new T();
 			Add( _ResourceName, Crc, dynamic_cast<AGResource*>(pResource) );
 
-			if( pResource->Load(_FileName, _Parameters) != RES_SUCCEED )
+			if( pResource->Load(_FileName, _Parameters) != AGResource::RES_SUCCEED )
 			{
 				AGWarning("Resource load failed");
 				SAFE_DELETE(pResource);
 				return NULL;
 			}
 
-			pResource->AddRef();
+			pResource->IncRefCount();
 			return pResource;
 		}
 	}

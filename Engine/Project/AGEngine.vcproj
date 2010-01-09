@@ -294,6 +294,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\AGTimer.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\AGTimer.h"
+				>
+			</File>
+			<File
 				RelativePath=".\include\AGTypes.h"
 				>
 			</File>
