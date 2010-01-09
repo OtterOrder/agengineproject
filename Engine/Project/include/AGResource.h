@@ -14,8 +14,11 @@ public:
 			AGResource	();
 	virtual	~AGResource	();
 
-	inline	void	AddRef()	{ ++_mRefCount; };
-			bool	Release();						// Return true if the resource is deleted
+	inline	void	IncRefCount()	{ ++_mRefCount; };
+			u32		DecRefCount();						// Return the remaining number of references
+	inline	u32		GetRefCount()	{ return _mRefCount; };
+
+	virtual	void	Release	() =0;
 
 	inline const cStr& GetName() const		{ return _mName; };
 };
