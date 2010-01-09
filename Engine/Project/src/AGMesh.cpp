@@ -16,3 +16,9 @@ AGMesh::AGMesh()
 AGMesh::~AGMesh()
 {
 }
+
+//------------------------------------------------------------------------------------------------------------------------------
+AGResource::AGResourceResult AGMesh::Load (cStr _FileName, void* _Parameters)
+{
+	return RES_SUCCEED;
+}

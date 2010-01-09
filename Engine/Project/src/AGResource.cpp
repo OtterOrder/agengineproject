@@ -11,6 +11,7 @@ AGResource::AGResource()
 //------------------------------------------------------------------------------------------------------------------------------
 AGResource::~AGResource()
 {
+	Release ();
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
@@ -20,11 +21,14 @@ u32 AGResource::DecRefCount()
 	--_mRefCount;
 
 	if(_mRefCount<=0)
-	{
-		Release ();
-
 		delete this;
-	}
 
 	return _mRefCount;
+}
+
+void AGResource::SetName(cStr _Name)
+{
+	AGWarning(_mName != "", "Resource name already setted");
+
+	_mName = _Name;
 }
