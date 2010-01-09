@@ -1,7 +1,6 @@
 #pragma once
 
 #include "AGResource.h"
-#include "AGDeviceManager.h"
 
 //------------------------------------------------------------------------------------------------------------------------------
 class AGMesh : public AGResource

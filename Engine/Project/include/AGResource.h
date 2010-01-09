@@ -1,5 +1,7 @@
 #pragma once
+
 #include "AGUtilities.h"
+#include "AGDeviceManager.h"
 
 //------------------------------------------------------------------------------------------------------------------------------
 class AGResource
