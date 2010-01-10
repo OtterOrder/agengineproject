@@ -5,15 +5,25 @@ extern	AGGame* gGame;
 
 //------------------------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------------
-void AGSystem::Initializze( void )
+void AGSystem::Initialize( void )
 {
+	// Attributes
 	_mShutDown = false;
 
+	// 
 	mTimer.Initialize();
 
 	CRC::Initialize();
 
+	// Default Parameters
+	AGWindowManager::GetSingleton()->SetSize(__DefaultWndWidth, __DefaultWndHeight);
+	AGWindowManager::GetSingleton()->SetName(__DefaultWndName);
+
+	// Game
 	gGame->Init();
+
+	// Managers
+	AGWindowManager::GetSingleton()->Initialize();
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
@@ -41,7 +51,7 @@ void AGSystem::MainLoop( void )
 //------------------------------------------------------------------------------------------------------------------------------
 void main ()
 {
-	AGSystem::GetSingleton()->Initializze();
+	AGSystem::GetSingleton()->Initialize();
 	AGSystem::GetSingleton()->MainLoop();
 	AGSystem::GetSingleton()->Destroy();
 
