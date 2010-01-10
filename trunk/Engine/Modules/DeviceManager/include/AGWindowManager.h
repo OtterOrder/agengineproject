@@ -18,12 +18,14 @@ friend class AGSingleton<AGWindowManager>;
 private:
 	AGVector2u	_mSize;
 	cStr		_mName;
+
 	HWND		_mWindow;
+	WNDCLASSEX	_mWndClassEx;
 
 
 protected:
 	AGWindowManager		()	{};
-	~AGWindowManager	()	{};
+	~AGWindowManager	();
 
 public:
 	//
