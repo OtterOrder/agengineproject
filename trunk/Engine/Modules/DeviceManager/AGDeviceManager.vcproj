@@ -295,6 +295,10 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\AGWDX9.cpp"
+					>
+				</File>
+				<File
 					RelativePath=".\include\AGWDX9.h"
 					>
 				</File>

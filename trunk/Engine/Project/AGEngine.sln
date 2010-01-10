@@ -2,6 +2,9 @@
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AGEngine", "AGEngine.vcproj", "{F9B41440-FD3A-4789-BAC0-DE005E70EB36}"
+	ProjectSection(ProjectDependencies) = postProject
+		{434328D1-1AFA-4FBC-BF5E-155016D62508} = {434328D1-1AFA-4FBC-BF5E-155016D62508}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "AGDeviceManager", "..\Modules\DeviceManager\AGDeviceManager.vcproj", "{434328D1-1AFA-4FBC-BF5E-155016D62508}"
 EndProject
