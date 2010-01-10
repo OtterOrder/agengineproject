@@ -24,7 +24,15 @@ AGMesh::~AGMesh()
 //------------------------------------------------------------------------------------------------------------------------------
 AGResource::AGResourceResult AGMesh::Load (cStr _FileName, void* _Parameters)
 {
-	AGLoadMeshFromX(_FileName, this);
+	AGLoadMeshFromX(_FileName,
+					this,
+					_mNbVertices,
+					_mNbFaces,
+					_mpVB,
+					_mpIB,
+					_mVertexElements,
+					_mpVD,
+					_mVertexSize);
 
 	return RES_SUCCEED;
 }
