@@ -18,7 +18,7 @@ void Game::InitEngine()
 {
 	cout << "Game Init Engine" << endl;
 
-	i = 0;
+	AGWindowManager::GetSingleton()->SetSize(1024, 512);
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
@@ -27,13 +27,8 @@ void Game::Init()
 	AGMesh* Bat = NULL;
 
 	Bat = AGResourceManager::GetSingleton()->Load<AGMesh>(".\\Data\\bat.x", "Bat");
-/*
-	FILE* pFile = NULL;
-	fopen_s(&pFile, ".\\Data\\bat.x", "r");
 
-	if (pFile)
-		fclose(pFile);
-*/
+	Bat->DecRefCount();
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
@@ -45,7 +40,7 @@ void Game::Destroy()
 //------------------------------------------------------------------------------------------------------------------------------
 void Game::Update()
 {
-	/*
+/*
 	cout << "Game Update" << endl;
 	
 	AGResource* pRes = new AGResource();
@@ -60,21 +55,9 @@ void Game::Update()
 
 	cout << CRC::GetCRC("Toto") << endl;
 	cout << CRC::GetCRC("Fifou")<< endl;
-	*/
-
-	i++;
 
 	//cout << "Dt = " << AGSystem::GetSingleton()->mTimer.GetDtMs() << "; Time = " << AGSystem::GetSingleton()->mTimer.GetTimeMs() << endl;
-
-
-	if ( i >= 20000000 )
-	{
-		//Sleep (10000);
+*/
+	if ( AGSystem::GetSingleton()->mTimer.GetDtMs() > 2000 )
 		AGSystem::GetSingleton()->ShutDown();
-	}
 }
-/*
-int APIENTRY WinMain (HINSTANCE, HINSTANCE, LPSTR, int)
-{
-	return 0;
-}*/

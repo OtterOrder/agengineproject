@@ -417,6 +417,18 @@
 					>
 				</File>
 			</Filter>
+			<Filter
+				Name="Matrial"
+				>
+				<File
+					RelativePath=".\src\AGMaterial.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\AGMaterial.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Resources"
@@ -435,6 +447,14 @@
 			</File>
 			<File
 				RelativePath=".\include\AGResource.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\AGShader.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\AGShader.h"
 				>
 			</File>
 			<File

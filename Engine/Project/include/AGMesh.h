@@ -21,5 +21,5 @@ public:
 	~AGMesh		();
 
 	AGResourceResult	Load (cStr _FileName, void* _Parameters = NULL);
-	void				Release ()	{};
+	void				Release ();
 };

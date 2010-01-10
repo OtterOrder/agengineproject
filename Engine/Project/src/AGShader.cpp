@@ -1,38 +1,29 @@
-#include "AGMesh.h"
-
-#include "AGWDX9.h"
+#include "AGShader.h"
 
 //------------------------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------------
-AGMesh::AGMesh()
+AGShader::AGShader()
 {
-	_mNbVertices = 0;
-	_mNbFaces = 0;
-
-	_mpVB = NULL;
-	_mpIB = NULL;
-	_mpVD = NULL;
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
-AGMesh::~AGMesh()
+AGShader::~AGShader()
 {
 	Release();
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------------
-AGResource::AGResourceResult AGMesh::Load (cStr _FileName, void* _Parameters)
+AGResource::AGResourceResult AGShader::Load (cStr _FileName, void* _Parameters)
 {
-	AGLoadMeshFromX(_FileName, this);
-
 	return RES_SUCCEED;
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
-void AGMesh::Release ()
+void AGShader::Release ()
 {
-	SAFE_RELEASE(_mpVB);
-	SAFE_RELEASE(_mpIB);
-	SAFE_RELEASE(_mpVD);
+	SAFE_RELEASE(_mpVertexShader);
+	SAFE_RELEASE(_mpPixelShader );
+	SAFE_RELEASE(_mpVertexConstantTable);
+	SAFE_RELEASE(_mpPixelConstantTable);
 }

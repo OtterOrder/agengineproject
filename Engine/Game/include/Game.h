@@ -8,7 +8,6 @@
 class Game : public AGGame
 {
 private:
-	u32 i;
 
 public:
 	Game	()	{};
