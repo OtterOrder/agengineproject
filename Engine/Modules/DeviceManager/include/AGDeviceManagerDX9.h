@@ -4,7 +4,6 @@
 #include "AGSingleton.h"
 
 //------------------------------------------------------------------------------------------------------------------------------
-//------------------------------------------------------------------------------------------------------------------------------
 class AGDeviceManager : public AGSingleton <AGDeviceManager>
 {
 private:
@@ -18,5 +17,5 @@ public:
 	bool	Initialize	();
 	bool	Destroy		();
 
-	inline AGPDevice	GetDevice	()	{ return _mpDevice; };
+	inline const AGPDevice&	GetDevice	()	const	{ return _mpDevice; };
 };
