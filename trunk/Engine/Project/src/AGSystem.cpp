@@ -49,11 +49,13 @@ void AGSystem::MainLoop( void )
 
 //------------------------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------------
-void main ()
+int APIENTRY WinMain (HINSTANCE, HINSTANCE, LPSTR, int)
 {
 	AGSystem::GetSingleton()->Initialize();
 	AGSystem::GetSingleton()->MainLoop();
 	AGSystem::GetSingleton()->Destroy();
 
 	AGSystem::DestroySingleton();
+
+	return 0;
 }
