@@ -2,8 +2,9 @@
 
 #include "AGTypes.h"
 #include "AGSingleton.h"
+
 #ifdef AGDX9
-#include "AGDeviceManagerDX9.h"
+#include "AGTypesDX9.h"
 #endif
 
 #include <Windows.h>
@@ -41,4 +42,7 @@ public:
 	// Name
 	inline const cStr&	GetName ()	const		{ return _mName; };
 	inline void			SetName	(cStr _Name)	{ _mName = _Name; };
+
+	// Window
+	inline const HWND&	GetWindow	()			{ return _mWindow; };
 };
