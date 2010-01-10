@@ -3,6 +3,12 @@
 #include "AGSingleton.h"
 #include "AGTimer.h"
 
+#include "AGWindowManager.h"
+
+#define __DefaultWndWidth		512
+#define __DefaultWndHeight		512
+#define __DefaultWndName	"AGEngine"
+
 //------------------------------------------------------------------------------------------------------------------------------
 class AGSystem : public AGSingleton<AGSystem>
 {
@@ -19,7 +25,7 @@ protected:
 	~AGSystem	()	{};
 
 public:
-	void	Initializze	();
+	void	Initialize	();
 	void	Destroy		();
 	void	MainLoop	();
 
