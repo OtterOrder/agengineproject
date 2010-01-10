@@ -22,11 +22,14 @@ void AGSystem::Initialize( void )
 	AGWindowManager::GetSingleton()->SetName(__DefaultWndName);
 
 	// Game
-	gGame->Init();
+	gGame->InitEngine();
 
 	// Managers
 	AGWindowManager::GetSingleton()->Initialize();
 	AGDeviceManager::GetSingleton()->Initialize();
+
+
+	gGame->Init();
 }
 
 //------------------------------------------------------------------------------------------------------------------------------

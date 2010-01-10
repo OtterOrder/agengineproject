@@ -14,9 +14,10 @@ public:
 	Game	()	{};
 	~Game	()	{};
 
-	void	Init	();
-	void	Destroy	();
-	void	Update	();
+	void	InitEngine	();
+	void	Init		();
+	void	Destroy		();
+	void	Update		();
 };
 
 AGGame* gGame = new Game;
