@@ -188,7 +188,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				AdditionalDependencies="d3d9.lib"
+				AdditionalDependencies="d3d9.lib d3dx9.lib"
 				AdditionalLibraryDirectories="$(DXSDK_DIR)Lib\x86"
 			/>
 			<Tool
@@ -253,7 +253,7 @@
 			/>
 			<Tool
 				Name="VCLibrarianTool"
-				AdditionalDependencies="d3d9.lib"
+				AdditionalDependencies="d3d9.lib d3dx9.lib"
 				AdditionalLibraryDirectories="$(DXSDK_DIR)Lib\x86"
 			/>
 			<Tool
@@ -292,6 +292,10 @@
 				</File>
 				<File
 					RelativePath=".\include\AGTypesDX9.h"
+					>
+				</File>
+				<File
+					RelativePath=".\include\AGWDX9.h"
 					>
 				</File>
 			</Filter>

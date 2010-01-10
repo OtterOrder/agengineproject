@@ -45,7 +45,7 @@ public:
 
 			if( pResource->Load(_FileName, _Parameters) != AGResource::RES_SUCCEED )
 			{
-				AGWarning("Resource load failed");
+				AGWarning(false, "Resource load failed");
 				SAFE_DELETE(pResource);
 				return NULL;
 			}
