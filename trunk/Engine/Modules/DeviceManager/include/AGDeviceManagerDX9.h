@@ -46,15 +46,27 @@ typedef		D3DXVECTOR4				AGVector4f;
 
 #define		AGVector3fToColor(vect)		D3DCOLOR_RGBA( (int)(vect.x*255.f), (int)(vect.y*255.f), (int)(vect.z*255.f), 255 )
 
-struct AGVector2i
+struct AGVector2s
 {
 	s32 x;
 	s32 y;
 
-	AGVector2i ()		{ x=0; y=0; };
-	AGVector2i (s32 _x, s32 _y) { x=_x; y=_y; };
+	AGVector2s ()		{ x=0; y=0; };
+	AGVector2s (s32 _x, s32 _y) { x=_x; y=_y; };
 
-	void	 operator = (const AGVector2i& _v)		{ x = _v.x; y = _v.y; };
+	void	 operator = (const AGVector2s& _v)		{ x = _v.x; y = _v.y; };
+};
+
+
+struct AGVector2u
+{
+	u32 x;
+	u32 y;
+
+	AGVector2u ()		{ x=0; y=0; };
+	AGVector2u (u32 _x, u32 _y) { x=_x; y=_y; };
+
+	void	 operator = (const AGVector2u& _v)		{ x = _v.x; y = _v.y; };
 };
 
 //------------------------------------------------------------------------------------------------------------------------------
