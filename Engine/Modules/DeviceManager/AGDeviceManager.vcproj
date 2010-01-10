@@ -290,6 +290,10 @@
 					RelativePath=".\include\AGDeviceManagerDX9.h"
 					>
 				</File>
+				<File
+					RelativePath=".\include\AGTypesDX9.h"
+					>
+				</File>
 			</Filter>
 		</Filter>
 		<Filter

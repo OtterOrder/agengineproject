@@ -1,6 +1,8 @@
 #include "AGSystem.h"
 #include "AGGame.h"
 
+#include "AGDeviceManager.h"
+
 extern	AGGame* gGame;
 
 //------------------------------------------------------------------------------------------------------------------------------
@@ -24,6 +26,7 @@ void AGSystem::Initialize( void )
 
 	// Managers
 	AGWindowManager::GetSingleton()->Initialize();
+	AGDeviceManager::GetSingleton()->Initialize();
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
@@ -31,6 +34,9 @@ void AGSystem::Destroy( void )
 {
 	gGame->Destroy();
 	SAFE_DELETE(gGame);
+
+	AGDeviceManager::DestroySingleton();
+	AGWindowManager::DestroySingleton();
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
