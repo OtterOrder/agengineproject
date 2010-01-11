@@ -28,7 +28,7 @@ u32 AGResource::DecRefCount()
 
 void AGResource::SetName(cStr _Name)
 {
-	AGWarning(_mName != "", "Resource name already setted");
+	AGWarning(_mName == "", "Resource name already setted");
 
 	_mName = _Name;
 }

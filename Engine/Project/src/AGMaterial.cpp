@@ -41,6 +41,7 @@ void AGMaterial::SetShader (cStr _VertexShaderFileName, cStr _VertexEntryPoint, 
 	SAFE_DECREF(_mpPixelShader);
 
 	_mpVertexShader = AGResourceManager::GetSingleton()->Load<AGVertexShader>(_VertexShaderFileName, (void*)_VertexEntryPoint);
+	_mpPixelShader  = AGResourceManager::GetSingleton()->Load<AGPixelShader> (_PixelShaderFileName,  (void*)_PixelEntryPoint);
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
