@@ -317,19 +317,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\AGPixelShader.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\AGPixelShader.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\AGResource.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\include\AGResource.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\AGShader.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\include\AGShader.h"
 				>
 			</File>
 			<File
@@ -346,6 +346,14 @@
 			</File>
 			<File
 				RelativePath=".\include\AGTexture.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\AGVertexShader.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\AGVertexShader.h"
 				>
 			</File>
 		</Filter>

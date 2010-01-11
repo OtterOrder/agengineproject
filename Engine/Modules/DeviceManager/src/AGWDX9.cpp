@@ -71,3 +71,57 @@ bool AGLoadMeshFromX (cStr _FileName,
 
 	return true;
 }
+
+//------------------------------------------------------------------------------------------------------------------------------
+bool AGLoadVertexShader (cStr _FileName, cStr _EntryPoint, AGPVertexShader& _VertexShader, AGPConstantTable& _ConstantTable)
+{
+	LPD3DXBUFFER pErrorBuffer = NULL;
+	LPD3DXBUFFER pShaderCode = NULL;
+
+	if ( FAILED(D3DXCompileShaderFromFile(_FileName, NULL, NULL, _EntryPoint, "vs_3_0", 0, &pShaderCode, &pErrorBuffer, &_ConstantTable) ))
+	{
+		OutputDebugString(reinterpret_cast <char*> (pErrorBuffer->GetBufferPointer()));
+		MessageBox (NULL, "Vertex Shader compilation Error", "Shader Error", MB_OK);
+
+		return false;
+	}
+
+	if (FAILED(AGDeviceManager::GetSingleton()->GetDevice()->CreateVertexShader( (DWORD*)pShaderCode->GetBufferPointer(), &_VertexShader )))
+	{
+		OutputDebugString(reinterpret_cast <char*> (pErrorBuffer->GetBufferPointer()));
+
+		return false;
+	}
+
+	SAFE_RELEASE(pErrorBuffer);
+	SAFE_RELEASE(pShaderCode);
+
+	return true;
+}
+
+//------------------------------------------------------------------------------------------------------------------------------
+bool AGLoadPixelShader (cStr _FileName, cStr _EntryPoint, AGPPixelShader& _PixelShader, AGPConstantTable& _ConstantTable)
+{
+	LPD3DXBUFFER pErrorBuffer = NULL;
+	LPD3DXBUFFER pShaderCode = NULL;
+
+	if ( FAILED(D3DXCompileShaderFromFile(_FileName, NULL, NULL, _EntryPoint, "ps_3_0", 0, &pShaderCode, &pErrorBuffer, &_ConstantTable) ))
+	{
+		OutputDebugString(reinterpret_cast <char*> (pErrorBuffer->GetBufferPointer()));
+		MessageBox (NULL, "Vertex Shader compilation Error", "Shader Error", MB_OK);
+
+		return false;
+	}
+
+	if (FAILED(AGDeviceManager::GetSingleton()->GetDevice()->CreatePixelShader( (DWORD*)pShaderCode->GetBufferPointer(), &_PixelShader )))
+	{
+		OutputDebugString(reinterpret_cast <char*> (pErrorBuffer->GetBufferPointer()));
+
+		return false;
+	}
+
+	SAFE_RELEASE(pErrorBuffer);
+	SAFE_RELEASE(pShaderCode);
+
+	return true;
+}

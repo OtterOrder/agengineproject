@@ -1,38 +1,35 @@
-#include "AGResourceManager.h"
-#include <assert.h>
+#include "AGVertexShader.h"
+
+#include "AGWDX9.h"
 
 //------------------------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------------
-AGResourceManager::AGResourceManager()
+AGVertexShader::AGVertexShader()
 {
+	_mpVertexShader	 = NULL;
+	_mpConstantTable = NULL;
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
-AGResourceManager::~AGResourceManager()
+AGVertexShader::~AGVertexShader()
 {
-	Clear();
-	assert( _mResourcesList.empty() );
+	Release();
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------------
-void AGResourceManager::Add(cStr _FileName, u32 _Crc, AGResource* _pResource)
+AGResource::AGResourceResult AGVertexShader::Load (cStr _FileName, void* _Parameters)
 {
-	assert(_pResource != NULL);
+	Release();
 
-	_mResourcesList.insert(pair<u32, AGResource*>(_Crc, _pResource));
-	_pResource->SetName(_FileName);
+	AGLoadVertexShader(_FileName, (cStr)_Parameters, _mpVertexShader, _mpConstantTable);
+
+	return RES_SUCCEED;
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
-void AGResourceManager::Clear()
+void AGVertexShader::Release ()
 {
-	if( !_mResourcesList.empty() )
-	{
-		for( Iterator It = _mResourcesList.begin(); It != _mResourcesList.end(); It++ )
-		{
-			SAFE_DELETE(It->second);
-		}
-		_mResourcesList.clear();
-	}
+	SAFE_RELEASE(_mpVertexShader);
+	SAFE_RELEASE(_mpConstantTable);
 }
