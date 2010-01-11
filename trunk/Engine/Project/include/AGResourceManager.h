@@ -20,16 +20,16 @@ protected:
 	~AGResourceManager		();
 
 private:
-	void Add(cStr _ResName, u32 _Crc, AGResource* _pResource);
+	void Add(cStr _FileName, u32 _Crc, AGResource* _pResource);
 	void Clear();
 
 
 public:
 
 	template< class T >
-	T* Load(cStr _FileName, cStr _ResourceName, void* _Parameters = NULL )
+	T* Load(cStr _FileName, void* _Parameters = NULL )
 	{
-		u32 Crc = CRC::GetCRC(_ResourceName);
+		u32 Crc = CRC::GetCRC(_FileName);
 
 		Iterator It = _mResourcesList.find(Crc);
 
@@ -41,7 +41,7 @@ public:
 		else
 		{
 			T* pResource	= new T();
-			Add( _ResourceName, Crc, dynamic_cast<AGResource*>(pResource) );
+			Add( _FileName, Crc, dynamic_cast<AGResource*>(pResource) );
 
 			if( pResource->Load(_FileName, _Parameters) != AGResource::RES_SUCCEED )
 			{

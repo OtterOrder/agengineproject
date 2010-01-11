@@ -15,3 +15,9 @@ bool AGLoadMeshFromX (cStr _FileName,
 					  AGVertexElement* _VertexElements,
 					  AGPVertexDeclaration _pVD,
 					  u32& _VertexSize);
+
+//------------------------------------------------------------------------------------------------------------------------------
+bool AGLoadVertexShader (cStr _FileName, cStr _EntryPoint, AGPVertexShader& _VertexShader, AGPConstantTable& _ConstantTable);
+
+//------------------------------------------------------------------------------------------------------------------------------
+bool AGLoadPixelShader (cStr _FileName, cStr _EntryPoint, AGPPixelShader& _PixelShader, AGPConstantTable& _ConstantTable);

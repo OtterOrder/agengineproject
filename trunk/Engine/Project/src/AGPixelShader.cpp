@@ -1,29 +1,36 @@
-#include "AGShader.h"
+#include "AGPixelShader.h"
+
+#include "AGWDX9.h"
 
 //------------------------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------------
-AGShader::AGShader()
+AGPixelShader::AGPixelShader()
 {
+	_mpPixelShader	 = NULL;
+	_mpConstantTable = NULL;
+
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
-AGShader::~AGShader()
+AGPixelShader::~AGPixelShader()
 {
 	Release();
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------------
-AGResource::AGResourceResult AGShader::Load (cStr _FileName, void* _Parameters)
+AGResource::AGResourceResult AGPixelShader::Load (cStr _FileName, void* _Parameters)
 {
+	Release();
+
+	AGLoadPixelShader(_FileName, (cStr)_Parameters, _mpPixelShader, _mpConstantTable);
+
 	return RES_SUCCEED;
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
-void AGShader::Release ()
+void AGPixelShader::Release ()
 {
-	SAFE_RELEASE(_mpVertexShader);
 	SAFE_RELEASE(_mpPixelShader );
-	SAFE_RELEASE(_mpVertexConstantTable);
-	SAFE_RELEASE(_mpPixelConstantTable);
+	SAFE_RELEASE(_mpConstantTable);
 }

@@ -26,7 +26,7 @@ void Game::Init()
 {
 	AGMesh* Bat = NULL;
 
-	Bat = AGResourceManager::GetSingleton()->Load<AGMesh>(".\\Data\\bat.x", "Bat");
+	Bat = AGResourceManager::GetSingleton()->Load<AGMesh>(".\\Data\\bat.x");
 
 	Bat->DecRefCount();
 }
