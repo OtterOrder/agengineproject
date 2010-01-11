@@ -5,7 +5,7 @@
 #include "AGWindowManager.h"
 #include "AGResourceManager.h"
 
-#include "AGMesh.h"
+#include "AG3DGraphicEntity.h"
 
 #include <iostream>
 using namespace std;
@@ -24,11 +24,13 @@ void Game::InitEngine()
 //------------------------------------------------------------------------------------------------------------------------------
 void Game::Init()
 {
-	AGMesh* Bat = NULL;
+	AG3DGraphicEntity Bat;
 
-	Bat = AGResourceManager::GetSingleton()->Load<AGMesh>(".\\Data\\bat.x");
+	Bat.SetMesh(".\\Data\\bat.x");
 
-	Bat->DecRefCount();
+	AGMaterial* pMaterial = new AGMaterial();
+	pMaterial->SetShader();
+	Bat.SetMaterial(pMaterial);
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
