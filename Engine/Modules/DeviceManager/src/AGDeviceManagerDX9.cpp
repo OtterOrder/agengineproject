@@ -79,7 +79,9 @@ void AGDeviceManager::SetMatrix (AGPConstantTable& _ConstTable, cStr _VarName, A
 	assert(_ConstTable);
 
 	AGHandle varHdl = _ConstTable->GetConstantByName(0, _VarName);
-	AGWarningReturn(varHdl != NULL, "Set Matrix. Variable handle not found.");
+
+	if( AGWarning(varHdl == NULL, "Set Matrix. Variable handle not found. Variable : %s", _VarName) )
+		return;
 
 	_ConstTable->SetMatrix(_mpDevice, varHdl, &_Matrix);
 }
