@@ -16,4 +16,8 @@ public:
 
 	AGResourceResult	Load (cStr _FileName, void* _Parameters = NULL);
 	void				Release ();
+
+	inline void			Activate ()		{ AGDeviceManager::GetSingleton()->SetVertexShader(_mpVertexShader); };
+
+	inline void	SetMatrix	(cStr _VarName, AGMatrix _Matrix)	{ AGDeviceManager::GetSingleton()->SetMatrix(_mpConstantTable, _VarName, _Matrix); };
 };

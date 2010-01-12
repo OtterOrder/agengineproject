@@ -7,6 +7,7 @@
 
 #include "AGMesh.h"
 #include "AGMaterial.h"
+#include "AGDebugCamera.h"	////.
 
 //------------------------------------------------------------------------------------------------------------------------------
 class AG3DGraphicEntity : public AG3DEntity, public AGGraphicEntity
@@ -24,4 +25,8 @@ public:
 
 	inline void			SetMaterial (AGMaterial* _pMaterial)	{ SAFE_DELETE(_mpMaterial); _mpMaterial = _pMaterial; };
 	inline AGMaterial*	GetMaterial	()							{ return _mpMaterial; };
+
+	void	Update ();
+
+	void	Draw	(CFirstPersonCamera* _pCamera);		////.
 };

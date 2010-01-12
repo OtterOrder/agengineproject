@@ -9,14 +9,11 @@ class AGCamera : virtual public AGEntity
 public:
 	DefineVectorIterator(AGCamera, Iterator);
 
-protected:
-	AGMatrix	_mView;
-	AGMatrix	_mProj;
+public:
+	AGMatrix	mView;
+	AGMatrix	mProj;
 
 public:
 	AGCamera	();
 	~AGCamera	();
-
-	inline const AGMatrix*		GetView()	{ return &_mView; };
-	inline const AGMatrix*		GetProj()	{ return &_mProj; };
 };

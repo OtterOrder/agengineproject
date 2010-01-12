@@ -21,6 +21,7 @@ private:
 
 	HWND		_mWindow;
 	WNDCLASSEX	_mWndClassEx;
+	MSG			_mMsg;
 
 
 protected:
@@ -30,6 +31,8 @@ protected:
 public:
 	//
 	void	Initialize ();
+
+	void	Update ();
 
 	// Resolution
 	inline	const u32&			GetWidth	()	const	{ return _mSize.x; };
