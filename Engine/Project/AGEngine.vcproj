@@ -291,6 +291,14 @@
 					RelativePath=".\include\AG3DGroup.h"
 					>
 				</File>
+				<File
+					RelativePath=".\src\AGLight.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\AGLight.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="Matrial"
@@ -378,6 +386,42 @@
 			</File>
 			<File
 				RelativePath=".\include\AGRenderer.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Scene"
+			>
+			<File
+				RelativePath=".\src\AG2DScene.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\AG2DScene.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\AG3DScene.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\AG3DScene.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\AGScene.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\AGScene.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\AGSceneManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\AGSceneManager.h"
 				>
 			</File>
 		</Filter>

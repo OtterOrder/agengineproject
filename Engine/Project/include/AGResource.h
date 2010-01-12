@@ -26,7 +26,7 @@ public:
 	inline	u32		GetRefCount ()	{ return _mRefCount; };
 
 	virtual AGResourceResult	Load (cStr _FileName, void* _Parameters = NULL) =0;
-	virtual	void				Release	()		{ _mName = ""; _mRefCount = 0; };
+			void				Release	()		{ _mName = ""; _mRefCount = 0; };
 
 	inline const cStr&	GetName () const		{ return _mName; };
 	void				SetName (cStr _Name);

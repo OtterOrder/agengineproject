@@ -11,8 +11,8 @@
 class Game : public AGGame
 {
 private:
-	AG3DCamera			_mCamera;
-	AG3DGraphicEntity	_mBat;
+	AG3DCamera*			_mCamera;
+	AG3DGraphicEntity*	_mBat;
 
 public:
 	Game	()	{};
