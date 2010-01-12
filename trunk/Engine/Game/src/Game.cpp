@@ -25,24 +25,31 @@ void Game::InitEngine()
 //------------------------------------------------------------------------------------------------------------------------------
 void Game::Init()
 {
-	_mBat.SetMesh(".\\Data\\bat.x");
+	_mBat = new AG3DGraphicEntity();
+
+	_mBat->SetMesh(".\\Data\\bat.x");
 
 	AGMaterial* pMaterial = new AGMaterial();
 	pMaterial->SetShader();
-	_mBat.SetMaterial(pMaterial);
+	_mBat->SetMaterial(pMaterial);
 
-	_mCamera.mFOV = AGDegToRad (45.f);
-	_mCamera.mRatio = 1.f;
-	_mCamera.mZNear = 1.f;
-	_mCamera.mZFar  = 1000.f;
 
-	_mCamera.mPosition = AGVector3f(0.f, 0.f, -10.f);
+	_mCamera = new AG3DCamera ();
+	_mCamera->mFOV = AGDegToRad (45.f);
+	_mCamera->mRatio = 1.f;
+	_mCamera->mZNear = 1.f;
+	_mCamera->mZFar  = 1000.f;
+
+	_mCamera->mPosition = AGVector3f(0.f, 0.f, -10.f);
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
 void Game::Destroy()
 {
 	cout << "Game Destroy" << endl;
+
+	SAFE_DELETE(_mBat);
+	SAFE_DELETE(_mCamera);
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
@@ -66,8 +73,8 @@ void Game::Update()
 
 	//cout << "Dt = " << AGSystem::GetSingleton()->mTimer.GetDtMs() << "; Time = " << AGSystem::GetSingleton()->mTimer.GetTimeMs() << endl;
 */
-	_mBat.Update();
-	_mCamera.Update();
+	_mBat->Update();
+	_mCamera->Update();
 
-	AGRenderer::GetSingleton()->Render(&_mBat, &_mCamera);
+	AGRenderer::GetSingleton()->Render(_mBat, _mCamera);
 }

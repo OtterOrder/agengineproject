@@ -40,6 +40,8 @@ AGResource::AGResourceResult AGMesh::Load (cStr _FileName, void* _Parameters)
 //------------------------------------------------------------------------------------------------------------------------------
 void AGMesh::Release ()
 {
+	((AGResource*)this)->Release();
+
 	SAFE_RELEASE(_mpVB);
 	SAFE_RELEASE(_mpIB);
 	SAFE_RELEASE(_mpVD);
