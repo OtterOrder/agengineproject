@@ -4,10 +4,15 @@
 #include "AGTypes.h"
 #include "AGUtilities.h"
 
+#include "AG3DCamera.h"
+#include "AG3DGraphicEntity.h"
+
 
 class Game : public AGGame
 {
 private:
+	AG3DCamera			_mCamera;
+	AG3DGraphicEntity	_mBat;
 
 public:
 	Game	()	{};

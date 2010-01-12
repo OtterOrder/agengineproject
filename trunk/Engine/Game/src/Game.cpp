@@ -4,8 +4,9 @@
 
 #include "AGWindowManager.h"
 #include "AGResourceManager.h"
+#include "AGRenderer.h"
 
-#include "AG3DGraphicEntity.h"
+#include "AGTypesDX9.h"
 
 #include <iostream>
 using namespace std;
@@ -24,13 +25,18 @@ void Game::InitEngine()
 //------------------------------------------------------------------------------------------------------------------------------
 void Game::Init()
 {
-	AG3DGraphicEntity Bat;
-
-	Bat.SetMesh(".\\Data\\bat.x");
+	_mBat.SetMesh(".\\Data\\bat.x");
 
 	AGMaterial* pMaterial = new AGMaterial();
 	pMaterial->SetShader();
-	Bat.SetMaterial(pMaterial);
+	_mBat.SetMaterial(pMaterial);
+
+	_mCamera.mFOV = AGDegToRad (45.f);
+	_mCamera.mRatio = 1.f;
+	_mCamera.mZNear = 1.f;
+	_mCamera.mZFar  = 1000.f;
+
+	_mCamera.mPosition = AGVector3f(0.f, 0.f, -10.f);
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
@@ -60,6 +66,8 @@ void Game::Update()
 
 	//cout << "Dt = " << AGSystem::GetSingleton()->mTimer.GetDtMs() << "; Time = " << AGSystem::GetSingleton()->mTimer.GetTimeMs() << endl;
 */
-	if ( AGSystem::GetSingleton()->mTimer.GetDtMs() > 2000 )
-		AGSystem::GetSingleton()->ShutDown();
+	_mBat.Update();
+	_mCamera.Update();
+
+	AGRenderer::GetSingleton()->Render(&_mBat, &_mCamera);
 }

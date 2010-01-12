@@ -3,6 +3,8 @@
 #include "AGDeviceManagerDX9.h"
 #include "AGWindowManager.h"
 
+#include <assert.h>
+
 //------------------------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------------
 AGDeviceManager::AGDeviceManager ()
@@ -52,10 +54,32 @@ bool AGDeviceManager::Initialize()
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
-bool AGDeviceManager::Destroy()
+void AGDeviceManager::Destroy()
 {
 	SAFE_RELEASE(_mpDevice);
 	SAFE_RELEASE(_mpD3d);
+}
 
-	return true;
+//------------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------------
+void AGDeviceManager::DrawMesh (AGPVertexDeclaration& _VertDelc, AGPVertexBuffer& _VB, u32& _VertexSize, AGPIndexBuffer& _IB, u32& _NbVertices, u32& _NbFaces)
+{
+	_mpDevice->SetVertexDeclaration(_VertDelc);
+
+	_mpDevice->SetStreamSource(0, _VB, 0, _VertexSize);
+	_mpDevice->SetIndices(_IB);
+
+	_mpDevice->DrawIndexedPrimitive( D3DPT_TRIANGLELIST, 0, 0, _NbVertices, 0, _NbFaces);
+}
+
+//------------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------------
+void AGDeviceManager::SetMatrix (AGPConstantTable& _ConstTable, cStr _VarName, AGMatrix& _Matrix)
+{
+	assert(_ConstTable);
+
+	AGHandle varHdl = _ConstTable->GetConstantByName(0, _VarName);
+	AGWarningReturn(varHdl != NULL, "Set Matrix. Variable handle not found.");
+
+	_ConstTable->SetMatrix(_mpDevice, varHdl, &_Matrix);
 }

@@ -13,7 +13,7 @@ bool AGLoadMeshFromX (cStr _FileName,
 					  AGPVertexBuffer& _pVB,
 					  AGPIndexBuffer& _pIB,
 					  AGVertexElement* _VertexElements,
-					  AGPVertexDeclaration _pVD,
+					  AGPVertexDeclaration& _pVD,
 					  u32& _VertexSize);
 
 //------------------------------------------------------------------------------------------------------------------------------

@@ -369,6 +369,26 @@
 				>
 			</File>
 		</Filter>
+		<Filter
+			Name="Renderer"
+			>
+			<File
+				RelativePath=".\src\AGRenderer.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\AGRenderer.h"
+				>
+			</File>
+		</Filter>
+		<File
+			RelativePath=".\src\AGDebugCamera.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\include\AGDebugCamera.h"
+			>
+		</File>
 	</Files>
 	<Globals>
 	</Globals>

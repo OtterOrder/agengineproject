@@ -48,6 +48,7 @@ void AGSystem::MainLoop( void )
 	while (!_mShutDown)
 	{
 		mTimer.Update();
+		AGWindowManager::GetSingleton()->Update();
 
 		gGame->Update();
 	}

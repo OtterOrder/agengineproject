@@ -1,6 +1,7 @@
 #pragma once
 
 #include "AGResource.h"
+#include "AGDeviceManager.h"
 
 //------------------------------------------------------------------------------------------------------------------------------
 class AGMesh : public AGResource
@@ -22,4 +23,6 @@ public:
 
 	AGResourceResult	Load (cStr _FileName, void* _Parameters = NULL);
 	void				Release ();
+
+	inline void			Draw ()		{ AGDeviceManager::GetSingleton()->DrawMesh(_mpVD, _mpVB, _mVertexSize, _mpIB, _mNbVertices, _mNbFaces); };
 };

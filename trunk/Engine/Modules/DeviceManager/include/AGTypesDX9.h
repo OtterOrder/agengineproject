@@ -7,6 +7,12 @@
 
 //------------------------------------------------------------------------------------------------------------------------------
 // Defines
+#define		AGCLEAR_TARGET					D3DCLEAR_TARGET
+#define		AGCLEAR_ZBUFFER					D3DCLEAR_ZBUFFER
+#define		AGCOLOR_XRGB					D3DCOLOR_XRGB
+
+//--------------------------------------------------------------
+#define		AGDegToRad						D3DXToRadian
 
 //------------------------------------------------------------------------------------------------------------------------------
 typedef		LPDIRECT3D9						AGPD3D;
@@ -38,6 +44,14 @@ typedef		D3DXMATRIX						AGMatrix;
 #define 	AGMatrixMultiply				D3DXMatrixMultiply
 #define		AGMatrixInverse					D3DXMatrixInverse
 #define		AGMatrixTranspose				D3DXMatrixTranspose
+
+#define		AGMatrixTranslation				D3DXMatrixTranslation
+
+#define		AGMatrixRotationX				D3DXMatrixRotationX
+#define		AGMatrixRotationY				D3DXMatrixRotationY
+#define		AGMatrixRotationZ				D3DXMatrixRotationZ
+
+#define		AGMatrixPerspectiveFovLH		D3DXMatrixPerspectiveFovLH
 
 //------------------------------------------------------------------------------------------------------------------------------
 typedef		D3DXVECTOR2				AGVector2f;

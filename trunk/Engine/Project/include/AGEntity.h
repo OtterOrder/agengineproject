@@ -1,6 +1,8 @@
 #pragma once
 #include "AGUtilities.h"
 
+#include "AGDeviceManager.h"
+
 //------------------------------------------------------------------------------------------------------------------------------
 class AGEntity
 {
@@ -13,4 +15,6 @@ private:
 public:
 	AGEntity	();
 	~AGEntity	();
+
+	virtual void	Update () =0;
 };

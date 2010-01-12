@@ -12,13 +12,16 @@ public:
 private:
 	AG3DEntity*	_mpParent;
 
-protected:
-	AGVector3f	_mPosition;
-	AGVector3f	_mRight;
-	AGVector3f	_mUp;
-	AGVector3f	_mFront;
+public:
+	AGVector3f	mPosition;
+	AGVector3f	mOrientation;
+	AGVector3f	mScale;
+
+	AGMatrix	mWorld;
 
 public:
 	AG3DEntity	();
 	~AG3DEntity	();
+
+	void	Update ();
 };
