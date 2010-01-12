@@ -3,13 +3,20 @@
 
 //------------------------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------------
-bool AGWarning(bool _test, cStr _str)
+bool AGWarning(bool _test, cStr _str, ...)
 {
-	if (_test)
+	if (!_test)
 		return false;
 
-	OutputDebugStr("Warning : ");
-	OutputDebugStr(_str);
+	char Buff [256];
+
+	va_list arglist;
+	va_start(arglist, _str);
+	_vsprintf_s_l(Buff, 256, _str, NULL, arglist);
+	va_end(arglist);
+
+	OutputDebugStr("AGWarning : ");
+	OutputDebugStr(Buff);
 	OutputDebugStr("\n");
 
 	return true;
