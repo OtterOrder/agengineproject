@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)include&quot;;.\..\Project\include;.\..\Modules\DeviceManager\include"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)include&quot;;.\..\Project\include;.\..\Modules\DeviceManager\include;&quot;$(DXSDK_DIR)Include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;AGDX9"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"

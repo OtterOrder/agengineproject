@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories=".\include;.\..\Extern;.\..\Modules\DeviceManager\include"
+				AdditionalIncludeDirectories=".\include;.\..\Extern;.\..\Modules\DeviceManager\include;&quot;$(DXSDK_DIR)Include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;AGDX9"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -107,7 +107,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories=".\include;.\..\Extern;.\..\Modules\DeviceManager\include"
+				AdditionalIncludeDirectories=".\include;.\..\Extern;.\..\Modules\DeviceManager\include;&quot;$(DXSDK_DIR)Include&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;AGDX9"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
