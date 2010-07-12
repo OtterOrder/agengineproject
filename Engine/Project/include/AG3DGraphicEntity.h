@@ -28,5 +28,5 @@ public:
 
 	void	Update ();
 
-	void	Draw	(CFirstPersonCamera* _pCamera);		////.
+	void	Draw	(CFirstPersonCamera* _pCamera, AGScene* _pScene);		////.
 };

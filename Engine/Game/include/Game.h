@@ -14,6 +14,8 @@ private:
 	AG3DCamera*			_mCamera;
 	AG3DGraphicEntity*	_mBat;
 
+	u32					_mMouseInputsId;
+
 public:
 	Game	()	{};
 	~Game	()	{};

@@ -2,6 +2,7 @@
 #include "AGGame.h"
 
 #include "AGDeviceManager.h"
+#include "AGInputManager.h"
 
 extern	AGGame* gGame;
 
@@ -40,6 +41,7 @@ void AGSystem::Destroy( void )
 
 	AGDeviceManager::DestroySingleton();
 	AGWindowManager::DestroySingleton();
+	AGInputManager::DestroySingleton();
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
@@ -49,6 +51,7 @@ void AGSystem::MainLoop( void )
 	{
 		mTimer.Update();
 		AGWindowManager::GetSingleton()->Update();
+		AGInputManager::GetSingleton()->Update();
 
 		gGame->Update();
 	}
