@@ -376,6 +376,26 @@
 				RelativePath=".\include\AGResourceManager.h"
 				>
 			</File>
+			<Filter
+				Name="Inputs"
+				>
+				<File
+					RelativePath=".\src\AGInputManager.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\AGInputManager.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\AGInputs.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\AGInputs.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Renderer"

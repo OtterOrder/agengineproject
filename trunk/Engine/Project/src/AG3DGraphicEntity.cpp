@@ -22,9 +22,9 @@ void AG3DGraphicEntity::Update ()
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
-void AG3DGraphicEntity::Draw (CFirstPersonCamera* _pCamera)	////.
+void AG3DGraphicEntity::Draw (CFirstPersonCamera* _pCamera, AGScene* _pScene)	////.
 {
-	_mpMaterial->Apply();
+	_mpMaterial->Apply(_pScene);
 
 	//_mpMaterial->GetVertexShader()->SetMatrix("g_mWorldViewProjection", mWorld * _pCamera->mView * _pCamera->mProj);
 

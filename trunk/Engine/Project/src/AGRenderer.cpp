@@ -19,7 +19,7 @@ AGRenderer::~AGRenderer()
 
 //------------------------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------------
-void AGRenderer::Render (AG3DGraphicEntity* _3DGraphicEntity, AG3DCamera* _pCamera)
+void AGRenderer::Render (AG3DGraphicEntity* _3DGraphicEntity, AG3DCamera* _pCamera, AGScene* _pScene)
 {
 	mCamera.FrameMove(AGSystem::GetSingleton()->mTimer.GetDt());	////.
 
@@ -29,7 +29,7 @@ void AGRenderer::Render (AG3DGraphicEntity* _3DGraphicEntity, AG3DCamera* _pCame
 	{
 		pDeviceManager->Clear( AGCLEAR_TARGET|AGCLEAR_ZBUFFER, AGCOLOR_XRGB(0, 0, 125), 1.f );
 
-		_3DGraphicEntity->Draw(&mCamera);	////.
+		_3DGraphicEntity->Draw(&mCamera, _pScene);	////.
 
 		pDeviceManager->EndScene();
 	}

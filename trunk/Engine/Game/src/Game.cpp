@@ -4,6 +4,7 @@
 
 #include "AGWindowManager.h"
 #include "AGResourceManager.h"
+#include "AGInputManager.h"
 #include "AGRenderer.h"
 
 #include "AGTypesDX9.h"
@@ -11,7 +12,7 @@
 #include <iostream>
 using namespace std;
 
-#include <Windows.h>
+#include "MouseInputs.h"
 
 //------------------------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------------
@@ -41,6 +42,8 @@ void Game::Init()
 	_mCamera->mZFar  = 1000.f;
 
 	_mCamera->mPosition = AGVector3f(0.f, 0.f, -10.f);
+
+	_mMouseInputsId = AGInputManager::GetSingleton()->AddInputs(new MouseInputs());
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
@@ -57,7 +60,7 @@ void Game::Update()
 {
 /*
 	cout << "Game Update" << endl;
-	
+
 	AGResource* pRes = new AGResource();
 
 	u32 RefCount;
@@ -72,9 +75,13 @@ void Game::Update()
 	cout << CRC::GetCRC("Fifou")<< endl;
 
 	//cout << "Dt = " << AGSystem::GetSingleton()->mTimer.GetDtMs() << "; Time = " << AGSystem::GetSingleton()->mTimer.GetTimeMs() << endl;
-*/
-	_mBat->Update();
-	_mCamera->Update();
+//*/
 
-	AGRenderer::GetSingleton()->Render(_mBat, _mCamera);
+	AGVector2s lMousePosition = MouseInputs::Get(_mMouseInputsId)->GetPosition();
+	AGDebugPrint("Mouse position : %i; %i", lMousePosition.x, lMousePosition.y);
+
+	_mBat->Update();
+	//_mCamera->Update();
+
+	AGRenderer::GetSingleton()->Render(_mBat, _mCamera, NULL);
 }

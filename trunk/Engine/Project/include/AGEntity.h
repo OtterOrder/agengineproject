@@ -14,7 +14,7 @@ private:
 
 public:
 	AGEntity	();
-	~AGEntity	();
+	virtual ~AGEntity	();
 
 	virtual void	Update () =0;
 };

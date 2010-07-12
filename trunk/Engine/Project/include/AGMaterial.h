@@ -2,6 +2,7 @@
 
 #include "AGVertexShader.h"
 #include "AGPixelShader.h"
+#include "AGScene.h"
 
 //------------------------------------------------------------------------------------------------------------------------------
 class AGMaterial
@@ -21,5 +22,7 @@ public:
 	inline AGVertexShader*		GetVertexShader	()		{ return _mpVertexShader; };
 	inline AGPixelShader*		GetPixelShader	()		{ return _mpPixelShader; };
 
-	void	Apply ();
+	//virtual void Setup (AGScene _pScene) = 0;
+
+	void	Apply (AGScene* _pScene);
 };

@@ -1,6 +1,9 @@
 #pragma once
 
 #include "AGEntity.h"
+#include "AGScene.h"
+
+#include "AGDebugCamera.h"	////.
 
 //------------------------------------------------------------------------------------------------------------------------------
 class AGGraphicEntity : virtual public AGEntity
@@ -10,5 +13,7 @@ public:
 
 public:
 	AGGraphicEntity		();
-	~AGGraphicEntity	();
+	virtual ~AGGraphicEntity	();
+
+	virtual void Draw (CFirstPersonCamera* _pCamera, AGScene* _pScene) =0;	////.
 };

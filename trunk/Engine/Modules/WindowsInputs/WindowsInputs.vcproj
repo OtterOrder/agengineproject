@@ -2,10 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9,00"
-	Name="Game"
-	ProjectGUID="{800C5127-EBDC-4693-B5BD-2F034D2D6040}"
-	RootNamespace="GameTest"
-	Keyword="Win32Proj"
+	Name="WindowsInputs"
+	ProjectGUID="{3FB7BA2D-3E97-4584-9474-75A9D736F68A}"
+	RootNamespace="WindowsInputs"
 	TargetFrameworkVersion="196613"
 	>
 	<Platforms>
@@ -17,11 +16,11 @@
 	</ToolFiles>
 	<Configurations>
 		<Configuration
-			Name="DebugDX9|Win32"
+			Name="Debug|Win32"
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
-			ConfigurationType="1"
-			CharacterSet="1"
+			ConfigurationType="4"
+			CharacterSet="2"
 			>
 			<Tool
 				Name="VCPreBuildEventTool"
@@ -41,12 +40,10 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)include&quot;;.\..\Project\include;&quot;$(DXSDK_DIR)Include&quot;;.\..\Modules\DeviceManager\include;.\..\Modules\WindowsInputs\include"
-				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;AGDX9"
+				AdditionalIncludeDirectories="./include;../../Project/include"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"
-				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				DebugInformationFormat="4"
 			/>
@@ -60,19 +57,10 @@
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
-				Name="VCLinkerTool"
-				AdditionalDependencies="AGEngine.lib AGDeviceManager.lib WindowsInputs.lib"
-				LinkIncremental="2"
-				AdditionalLibraryDirectories=".\..\Project\DebugDX9;.\..\Modules\DeviceManager\DebugDX9;.\..\Modules\WindowsInputs\Debug"
-				GenerateDebugInformation="true"
-				SubSystem="2"
-				TargetMachine="1"
+				Name="VCLibrarianTool"
 			/>
 			<Tool
 				Name="VCALinkTool"
-			/>
-			<Tool
-				Name="VCManifestTool"
 			/>
 			<Tool
 				Name="VCXDCMakeTool"
@@ -84,18 +72,15 @@
 				Name="VCFxCopTool"
 			/>
 			<Tool
-				Name="VCAppVerifierTool"
-			/>
-			<Tool
 				Name="VCPostBuildEventTool"
 			/>
 		</Configuration>
 		<Configuration
-			Name="ReleaseDX9|Win32"
+			Name="Release|Win32"
 			OutputDirectory="$(SolutionDir)$(ConfigurationName)"
 			IntermediateDirectory="$(ConfigurationName)"
 			ConfigurationType="1"
-			CharacterSet="1"
+			CharacterSet="2"
 			WholeProgramOptimization="1"
 			>
 			<Tool
@@ -117,11 +102,9 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)include&quot;;.\..\Project\include;&quot;$(DXSDK_DIR)Include&quot;;.\..\Modules\DeviceManager\include;.\..\Modules\WindowsInputs\include"
-				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;AGDX9"
+				AdditionalIncludeDirectories="./include;./../Project/include"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
-				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				DebugInformationFormat="3"
 			/>
@@ -136,11 +119,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="AGEngine.lib AGDeviceManager.lib WindowsInputs.lib"
-				LinkIncremental="1"
-				AdditionalLibraryDirectories=".\..\Project\ReleaseDX9;.\..\Modules\DeviceManager\ReleaseDX9;.\..\Modules\WindowsInputs\Release"
 				GenerateDebugInformation="true"
-				SubSystem="1"
 				OptimizeReferences="2"
 				EnableCOMDATFolding="2"
 				TargetMachine="1"
@@ -171,14 +150,30 @@
 	<References>
 	</References>
 	<Files>
-		<File
-			RelativePath=".\src\Game.cpp"
+		<Filter
+			Name="KeyboardInputs"
 			>
-		</File>
-		<File
-			RelativePath=".\include\Game.h"
+			<File
+				RelativePath=".\src\KeyboardInputs.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\KeyboardInputs.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="MouseInputs"
 			>
-		</File>
+			<File
+				RelativePath=".\src\MouseInputs.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\MouseInputs.h"
+				>
+			</File>
+		</Filter>
 	</Files>
 	<Globals>
 	</Globals>

@@ -19,5 +19,5 @@ protected:
 public:
 	CFirstPersonCamera 	mCamera;		////.
 
-	void Render (AG3DGraphicEntity* _3DGraphicEntity, AG3DCamera* _pCamera);	////. ToDo : Change parameters
+	void Render (AG3DGraphicEntity* _3DGraphicEntity, AG3DCamera* _pCamera, AGScene* _pScene);	////. ToDo : Change parameters
 };

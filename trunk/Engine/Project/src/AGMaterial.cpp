@@ -58,7 +58,7 @@ void AGMaterial::SetPixelShader (cStr _FileName, cStr _EntryPoint)
 	_mpPixelShader = AGResourceManager::GetSingleton()->Load<AGPixelShader>(_FileName, (void*)_EntryPoint);
 }
 
-void AGMaterial::Apply()
+void AGMaterial::Apply(AGScene* _pScene)
 {
 	if (_mpVertexShader)
 		_mpVertexShader->Activate();
