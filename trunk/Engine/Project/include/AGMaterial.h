@@ -7,22 +7,20 @@
 //------------------------------------------------------------------------------------------------------------------------------
 class AGMaterial
 {
-private:
+protected:
 	AGVertexShader*	_mpVertexShader;
 	AGPixelShader*	_mpPixelShader;
 
 public:
-	AGMaterial	();
-	~AGMaterial	();
+							AGMaterial	();
+	virtual					~AGMaterial	();
 
-	void	SetShader		(cStr _VertexShaderFileName = NULL, cStr _VertexEntryPoint = NULL, cStr _PixelShaderFileName = NULL, cStr _PixelEntryPoint = NULL);
-	void	SetVertexShader	(cStr _FileName, cStr _EntryPoint);
-	void	SetPixelShader	(cStr _FileName, cStr _EntryPoint);
+			void			SetShader		(cStr _VertexShaderFileName, cStr _VertexEntryPoint, cStr _PixelShaderFileName, cStr _PixelEntryPoint);
+			void			SetVertexShader	(cStr _FileName, cStr _EntryPoint);
+			void			SetPixelShader	(cStr _FileName, cStr _EntryPoint);
 
-	inline AGVertexShader*		GetVertexShader	()		{ return _mpVertexShader; };
-	inline AGPixelShader*		GetPixelShader	()		{ return _mpPixelShader; };
+	inline	AGVertexShader*	GetVertexShader	()		{ return _mpVertexShader; };
+	inline	AGPixelShader*	GetPixelShader	()		{ return _mpPixelShader; };
 
-	//virtual void Setup (AGScene _pScene) = 0;
-
-	void	Apply (AGScene* _pScene);
+			void			Activate ();
 };

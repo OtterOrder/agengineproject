@@ -2,7 +2,10 @@
 
 #include "AGDeviceManager.h"
 
-#include "AgSystem.h"	////.
+#include "AG2DScene.h"
+#include "AG3DScene.h"
+
+#include "AGSystem.h"	////.
 
 //------------------------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------------
@@ -19,7 +22,7 @@ AGRenderer::~AGRenderer()
 
 //------------------------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------------
-void AGRenderer::Render (AG3DGraphicEntity* _3DGraphicEntity, AG3DCamera* _pCamera, AGScene* _pScene)
+void AGRenderer::Render (AG3DScene* _pScene)
 {
 	mCamera.FrameMove(AGSystem::GetSingleton()->mTimer.GetDt());	////.
 
@@ -29,10 +32,27 @@ void AGRenderer::Render (AG3DGraphicEntity* _3DGraphicEntity, AG3DCamera* _pCame
 	{
 		pDeviceManager->Clear( AGCLEAR_TARGET|AGCLEAR_ZBUFFER, AGCOLOR_XRGB(0, 0, 125), 1.f );
 
-		_3DGraphicEntity->Draw(&mCamera, _pScene);	////.
+		//_3DGraphicEntity->Draw(&mCamera, _pScene);	////.
+
+		AG3DCamera* pCamera = (AG3DCamera*)(_pScene->GetCamera());
+
+		//AG3DGraphicEntity::Iterator GEntityIt;	// erreur de compilation. ?
+		std::vector<AG3DGraphicEntity*>::iterator GEntityIt;	////.
+
+		std::vector<AG3DGraphicEntity*> Entities = _pScene->GetEntities();
+
+		for (GEntityIt = Entities.begin(); GEntityIt != Entities.end(); GEntityIt++)
+		{
+			(*GEntityIt)->Draw(&mCamera, _pScene);	////.
+		}
 
 		pDeviceManager->EndScene();
 	}
 
 	pDeviceManager->Present();
+}
+
+//------------------------------------------------------------------------------------------------------------------------------
+void AGRenderer::Render (AG2DScene* _pScene)
+{
 }

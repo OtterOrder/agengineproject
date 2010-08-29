@@ -5,7 +5,9 @@
 #include "AGWindowManager.h"
 #include "AGResourceManager.h"
 #include "AGInputManager.h"
+#include "AGSceneManager.h"
 #include "AGRenderer.h"
+#include "AG3DDefaultMaterial.h"
 
 #include "AGTypesDX9.h"
 
@@ -26,14 +28,18 @@ void Game::InitEngine()
 //------------------------------------------------------------------------------------------------------------------------------
 void Game::Init()
 {
-	_mBat = new AG3DGraphicEntity();
+	_mScene = AGSceneManager::GetSingleton()->GetNew3DScene();
 
+	_mBat = _mScene->GetNewGraphicEntity();
 	_mBat->SetMesh(".\\Data\\bat.x");
 
-	AGMaterial* pMaterial = new AGMaterial();
-	pMaterial->SetShader();
+	AG3DMaterial* pMaterial = new AG3DDefaultMaterial();
 	_mBat->SetMaterial(pMaterial);
 
+	_mBat2 = _mScene->GetNewGraphicEntity();
+	_mBat2->SetMesh(".\\Data\\bat.x");
+	_mBat2->SetMaterial(new AG3DDefaultMaterial);
+	_mBat2->mPosition.x = 10.0f;
 
 	_mCamera = new AG3DCamera ();
 	_mCamera->mFOV = AGDegToRad (45.f);
@@ -58,30 +64,8 @@ void Game::Destroy()
 //------------------------------------------------------------------------------------------------------------------------------
 void Game::Update()
 {
-/*
-	cout << "Game Update" << endl;
-
-	AGResource* pRes = new AGResource();
-
-	u32 RefCount;
-
-	pRes->IncRefCount();
-	pRes->IncRefCount();
-	RefCount = pRes->DecRefCount();
-	RefCount = pRes->DecRefCount();
-	
-
-	cout << CRC::GetCRC("Toto") << endl;
-	cout << CRC::GetCRC("Fifou")<< endl;
-
-	//cout << "Dt = " << AGSystem::GetSingleton()->mTimer.GetDtMs() << "; Time = " << AGSystem::GetSingleton()->mTimer.GetTimeMs() << endl;
-//*/
-
 	AGVector2s lMousePosition = MouseInputs::Get(_mMouseInputsId)->GetPosition();
-	AGDebugPrint("Mouse position : %i; %i", lMousePosition.x, lMousePosition.y);
+	//AGDebugPrint("Mouse position : %i; %i", lMousePosition.x, lMousePosition.y);
 
-	_mBat->Update();
-	//_mCamera->Update();
-
-	AGRenderer::GetSingleton()->Render(_mBat, _mCamera, NULL);
+	//_mBat->mPosition.x += 0.005f;
 }

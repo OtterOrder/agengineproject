@@ -12,16 +12,15 @@ public:
 private:
 	AG3DEntity*	_mpParent;
 
+protected:
+	AGMatrix	_mWorld;
+
 public:
 	AGVector3f	mPosition;
-	AGVector3f	mOrientation;
-	AGVector3f	mScale;
-
-	AGMatrix	mWorld;
 
 public:
-	AG3DEntity	();
-	~AG3DEntity	();
+			AG3DEntity	();
+			~AG3DEntity	();
 
-	void	Update ();
+	virtual	void	Update ();
 };

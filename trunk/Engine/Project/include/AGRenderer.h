@@ -2,10 +2,10 @@
 
 #include "AGSingleton.h"
 
-#include "AG3DGraphicEntity.h"
-
-#include "AG3DCamera.h"
 #include "AGDebugCamera.h"		////.
+
+class AG2DScene;
+class AG3DScene;
 
 //------------------------------------------------------------------------------------------------------------------------------
 class AGRenderer : public AGSingleton<AGRenderer>
@@ -19,5 +19,6 @@ protected:
 public:
 	CFirstPersonCamera 	mCamera;		////.
 
-	void Render (AG3DGraphicEntity* _3DGraphicEntity, AG3DCamera* _pCamera, AGScene* _pScene);	////. ToDo : Change parameters
+	void Render (AG3DScene* _pScene);
+	void Render (AG2DScene* _pScene);
 };

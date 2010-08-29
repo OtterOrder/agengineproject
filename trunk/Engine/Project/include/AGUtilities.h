@@ -37,6 +37,7 @@
 	if (p)					\
 	{						\
 		p->DecRefCount();	\
+		p = NULL;			\
 	}						\
 }
 

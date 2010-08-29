@@ -1,30 +1,31 @@
-#include "AG3DCamera.h"
+#include "AG3DDefaultMaterial.h"
+
+#include "AG3DGraphicEntity.h"
+
+#define		DEFAULT_VS_PATH		".\\Data\\Shaders\\Defaults\\DefaultVS.vsh"
+#define		DEFAULT_PS_PATH		".\\Data\\Shaders\\Defaults\\DefaultPS.psh"
+
+#define		DEFAULT_VS_ENTRY	"VSMain"
+#define		DEFAULT_PS_ENTRY	"PSMain"
 
 //------------------------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------------
-AG3DCamera::AG3DCamera()
+AG3DDefaultMaterial::AG3DDefaultMaterial()
 {
+	AG3DMaterial::AG3DMaterial();
+
+	SetShader(DEFAULT_VS_PATH, DEFAULT_VS_ENTRY, DEFAULT_PS_PATH, DEFAULT_PS_ENTRY);
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
-AG3DCamera::~AG3DCamera()
+AG3DDefaultMaterial::~AG3DDefaultMaterial()
 {
+	AG3DMaterial::~AG3DMaterial();
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------------
-void AG3DCamera::Update ()
+void AG3DDefaultMaterial::Apply (AG3DScene* _pScene, AG3DGraphicEntity* _pEntity)
 {
-	AGMatrix M1, M2, M3;
-	AGMatrixRotationX(&M1,  AGDegToRad(-mOrientation.x) );
-	AGMatrixRotationY(&M2,  AGDegToRad(-mOrientation.y) );
-	AGMatrixRotationZ(&M3,  AGDegToRad(-mOrientation.z) );
 
-	M2 = M1 * M2 * M3;
-
-	AGMatrixTranslation(&M1, -mPosition.x, -mPosition.y, -mPosition.z);
-
-	_mWorld = M1 * M2;
-
-	AGMatrixPerspectiveFovLH (&mProj, mFOV, mRatio, mZNear, mZFar);
 }
