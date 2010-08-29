@@ -43,6 +43,7 @@ void AGSystem::Destroy( void )
 	AGDeviceManager::DestroySingleton();
 	AGWindowManager::DestroySingleton();
 	AGInputManager::DestroySingleton();
+	AGSceneManager::DestroySingleton();
 }
 
 //------------------------------------------------------------------------------------------------------------------------------

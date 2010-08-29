@@ -9,6 +9,13 @@ AGSceneManager::AGSceneManager()
 //------------------------------------------------------------------------------------------------------------------------------
 AGSceneManager::~AGSceneManager()
 {
+	AGScene::Iterator SceneIt;
+
+	for (SceneIt = _mpScenes.begin(); SceneIt != _mpScenes.end(); SceneIt++)
+	{
+		SAFE_DELETE(*SceneIt);
+	}
+	_mpScenes.clear();
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
