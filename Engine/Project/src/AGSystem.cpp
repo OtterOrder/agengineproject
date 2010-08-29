@@ -3,6 +3,7 @@
 
 #include "AGDeviceManager.h"
 #include "AGInputManager.h"
+#include "AGSceneManager.h"
 
 extern	AGGame* gGame;
 
@@ -54,6 +55,10 @@ void AGSystem::MainLoop( void )
 		AGInputManager::GetSingleton()->Update();
 
 		gGame->Update();
+
+		AGSceneManager::GetSingleton()->Update();
+
+		AGSceneManager::GetSingleton()->Draw();
 	}
 }
 

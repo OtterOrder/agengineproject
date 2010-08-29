@@ -10,3 +10,35 @@ AGSceneManager::AGSceneManager()
 AGSceneManager::~AGSceneManager()
 {
 }
+
+//------------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------------
+void AGSceneManager::Update ()
+{
+	AGScene::Iterator SceneIt;
+
+	for (SceneIt = _mpScenes.begin(); SceneIt != _mpScenes.end(); SceneIt++)
+	{
+		(*SceneIt)->Update();
+	}
+}
+
+//------------------------------------------------------------------------------------------------------------------------------
+void AGSceneManager::Draw ()
+{
+	AGScene::Iterator SceneIt;
+
+	for (SceneIt = _mpScenes.begin(); SceneIt != _mpScenes.end(); SceneIt++)
+	{
+		(*SceneIt)->Draw();
+	}
+}
+
+//------------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------------
+AG3DScene* AGSceneManager::GetNew3DScene ()
+{
+	AG3DScene* pScene = new AG3DScene();
+	_mpScenes.push_back(pScene);
+	return pScene;
+}

@@ -15,5 +15,5 @@ public:
 	AGGraphicEntity		();
 	virtual ~AGGraphicEntity	();
 
-	virtual void Draw (CFirstPersonCamera* _pCamera, AGScene* _pScene) =0;	////.
+	//virtual void Draw (CFirstPersonCamera* _pCamera, AGScene* _pScene) =0;	////.
 };

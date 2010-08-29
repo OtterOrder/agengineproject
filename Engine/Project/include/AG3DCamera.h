@@ -12,14 +12,16 @@ public:
 	DefineVectorIterator(AG3DCamera, Iterator);
 
 public:
-	float mFOV;
-	float mRatio;
-	float mZNear;
-	float mZFar;
+	float		mFOV;
+	float		mRatio;
+	float		mZNear;
+	float		mZFar;
+
+	AGVector3f	mOrientation;
 
 public:
-	AG3DCamera	();
-	~AG3DCamera	();
+			AG3DCamera	();
+			~AG3DCamera	();
 
-	void Update ();
+	void	Update ();
 };

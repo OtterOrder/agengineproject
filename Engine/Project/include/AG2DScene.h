@@ -2,8 +2,8 @@
 
 #include "AGScene.h"
 
-#include "AG2DCamera.h"
-#include "AG2DGraphicEntity.h"
+class AG2DCamera;
+class AG2DGraphicEntity;
 
 //------------------------------------------------------------------------------------------------------------------------------
 class AG2DScene : public AGScene

@@ -255,6 +255,14 @@
 					RelativePath=".\include\AG2DGroup.h"
 					>
 				</File>
+				<File
+					RelativePath=".\src\AG2DMaterial.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\AG2DMaterial.h"
+					>
+				</File>
 			</Filter>
 			<Filter
 				Name="3D"
@@ -292,6 +300,14 @@
 					>
 				</File>
 				<File
+					RelativePath=".\src\AG3DMaterial.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\AG3DMaterial.h"
+					>
+				</File>
+				<File
 					RelativePath=".\src\AGLight.cpp"
 					>
 				</File>
@@ -301,8 +317,16 @@
 				</File>
 			</Filter>
 			<Filter
-				Name="Matrial"
+				Name="Material"
 				>
+				<File
+					RelativePath=".\src\AG3DDefaultMaterial.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\AG3DDefaultMaterial.h"
+					>
+				</File>
 				<File
 					RelativePath=".\src\AGMaterial.cpp"
 					>

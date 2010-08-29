@@ -7,26 +7,34 @@
 
 #include "AGMesh.h"
 #include "AGMaterial.h"
+#include "AG3DMaterial.h"
 #include "AGDebugCamera.h"	////.
 
 //------------------------------------------------------------------------------------------------------------------------------
 class AG3DGraphicEntity : public AG3DEntity, public AGGraphicEntity
 {
+public:
+	DefineVectorIterator(AG3DEntity,  Iterator);
+
 private:
-	AGMesh*		_mpMesh;
-	AGMaterial*	_mpMaterial;
+	AGMesh*			_mpMesh;
+	AG3DMaterial*	_mpMaterial;
 
 public:
-	AG3DGraphicEntity	();
-	~AG3DGraphicEntity	();
+	AGVector3f	mOrientation;
+	AGVector3f	mScale;
 
-	void			SetMesh	(cStr _FileName)	{ SAFE_DECREF(_mpMesh);	_mpMesh = AGResourceManager::GetSingleton()->Load<AGMesh>(_FileName); };
-	inline AGMesh*	GetMesh	()					{ return _mpMesh; };
+public:
+							AG3DGraphicEntity	();
+							~AG3DGraphicEntity	();
 
-	inline void			SetMaterial (AGMaterial* _pMaterial)	{ SAFE_DELETE(_mpMaterial); _mpMaterial = _pMaterial; };
-	inline AGMaterial*	GetMaterial	()							{ return _mpMaterial; };
+	void					SetMesh	(cStr _FileName)	{ SAFE_DECREF(_mpMesh);	_mpMesh = AGResourceManager::GetSingleton()->Load<AGMesh>(_FileName); };
+	inline	AGMesh*			GetMesh	()					{ return _mpMesh; };
 
-	void	Update ();
+	inline	void			SetMaterial (AG3DMaterial* _pMaterial)	{ SAFE_DELETE(_mpMaterial); _mpMaterial = _pMaterial; };
+	inline	AG3DMaterial*	GetMaterial	()							{ return _mpMaterial; };
 
-	void	Draw	(CFirstPersonCamera* _pCamera, AGScene* _pScene);		////.
+	virtual	void			Update ();
+
+			void			Draw	(CFirstPersonCamera* _pCamera, AG3DScene* _pScene);		////.
 };

@@ -1,30 +1,21 @@
-#include "AG3DCamera.h"
+#include "AG2DMaterial.h"
+
+#include "AG2DGraphicEntity.h"
 
 //------------------------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------------
-AG3DCamera::AG3DCamera()
+AG2DMaterial::AG2DMaterial()
 {
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
-AG3DCamera::~AG3DCamera()
+AG2DMaterial::~AG2DMaterial()
 {
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------------
-void AG3DCamera::Update ()
+void AG2DMaterial::Apply (AG2DScene* _pScene, AG2DGraphicEntity* _pEntity)
 {
-	AGMatrix M1, M2, M3;
-	AGMatrixRotationX(&M1,  AGDegToRad(-mOrientation.x) );
-	AGMatrixRotationY(&M2,  AGDegToRad(-mOrientation.y) );
-	AGMatrixRotationZ(&M3,  AGDegToRad(-mOrientation.z) );
 
-	M2 = M1 * M2 * M3;
-
-	AGMatrixTranslation(&M1, -mPosition.x, -mPosition.y, -mPosition.z);
-
-	_mWorld = M1 * M2;
-
-	AGMatrixPerspectiveFovLH (&mProj, mFOV, mRatio, mZNear, mZFar);
 }
