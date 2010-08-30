@@ -28,8 +28,9 @@ public:
 
 	void	DrawMesh (AGPVertexDeclaration& _VertDelc, AGPVertexBuffer& _VB, u32& _VertexSize, AGPIndexBuffer& _IB, u32& _NbVertices, u32& _NbFaces);
 
-	void	SetMatrix	(AGPConstantTable& _ConstTable, cStr _VarName, AGMatrix& _Matrix);
-
 	inline void		SetVertexShader	(AGPVertexShader _VertexShader)		{ _mpDevice->SetVertexShader(_VertexShader); };
 	inline void		SetPixelShader	(AGPPixelShader _PixelShader)		{ _mpDevice->SetPixelShader(_PixelShader); };
+
+	void	SetMatrix	(AGPConstantTable& _ConstTable, cStr _VarName, AGMatrix& _Matrix);
+	void	SetTexture	(AGPConstantTable& _ConstTable, cStr _VarName, AGPTexture& _Texture);
 };

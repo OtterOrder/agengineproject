@@ -108,7 +108,7 @@ bool AGLoadPixelShader (cStr _FileName, cStr _EntryPoint, AGPPixelShader& _Pixel
 	if ( FAILED(D3DXCompileShaderFromFile(_FileName, NULL, NULL, _EntryPoint, "ps_3_0", 0, &pShaderCode, &pErrorBuffer, &_ConstantTable) ))
 	{
 		OutputDebugString(reinterpret_cast <char*> (pErrorBuffer->GetBufferPointer()));
-		MessageBox (NULL, "Vertex Shader compilation Error", "Shader Error", MB_OK);
+		MessageBox (NULL, "Pixel Shader compilation Error", "Shader Error", MB_OK);
 
 		return false;
 	}
@@ -122,6 +122,31 @@ bool AGLoadPixelShader (cStr _FileName, cStr _EntryPoint, AGPPixelShader& _Pixel
 
 	SAFE_RELEASE(pErrorBuffer);
 	SAFE_RELEASE(pShaderCode);
+
+	return true;
+}
+
+//------------------------------------------------------------------------------------------------------------------------------
+bool AGLoadTexture (cStr _FileName, AGPTexture& _PTexture, AGImageInfo& _TextureInfo)
+{
+	if( FAILED( D3DXCreateTextureFromFileEx(AGDeviceManager::GetSingleton()->GetDevice(),
+											_FileName,
+											D3DX_DEFAULT,
+											D3DX_DEFAULT,
+											D3DX_DEFAULT,
+											0,
+											D3DFMT_A8R8G8B8,
+											D3DPOOL_MANAGED,
+											D3DX_DEFAULT,
+											D3DX_DEFAULT,
+											0,
+											&_TextureInfo,
+											NULL,
+											&_PTexture ) ) )
+	{
+		_PTexture = NULL;
+		return false;
+	}
 
 	return true;
 }

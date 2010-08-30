@@ -1,0 +1,1 @@
+sampler DiffuseSampler = sampler_state{    AddressU  = WRAP;        	AddressV  = WRAP;    MipFilter = LINEAR;    MinFilter = LINEAR;    MagFilter = LINEAR;};struct PS_INPUT{	float2 UV		: TEXCOORD0;};float4 PSMain (PS_INPUT _Input)	: COLOR0{	return tex2D(DiffuseSampler, _Input.UV);}

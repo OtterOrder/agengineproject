@@ -21,3 +21,6 @@ bool AGLoadVertexShader (cStr _FileName, cStr _EntryPoint, AGPVertexShader& _Ver
 
 //------------------------------------------------------------------------------------------------------------------------------
 bool AGLoadPixelShader (cStr _FileName, cStr _EntryPoint, AGPPixelShader& _PixelShader, AGPConstantTable& _ConstantTable);
+
+//------------------------------------------------------------------------------------------------------------------------------
+bool AGLoadTexture (cStr _FileName, AGPTexture& _PTexture, AGImageInfo& _TextureInfo);

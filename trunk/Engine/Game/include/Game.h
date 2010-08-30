@@ -14,8 +14,6 @@ class Game : public AGGame
 private:
 	AG3DScene*			_mScene;
 	AG3DCamera*			_mCamera;
-	AG3DGraphicEntity*	_mBat;
-	AG3DGraphicEntity*	_mBat2;
 
 	u32					_mMouseInputsId;
 

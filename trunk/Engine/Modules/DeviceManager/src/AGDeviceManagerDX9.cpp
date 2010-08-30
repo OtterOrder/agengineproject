@@ -85,3 +85,19 @@ void AGDeviceManager::SetMatrix (AGPConstantTable& _ConstTable, cStr _VarName, A
 
 	_ConstTable->SetMatrix(_mpDevice, varHdl, &_Matrix);
 }
+
+//------------------------------------------------------------------------------------------------------------------------------
+void AGDeviceManager::SetTexture(AGPConstantTable& _ConstTable, cStr _VarName, AGPTexture& _Texture)
+{
+	assert(_ConstTable);
+
+	AGHandle textureHdl = _ConstTable->GetConstantByName(0, _VarName);
+	if (AGWarning(textureHdl == NULL, "Set Sampler. Variable handle not found."))
+		return;
+
+	AGConstantDesc textureDesc;
+	u32 count;
+
+	_ConstTable->GetConstantDesc(textureHdl, &textureDesc, &count);
+	_mpDevice->SetTexture(textureDesc.RegisterIndex, _Texture);
+}
