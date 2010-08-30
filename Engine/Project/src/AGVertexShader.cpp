@@ -30,6 +30,8 @@ AGResource::AGResourceResult AGVertexShader::Load (cStr _FileName, void* _Parame
 //------------------------------------------------------------------------------------------------------------------------------
 void AGVertexShader::Release ()
 {
+	AGResource::Release();
+
 	SAFE_RELEASE(_mpVertexShader);
 	SAFE_RELEASE(_mpConstantTable);
 }

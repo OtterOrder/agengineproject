@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(SolutionDir)include&quot;;.\..\Project\include;&quot;$(DXSDK_DIR)Include&quot;;.\..\Modules\DeviceManager\include;.\..\Modules\WindowsInputs\include"
+				AdditionalIncludeDirectories="&quot;$(SolutionDir)include&quot;;.\..\Project\include;&quot;$(SolutionDir)Materials\include&quot;;&quot;$(DXSDK_DIR)Include&quot;;.\..\Modules\DeviceManager\include;.\..\Modules\WindowsInputs\include"
 				PreprocessorDefinitions="WIN32;_DEBUG;_WINDOWS;AGDX9"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -171,6 +171,18 @@
 	<References>
 	</References>
 	<Files>
+		<Filter
+			Name="Materials"
+			>
+			<File
+				RelativePath=".\Materials\src\NormalMapMaterial.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Materials\include\NormalMapMaterial.h"
+				>
+			</File>
+		</Filter>
 		<File
 			RelativePath=".\src\Game.cpp"
 			>

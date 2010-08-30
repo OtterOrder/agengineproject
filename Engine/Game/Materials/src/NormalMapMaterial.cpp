@@ -1,38 +1,34 @@
-#include "AGPixelShader.h"
+#include "NormalMapMaterial.h"
 
-#include "AGWDX9.h"
+#include "AG3DGraphicEntity.h"
 
 //------------------------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------------
-AGPixelShader::AGPixelShader()
+NormalMapMaterial::NormalMapMaterial()
 {
-	_mpPixelShader	 = NULL;
-	_mpConstantTable = NULL;
+	AG3DMaterial::AG3DMaterial();
 
+	SetShader(".\\Data\\Shaders\\NormalMap.vsh", "VSMain", ".\\Data\\Shaders\\NormalMap.psh", "PSMain");
+	_mpDiffuseTex = NULL;
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
-AGPixelShader::~AGPixelShader()
+NormalMapMaterial::~NormalMapMaterial()
 {
-	Release();
+	AG3DMaterial::~AG3DMaterial();
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------------
-AGResource::AGResourceResult AGPixelShader::Load (cStr _FileName, void* _Parameters)
+void NormalMapMaterial::Apply (AG3DScene* _pScene, AG3DGraphicEntity* _pEntity)
 {
-	Release();
-
-	AGLoadPixelShader(_FileName, (cStr)_Parameters, _mpPixelShader, _mpConstantTable);
-
-	return RES_SUCCEED;
+	_mpPixelShader->SetTexture("DiffuseSampler", _mpDiffuseTex->GetTexture());
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
-void AGPixelShader::Release ()
+//------------------------------------------------------------------------------------------------------------------------------
+void NormalMapMaterial::SetDiffuse (cStr _FileName)
 {
-	AGResource::Release();
-
-	SAFE_RELEASE(_mpPixelShader );
-	SAFE_RELEASE(_mpConstantTable);
+	SAFE_DECREF(_mpDiffuseTex);
+	_mpDiffuseTex = AGResourceManager::GetSingleton()->Load<AGTexture>(_FileName);
 }

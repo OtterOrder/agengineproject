@@ -9,6 +9,8 @@
 #include "AGRenderer.h"
 #include "AG3DDefaultMaterial.h"
 
+#include "NormalMapMaterial.h"
+
 #include "AGTypesDX9.h"
 
 #include <iostream>
@@ -22,7 +24,7 @@ void Game::InitEngine()
 {
 	cout << "Game Init Engine" << endl;
 
-	AGWindowManager::GetSingleton()->SetSize(1024, 512);
+	AGWindowManager::GetSingleton()->SetSize(1920, 1080);
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
@@ -30,16 +32,30 @@ void Game::Init()
 {
 	_mScene = AGSceneManager::GetSingleton()->GetNew3DScene();
 
-	_mBat = _mScene->GetNewGraphicEntity();
-	_mBat->SetMesh(".\\Data\\bat.x");
+	NormalMapMaterial* Material;
+	AG3DGraphicEntity* pGraphicEntity;
 
-	AG3DMaterial* pMaterial = new AG3DDefaultMaterial();
-	_mBat->SetMaterial(pMaterial);
+	// Floor
+	pGraphicEntity = _mScene->GetNewGraphicEntity();
+	pGraphicEntity->SetMesh(".\\Data\\Floor.x");
+	Material = new NormalMapMaterial();
+	Material->SetDiffuse(".\\Data\\Floor_Diff.dds");
+	pGraphicEntity->SetMaterial(Material);
 
-	_mBat2 = _mScene->GetNewGraphicEntity();
-	_mBat2->SetMesh(".\\Data\\bat.x");
-	_mBat2->SetMaterial(new AG3DDefaultMaterial);
-	_mBat2->mPosition.x = 10.0f;
+	// Columns
+	float NbColumns = 10.f;
+	float Distance = 240.f;
+
+	for (float i = 0.f; i < NbColumns; ++i)
+	{
+		pGraphicEntity = _mScene->GetNewGraphicEntity();
+		pGraphicEntity->SetMesh(".\\Data\\Column.x");
+		Material = new NormalMapMaterial();
+		Material->SetDiffuse(".\\Data\\Column_Diff.dds");
+		pGraphicEntity->SetMaterial(Material);
+		pGraphicEntity->mPosition = AGVector3f( (i - (NbColumns-1.f)/2.f) * Distance , 0.f, -412.f);
+	}
+	
 
 	_mCamera = new AG3DCamera ();
 	_mCamera->mFOV = AGDegToRad (45.f);
@@ -50,6 +66,8 @@ void Game::Init()
 	_mCamera->mPosition = AGVector3f(0.f, 0.f, -10.f);
 
 	_mMouseInputsId = AGInputManager::GetSingleton()->AddInputs(new MouseInputs());
+
+	AGRenderer::GetSingleton()->mCamera.SetProjParams(AGDegToRad(45.f), 1920.f / 1080.f, 10.f, 100000.f);
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
@@ -57,7 +75,6 @@ void Game::Destroy()
 {
 	cout << "Game Destroy" << endl;
 
-	SAFE_DELETE(_mBat);
 	SAFE_DELETE(_mCamera);
 }
 
