@@ -17,5 +17,6 @@ AGSpotLight::~AGSpotLight()
 void AGSpotLight::Update()
 {
 	AGVector3fNormalize(mDirection);
-	mHalfAngle = AGClamp(0.f, AGPi, mHalfAngle);
+	mInHalfAngle  = AGClamp(0.f, AGPi, mInHalfAngle);
+	mOutHalfAngle = AGClamp(0.f, AGPi, mOutHalfAngle);
 }

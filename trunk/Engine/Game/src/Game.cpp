@@ -61,9 +61,12 @@ void Game::Init()
 
 	//Light
 	AGSpotLight* pSpotLight = _mScene->GetNewSpotLight();
-	pSpotLight->mPosition = AGVector3f(0.f, 100.f, 0.f);
+	pSpotLight->mPosition = AGVector3f(0.f, 300.f, 0.f);
 	pSpotLight->SetDiffuse (0.7f, 0.7f, 0.7f);
 	pSpotLight->SetSpecular(1.0f, 1.0f, 1.0f);
+	pSpotLight->mDirection = AGVector3f(0.f, -1.f, 0.f);
+	pSpotLight->mInHalfAngle  = AGPi / 3.4f;
+	pSpotLight->mOutHalfAngle = AGPi / 3.f;
 
 	_mCamera = new AG3DCamera ();
 	_mCamera->mFOV = AGDegToRad (45.f);

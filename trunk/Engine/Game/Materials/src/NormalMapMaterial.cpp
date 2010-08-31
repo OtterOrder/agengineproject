@@ -35,13 +35,11 @@ void NormalMapMaterial::Apply (AG3DScene* _pScene, AG3DGraphicEntity* _pEntity)
 
 	// Pixel Shader
 	_mpPixelShader->SetTexture("DiffuseSampler", _mpDiffuseTex->GetTexture());
-
-	if (_mpNormalTex)
-		_mpPixelShader->SetTexture("NormalSampler",  _mpNormalTex->GetTexture() );
-	else
-		_mpPixelShader->SetTexture("NormalSampler",  NULL );
+	_mpPixelShader->SetTexture("NormalSampler",  _mpNormalTex->GetTexture() );
 
 	_mpPixelShader->SetFloat("gBumpCoef", mBumpCoef);
+
+	_mpPixelShader->SetVector3f	("gCamPosition",	_pScene->Get3DCamera()->mPosition);
 
 	vector<AGLight*> Lights = _pScene->GetLights();
 	AGLight::Iterator LightIt;
@@ -53,11 +51,12 @@ void NormalMapMaterial::Apply (AG3DScene* _pScene, AG3DGraphicEntity* _pEntity)
 		if ((*LightIt)->GetType() == AGLight::Spot)
 		{
 			SpotLight = (AGSpotLight*)(*LightIt);
-			_mpPixelShader->SetVector3f	("gLightPosition",	SpotLight->mPosition);
-			//_mpPixelShader->SetVector3f	("gLightDirection",	SpotLight->mDirection);
-			_mpPixelShader->SetVector3f	("gLightDiffuse",	SpotLight->GetDiffuse());
-			_mpPixelShader->SetVector3f	("gLightSpecular",	SpotLight->GetSpecular());
-			_mpPixelShader->SetVector3f	("gCamPosition",	_pScene->Get3DCamera()->mPosition);
+			_mpPixelShader->SetVector3f	("gLightPosition",		SpotLight->mPosition);
+			_mpPixelShader->SetVector3f	("gLightDirection",		SpotLight->mDirection);
+			_mpPixelShader->SetVector3f	("gLightDiffuse",		SpotLight->GetDiffuse());
+			_mpPixelShader->SetVector3f	("gLightSpecular",		SpotLight->GetSpecular());
+			_mpPixelShader->SetFloat	("gLightInCos",			cos(SpotLight->mInHalfAngle));
+			_mpPixelShader->SetFloat	("gLightOutCos",		cos(SpotLight->mOutHalfAngle));
 
 			return;
 		}

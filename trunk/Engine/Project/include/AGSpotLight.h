@@ -7,7 +7,8 @@ class AGSpotLight : public AGLight
 {
 public:
 	AGVector3f	mDirection;
-	float		mHalfAngle;		// Radians	[0.0 , Pi]
+	float		mInHalfAngle;		// Radians	[0.0 , Pi]
+	float		mOutHalfAngle;		// Radians	[0.0 , Pi]
 
 public:
 					AGSpotLight		();

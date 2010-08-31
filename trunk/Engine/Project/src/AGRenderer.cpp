@@ -30,7 +30,7 @@ void AGRenderer::Render (AG3DScene* _pScene)
 	
 	if (pDeviceManager->BeginScene())
 	{
-		pDeviceManager->Clear( AGCLEAR_TARGET|AGCLEAR_ZBUFFER, AGCOLOR_XRGB(0, 0, 125), 1.f );
+		pDeviceManager->Clear( AGCLEAR_TARGET|AGCLEAR_ZBUFFER, AGCOLOR_XRGB(0, 0, 0), 1.f );
 
 		//_3DGraphicEntity->Draw(&mCamera, _pScene);	////.
 
