@@ -157,7 +157,7 @@ void AGDeviceManager::SetTexture(AGPConstantTable& _ConstTable, cStr _VarName, A
 	assert(_ConstTable);
 
 	AGHandle textureHdl = _ConstTable->GetConstantByName(0, _VarName);
-	if (AGWarning(textureHdl == NULL, "Set Sampler. Variable handle not found."))
+	if ( AGWarning(textureHdl == NULL, "Set Texture. Variable handle not found. Variable : %s", _VarName) )
 		return;
 
 	AGConstantDesc textureDesc;
@@ -165,4 +165,6 @@ void AGDeviceManager::SetTexture(AGPConstantTable& _ConstTable, cStr _VarName, A
 
 	_ConstTable->GetConstantDesc(textureHdl, &textureDesc, &count);
 	_mpDevice->SetTexture(textureDesc.RegisterIndex, _Texture);
+	_mpDevice->SetSamplerState(textureDesc.RegisterIndex, D3DSAMP_MINFILTER, D3DTEXF_LINEAR);
+	_mpDevice->SetSamplerState(textureDesc.RegisterIndex, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR);
 }
