@@ -307,14 +307,26 @@
 					RelativePath=".\include\AG3DMaterial.h"
 					>
 				</File>
-				<File
-					RelativePath=".\src\AGLight.cpp"
+				<Filter
+					Name="Lights"
 					>
-				</File>
-				<File
-					RelativePath=".\include\AGLight.h"
-					>
-				</File>
+					<File
+						RelativePath=".\src\AGLight.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\include\AGLight.h"
+						>
+					</File>
+					<File
+						RelativePath=".\src\AGSpotLight.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\include\AGSpotLight.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="Material"

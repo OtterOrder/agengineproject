@@ -74,6 +74,71 @@ void AGDeviceManager::DrawMesh (AGPVertexDeclaration& _VertDelc, AGPVertexBuffer
 
 //------------------------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------------
+void AGDeviceManager::SetInt (AGPConstantTable& _ConstTable, cStr _VarName, s32& _Int)
+{
+	assert(_ConstTable);
+
+	AGHandle varHdl = _ConstTable->GetConstantByName(0, _VarName);
+
+	if( AGWarning(varHdl == NULL, "Set Int. Variable handle not found. Variable : %s", _VarName) )
+		return;
+
+	_ConstTable->SetInt(_mpDevice, varHdl, _Int);
+}
+
+//------------------------------------------------------------------------------------------------------------------------------
+void AGDeviceManager::SetFloat (AGPConstantTable& _ConstTable, cStr _VarName, float& _Float)
+{
+	assert(_ConstTable);
+
+	AGHandle varHdl = _ConstTable->GetConstantByName(0, _VarName);
+
+	if( AGWarning(varHdl == NULL, "Set Float. Variable handle not found. Variable : %s", _VarName) )
+		return;
+
+	_ConstTable->SetFloat(_mpDevice, varHdl, _Float);
+}
+
+//------------------------------------------------------------------------------------------------------------------------------
+void AGDeviceManager::SetVector2f (AGPConstantTable& _ConstTable, cStr _VarName, AGVector2f& _Vector)
+{
+	assert(_ConstTable);
+
+	AGHandle varHdl = _ConstTable->GetConstantByName(0, _VarName);
+
+	if( AGWarning(varHdl == NULL, "Set Vector2. Variable handle not found. Variable : %s", _VarName) )
+		return;
+
+	_ConstTable->SetFloatArray(_mpDevice, varHdl, &(_Vector.x), 2);
+}
+
+//------------------------------------------------------------------------------------------------------------------------------
+void AGDeviceManager::SetVector3f (AGPConstantTable& _ConstTable, cStr _VarName, AGVector3f& _Vector)
+{
+	assert(_ConstTable);
+
+	AGHandle varHdl = _ConstTable->GetConstantByName(0, _VarName);
+
+	if( AGWarning(varHdl == NULL, "Set Vector3. Variable handle not found. Variable : %s", _VarName) )
+		return;
+
+	_ConstTable->SetFloatArray(_mpDevice, varHdl, &(_Vector.x), 3);
+}
+
+//------------------------------------------------------------------------------------------------------------------------------
+void AGDeviceManager::SetVector4f (AGPConstantTable& _ConstTable, cStr _VarName, AGVector4f& _Vector)
+{
+	assert(_ConstTable);
+
+	AGHandle varHdl = _ConstTable->GetConstantByName(0, _VarName);
+
+	if( AGWarning(varHdl == NULL, "Set Vector4. Variable handle not found. Variable : %s", _VarName) )
+		return;
+
+	_ConstTable->SetFloatArray(_mpDevice, varHdl, &(_Vector.x), 4);
+}
+
+//------------------------------------------------------------------------------------------------------------------------------
 void AGDeviceManager::SetMatrix (AGPConstantTable& _ConstTable, cStr _VarName, AGMatrix& _Matrix)
 {
 	assert(_ConstTable);

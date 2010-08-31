@@ -71,3 +71,12 @@ private:
 	static void	PartialCRC	(u32* ulCRC, cStr sData, u32 ulDataLength);
 	static u32	Reflect		(u32 ulReflect, const s8 cChar);
 };
+
+
+//------------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------------
+#define AGPi	3.1415926f
+
+#define AGMax(_A, _B)						(((_A) > (_B)) ? (_A) : (_B))
+#define AGMin(_A, _B)						(((_A) < (_B)) ? (_A) : (_B))
+#define AGClamp(_Min, _Max, _Value)			(AGMax(AGMin(_Max, _Value), _Min))
