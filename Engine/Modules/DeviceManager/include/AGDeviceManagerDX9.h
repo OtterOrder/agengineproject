@@ -31,6 +31,11 @@ public:
 	inline void		SetVertexShader	(AGPVertexShader _VertexShader)		{ _mpDevice->SetVertexShader(_VertexShader); };
 	inline void		SetPixelShader	(AGPPixelShader _PixelShader)		{ _mpDevice->SetPixelShader(_PixelShader); };
 
+	void	SetInt		(AGPConstantTable& _ConstTable, cStr _VarName, s32& _Int);
+	void	SetFloat	(AGPConstantTable& _ConstTable, cStr _VarName, float& _Float);
+	void	SetVector2f	(AGPConstantTable& _ConstTable, cStr _VarName, AGVector2f& _Vector);
+	void	SetVector3f	(AGPConstantTable& _ConstTable, cStr _VarName, AGVector3f& _Vector);
+	void	SetVector4f	(AGPConstantTable& _ConstTable, cStr _VarName, AGVector4f& _Vector);
 	void	SetMatrix	(AGPConstantTable& _ConstTable, cStr _VarName, AGMatrix& _Matrix);
 	void	SetTexture	(AGPConstantTable& _ConstTable, cStr _VarName, AGPTexture& _Texture);
 };

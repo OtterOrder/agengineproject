@@ -23,8 +23,7 @@ AG3DScene::~AG3DScene()
 	}
 	_mpGraphicEntites.clear();
 
-	//AGLight::Iterator LightIt;	// erreur de compilation. ?
-	std::vector<AGLight*>::iterator LightIt;	////.
+	AGLight::Iterator LightIt;
 	for (LightIt = _mpLights.begin(); LightIt != _mpLights.end(); LightIt++)
 	{
 		SAFE_DELETE(*LightIt);
@@ -45,6 +44,12 @@ void AG3DScene::Update ()
 	{
 		(*GEntityIt)->Update();
 	}
+
+	AGLight::Iterator LightIt;
+	for (LightIt = _mpLights.begin(); LightIt != _mpLights.end(); LightIt++)
+	{
+		(*LightIt)->Update();
+	}
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
@@ -57,7 +62,7 @@ AG3DGraphicEntity* AG3DScene::GetNewGraphicEntity ()
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
-void AG3DScene::RemoveGraphicObject(AG3DGraphicEntity* _pGraphicEntity)
+void AG3DScene::RemoveGraphicEntity (AG3DGraphicEntity* _pGraphicEntity)
 {
 	//AG3DGraphicEntity::Iterator GEntityIt;	// erreur de compilation. ?
 	std::vector<AG3DGraphicEntity*>::iterator GEntityIt;	////.
@@ -67,6 +72,30 @@ void AG3DScene::RemoveGraphicObject(AG3DGraphicEntity* _pGraphicEntity)
 		if (_pGraphicEntity == *GEntityIt)
 		{
 			_mpGraphicEntites.erase(GEntityIt);
+			return;
+		}
+	}
+}
+
+//------------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------------
+AGSpotLight* AG3DScene::GetNewSpotLight ()
+{
+	AGSpotLight* pSpotLight = new AGSpotLight();
+	_mpLights.push_back(pSpotLight);
+	return pSpotLight;
+}
+
+//------------------------------------------------------------------------------------------------------------------------------
+void AG3DScene::RemoveLight (AGLight* _pLight)
+{
+	AGLight::Iterator LightIt;
+
+	for (LightIt = _mpLights.begin(); LightIt != _mpLights.end(); LightIt++)
+	{
+		if (_pLight == *LightIt)
+		{
+			_mpLights.erase(LightIt);
 			return;
 		}
 	}

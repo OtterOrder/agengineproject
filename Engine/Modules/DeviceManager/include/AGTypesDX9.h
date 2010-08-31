@@ -58,4 +58,5 @@ typedef		D3DXVECTOR2				AGVector2f;
 typedef		D3DXVECTOR3				AGVector3f;
 typedef		D3DXVECTOR4				AGVector4f;
 
-#define		AGVector3fToColor(vect)		D3DCOLOR_RGBA( (int)(vect.x*255.f), (int)(vect.y*255.f), (int)(vect.z*255.f), 255 )
+#define		AGVector3fToColor  (_Vect)		D3DCOLOR_RGBA( (int)(vect.x*255.f), (int)(vect.y*255.f), (int)(vect.z*255.f), 255 )
+#define		AGVector3fNormalize(_Vect)		D3DXVec3Normalize( &_Vect, &_Vect )

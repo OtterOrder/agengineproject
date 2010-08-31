@@ -22,5 +22,7 @@ public:
 			AG3DEntity	();
 			~AG3DEntity	();
 
-	virtual	void	Update ();
+	virtual	void		Update			();
+
+	inline	AGMatrix	GetWorldMatrix	()	{ return _mWorld; }
 };

@@ -3,6 +3,7 @@
 #include "AGScene.h"
 
 #include "AG3DGraphicEntity.h"
+#include "AGSpotLight.h"
 class AG3DCamera;
 class AGLight;
 
@@ -20,14 +21,20 @@ public:
 										AG3DScene  ();
 										~AG3DScene ();
 
-	inline	AGCamera*					GetCamera	()	{ return (AGCamera*)_mpCamera; }
-	inline	vector<AG3DGraphicEntity*>	GetEntities	()	{ return _mpGraphicEntites; }
+	inline	AGCamera*					GetCamera	()	{ return (AGCamera*)_mpCamera;	}
+	inline	AG3DCamera*					Get3DCamera	()	{ return _mpCamera; }
+	inline	vector<AG3DGraphicEntity*>	GetEntities	()	{ return _mpGraphicEntites;		}
+	inline	vector<AGLight*>			GetLights	()	{ return _mpLights;				}
 
 			void						Update	();
 
 	inline	void						Draw	()		{ AGRenderer::GetSingleton()->Render(this); }
 
 			AG3DGraphicEntity*			GetNewGraphicEntity ();
-			void						RemoveGraphicObject (AG3DGraphicEntity* _pGraphicEntity);
-	inline	void						DeleteGraphicEntity (AG3DGraphicEntity* _pGraphicEntity)	{ RemoveGraphicObject(_pGraphicEntity); SAFE_DELETE(_pGraphicEntity); }
+			void						RemoveGraphicEntity (AG3DGraphicEntity* _pGraphicEntity);
+	inline	void						DeleteGraphicEntity (AG3DGraphicEntity* _pGraphicEntity)	{ RemoveGraphicEntity(_pGraphicEntity); SAFE_DELETE(_pGraphicEntity); }
+
+			AGSpotLight*				GetNewSpotLight		();
+			void						RemoveLight			(AGLight* _pLight);
+	inline	void						DeleteLight			(AGLight* _pLight)					{ RemoveLight(_pLight); SAFE_DELETE(_pLight); }
 };
