@@ -55,7 +55,7 @@ void AGWindowManager::Initialize()
 	_mWndClassEx.cbWndExtra		= 0;
 	_mWndClassEx.hInstance		= GetModuleHandle(NULL);
 	_mWndClassEx.hIcon			= NULL;
-	_mWndClassEx.hCursor		= NULL;
+	_mWndClassEx.hCursor		= LoadCursor( NULL, IDC_ARROW );
 	_mWndClassEx.hbrBackground	= NULL;
 	_mWndClassEx.lpszMenuName	= NULL;
 	_mWndClassEx.lpszClassName	= _mName;
