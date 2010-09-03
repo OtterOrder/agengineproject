@@ -327,6 +327,26 @@
 						>
 					</File>
 				</Filter>
+				<Filter
+					Name="Skybox"
+					>
+					<File
+						RelativePath=".\src\AGPRTLightProbe.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\include\AGPRTLightProbe.h"
+						>
+					</File>
+					<File
+						RelativePath=".\src\AGSkybox.cpp"
+						>
+					</File>
+					<File
+						RelativePath=".\include\AGSkybox.h"
+						>
+					</File>
+				</Filter>
 			</Filter>
 			<Filter
 				Name="Material"
@@ -390,6 +410,14 @@
 			</File>
 			<File
 				RelativePath=".\include\AGTexture.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\AGTextureCube.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\AGTextureCube.h"
 				>
 			</File>
 			<File
