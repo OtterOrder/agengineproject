@@ -100,3 +100,13 @@ void AG3DScene::RemoveLight (AGLight* _pLight)
 		}
 	}
 }
+
+//------------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------------
+AGSkybox* AG3DScene::GetNewSkybox ()
+{
+	AGSkybox* pSkybox = new AGSkybox();
+	AG3DGraphicEntity * Ptr=dynamic_cast<AG3DGraphicEntity*>(pSkybox);
+	_mpGraphicEntites.push_back(Ptr);
+	return pSkybox;
+}

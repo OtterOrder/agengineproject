@@ -34,6 +34,7 @@ typedef		D3DXHANDLE						AGHandle;
 
 //--------------------------------------------------------------
 typedef		LPDIRECT3DTEXTURE9				AGPTexture;
+typedef		LPDIRECT3DCUBETEXTURE9			AGPTextureCube;
 typedef		LPDIRECT3DSURFACE9				AGPSurface;
 typedef		D3DXIMAGE_INFO					AGImageInfo;
 typedef		D3DFORMAT						AGFormat;

@@ -24,3 +24,6 @@ bool AGLoadPixelShader (cStr _FileName, cStr _EntryPoint, AGPPixelShader& _Pixel
 
 //------------------------------------------------------------------------------------------------------------------------------
 bool AGLoadTexture (cStr _FileName, AGPTexture& _PTexture, AGImageInfo& _TextureInfo);
+
+//------------------------------------------------------------------------------------------------------------------------------
+bool AGLoadTextureCube (cStr _FileName, AGPTexture& _PTexture, AGImageInfo& _TextureInfo);

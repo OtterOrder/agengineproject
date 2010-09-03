@@ -150,3 +150,17 @@ bool AGLoadTexture (cStr _FileName, AGPTexture& _PTexture, AGImageInfo& _Texture
 
 	return true;
 }
+
+//------------------------------------------------------------------------------------------------------------------------------
+bool AGLoadTextureCube (cStr _FileName, AGPTextureCube& _PTexture, AGImageInfo& _TextureInfo)
+{
+	if( FAILED( D3DXCreateCubeTextureFromFile(AGDeviceManager::GetSingleton()->GetDevice(),
+		_FileName,
+		&_PTexture ) ) )
+	{
+		_PTexture = NULL;
+		return false;
+	}
+
+	return true;
+}
