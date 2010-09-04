@@ -14,6 +14,9 @@
 //--------------------------------------------------------------
 #define		AGDegToRad						D3DXToRadian
 
+//--------------------------------------------------------------
+#define		AGFVF_XYZ						D3DFVF_XYZ
+
 //------------------------------------------------------------------------------------------------------------------------------
 typedef		LPDIRECT3D9						AGPD3D;
 typedef		LPDIRECT3DDEVICE9				AGPDevice;
@@ -51,6 +54,8 @@ typedef		D3DXMATRIX						AGMatrix;
 #define		AGMatrixRotationX				D3DXMatrixRotationX
 #define		AGMatrixRotationY				D3DXMatrixRotationY
 #define		AGMatrixRotationZ				D3DXMatrixRotationZ
+
+#define		AGMatrixScaling					D3DXMatrixScaling
 
 #define		AGMatrixPerspectiveFovLH		D3DXMatrixPerspectiveFovLH
 

@@ -26,4 +26,5 @@ public:
 	inline	void	SetVector4f	(cStr _VarName, AGVector4f _Vector)			{ AGDeviceManager::GetSingleton()->SetVector4f	(_mpConstantTable, _VarName, _Vector);	}
 	inline	void	SetMatrix	(cStr _VarName, AGMatrix _Matrix)			{ AGDeviceManager::GetSingleton()->SetMatrix	(_mpConstantTable, _VarName, _Matrix);	}
 	inline	void	SetTexture	(cStr _VarName, AGPTexture _Texture)		{ AGDeviceManager::GetSingleton()->SetTexture	(_mpConstantTable, _VarName, _Texture); }
+	inline	void	SetTexture	(cStr _VarName, AGPTextureCube _Texture)	{ AGDeviceManager::GetSingleton()->SetTexture	(_mpConstantTable, _VarName, _Texture); }
 };

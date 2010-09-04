@@ -16,7 +16,7 @@ class AG3DGraphicEntity : public AG3DEntity, public AGGraphicEntity
 public:
 	DefineVectorIterator(AG3DEntity,  Iterator);
 
-private:
+protected:
 	AGMesh*			_mpMesh;
 	AG3DMaterial*	_mpMaterial;
 
@@ -36,5 +36,5 @@ public:
 
 	virtual	void			Update ();
 
-			void			Draw	(CFirstPersonCamera* _pCamera, AG3DScene* _pScene);		////.
+	virtual	void			Draw	(CFirstPersonCamera* _pCamera, AG3DScene* _pScene);		////.
 };

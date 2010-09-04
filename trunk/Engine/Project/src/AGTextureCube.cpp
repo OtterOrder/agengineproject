@@ -20,7 +20,7 @@ AGResource::AGResourceResult AGTextureCube::Load (cStr _FileName, void* _Paramet
 {
 	Release();
 
-	AGLoadTexture(_FileName, _mPTexture, _mTextureInfo);
+	AGLoadTextureCube(_FileName, _mPTexture, _mTextureInfo);
 
 	return RES_SUCCEED;
 }

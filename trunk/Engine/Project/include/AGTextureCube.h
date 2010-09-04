@@ -5,8 +5,8 @@
 class AGTextureCube : public AGResource
 {
 private:
-	AGImageInfo	_mTextureInfo;
-	AGPTexture	_mPTexture;
+	AGImageInfo		_mTextureInfo;
+	AGPTextureCube	_mPTexture;
 
 public:
 	AGTextureCube	();
@@ -15,5 +15,5 @@ public:
 	AGResourceResult	Load (cStr _FileName, void* _Parameters = NULL);
 	void				Release ();
 
-	inline	AGPTexture			GetTexture ()	{ return _mPTexture; }
+	inline	AGPTextureCube			GetTexture ()	{ return _mPTexture; }
 };
