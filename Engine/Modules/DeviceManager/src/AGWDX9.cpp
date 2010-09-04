@@ -164,3 +164,52 @@ bool AGLoadTextureCube (cStr _FileName, AGPTextureCube& _PTexture, AGImageInfo& 
 
 	return true;
 }
+
+//------------------------------------------------------------------------------------------------------------------------------
+bool AGCreateVertexBuffer (UINT _Lenght, DWORD _FVF, AGPVertexBuffer& _VertexBuffer)
+{
+	if( FAILED( AGDeviceManager::GetSingleton()->GetDevice()->CreateVertexBuffer(
+		_Lenght,
+		D3DUSAGE_WRITEONLY,
+		_FVF,
+		D3DPOOL_DEFAULT,
+		&_VertexBuffer,
+		NULL)
+		) )
+	{
+		_VertexBuffer = NULL;
+		return false;
+	}
+
+	return true;
+}
+
+//------------------------------------------------------------------------------------------------------------------------------
+bool AGLockVertexBuffer (UINT _Offset, AGPVertexBuffer _VertexBuffer, UINT _SizeToLock, void** _Data)
+{
+	if( FAILED(_VertexBuffer->Lock(_Offset, _SizeToLock, _Data, 0)))
+		return false;
+
+	return true;
+}
+
+//------------------------------------------------------------------------------------------------------------------------------
+bool AGUnlockVertexBuffer (AGPVertexBuffer _VertexBuffer)
+{
+	if( FAILED(_VertexBuffer->Unlock()))
+		return false;
+
+	return true;
+}
+
+//------------------------------------------------------------------------------------------------------------------------------
+bool AGDrawVertexBuffer (UINT _Lenght, DWORD _FVF, AGPVertexBuffer& _VertexBuffer, UINT _StartVertex, UINT _PrimitiveCount)
+{
+	AGDeviceManager::GetSingleton()->GetDevice()->SetFVF(_FVF);
+
+	AGDeviceManager::GetSingleton()->GetDevice()->SetStreamSource(0, _VertexBuffer, 0, _Lenght);
+
+	AGDeviceManager::GetSingleton()->GetDevice()->DrawPrimitive( D3DPT_TRIANGLESTRIP, _StartVertex, _PrimitiveCount );
+
+	return true;
+}

@@ -38,4 +38,5 @@ public:
 	void	SetVector4f	(AGPConstantTable& _ConstTable, cStr _VarName, AGVector4f& _Vector);
 	void	SetMatrix	(AGPConstantTable& _ConstTable, cStr _VarName, AGMatrix& _Matrix);
 	void	SetTexture	(AGPConstantTable& _ConstTable, cStr _VarName, AGPTexture& _Texture);
+	void	SetTexture	(AGPConstantTable& _ConstTable, cStr _VarName, AGPTextureCube& _Texture);
 };

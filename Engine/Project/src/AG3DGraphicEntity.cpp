@@ -6,6 +6,7 @@ AG3DGraphicEntity::AG3DGraphicEntity()
 {
 	_mpMesh		= NULL;
 	_mpMaterial	= NULL;
+	mScale		= AGVector3f(1.f, 1.f, 1.f);
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
@@ -20,6 +21,7 @@ AG3DGraphicEntity::~AG3DGraphicEntity()
 void AG3DGraphicEntity::Update ()
 {
 	AG3DEntity::Update();
+	AGMatrixScaling(&_mWorld, mScale.x, mScale.y, mScale.z);
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
