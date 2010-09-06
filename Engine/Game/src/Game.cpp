@@ -57,6 +57,17 @@ void Game::Init()
 	pShadowMaterial = new NormalMapShadowMaterial();
 	pGraphicEntity->SetShadowMaterial(pShadowMaterial);
 
+	// Walls
+	pGraphicEntity = _mScene->GetNewGraphicEntity();
+	pGraphicEntity->SetMesh(".\\Data\\Walls.x");
+	pMaterial = new NormalMapMaterial();
+	pMaterial->SetDiffuse(".\\Data\\Walls_Diff.dds");
+	pMaterial->SetNormal (".\\Data\\Walls_Normal.dds");
+	pGraphicEntity->SetMaterial(pMaterial);
+	pZMaterial = new NormalMapZMaterial();
+	pGraphicEntity->SetZMaterial(pZMaterial);
+	pShadowMaterial = new NormalMapShadowMaterial();
+	pGraphicEntity->SetShadowMaterial(pShadowMaterial);
 
 	// Columns
 	float NbColumns = 10.f;
@@ -80,15 +91,17 @@ void Game::Init()
 
 	//Light
 	AGSpotLight* pSpotLight = _mScene->GetNewSpotLight();
-	pSpotLight->mPosition = AGVector3f(0.f, 300.f, 0.f);
+	pSpotLight->mPosition = AGVector3f(0.f, 400.f, -500.f);
 	pSpotLight->SetDiffuse (0.7f, 0.7f, 0.7f);
 	pSpotLight->SetSpecular(1.0f, 1.0f, 1.0f);
-	pSpotLight->mDirection = AGVector3f(0.f, -1.f, 0.f);
+	AGVector3f Direction = AGVector3f(0.f, 0.f, 0.f) - pSpotLight->mPosition;
+	AGVector3fNormalize(Direction);
+	pSpotLight->mDirection = Direction;
 	pSpotLight->mInHalfAngle  = AGPi / 4.f;
 	pSpotLight->mOutHalfAngle = AGPi / 3.f;
 
 	//ShadowMap
-	AGShadowManager::GetSingleton()->AddNewShadowMap(pSpotLight, 80.f, 303.f, _mScene);
+	AGShadowManager::GetSingleton()->AddNewShadowMap(pSpotLight, 200.f, 1200.f, _mScene);
 
 	_mCamera = new AG3DCamera ();
 	_mCamera->mFOV = AGDegToRad (45.f);
@@ -100,7 +113,7 @@ void Game::Init()
 
 	_mMouseInputsId = AGInputManager::GetSingleton()->AddInputs(new MouseInputs());
 
-	AGRenderer::GetSingleton()->mCamera.SetProjParams(AGDegToRad(45.f), 1920.f / 1080.f, 10.f, 3000.f);
+	AGRenderer::GetSingleton()->mCamera.SetProjParams(AGDegToRad(45.f), 1920.f / 1080.f, 10.f, 10000.f);
 	D3DXVECTOR3 Eye    (-1193.999756f, 292.999969f, 191.999969f);
 	D3DXVECTOR3 LookAt (-1193.118530f, 292.629089f, 191.707870f);
 	AGRenderer::GetSingleton()->mCamera.SetViewParams(&Eye, &LookAt);

@@ -1,5 +1,8 @@
 #include "AG3DGraphicEntity.h"
 
+#include "AG3DScene.h"
+#include "AG3DCamera.h"
+
 //------------------------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------------
 AG3DGraphicEntity::AG3DGraphicEntity()
@@ -41,6 +44,8 @@ void AG3DGraphicEntity::Update ()
 //------------------------------------------------------------------------------------------------------------------------------
 void AG3DGraphicEntity::Draw (CFirstPersonCamera* _pCamera, AG3DScene* _pScene)	////.
 {
+	_pScene->Get3DCamera()->mPosition = *(_pCamera->GetEyePt());	////.
+
 	_mpMaterial->Activate();
 	_mpMaterial->Apply(_pScene, this);
 
