@@ -3,6 +3,7 @@
 #include "AGLight.h"
 #include "AGSpotLight.h"
 #include "AG3DCamera.h"
+#include "AGShadowManager.h"
 
 //------------------------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------------
@@ -39,6 +40,9 @@ void NormalMapMaterial::Apply (AG3DScene* _pScene, AG3DGraphicEntity* _pEntity)
 	// Pixel Shader
 	_mpPixelShader->SetTexture("DiffuseSampler", _mpDiffuseTex);
 	_mpPixelShader->SetTexture("NormalSampler",  _mpNormalTex);
+
+	AGTextureFilter Filter;
+	_mpPixelShader->SetTexture("ShadowSampler",  AGShadowManager::GetSingleton()->GetShadows(), &Filter);
 
 	_mpPixelShader->SetFloat("gBumpCoef", mBumpCoef);
 

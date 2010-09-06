@@ -20,6 +20,7 @@ struct VS_OUTPUT
 	float3 WorldNormal		: NORMAL;
 	float3 Tangent			: TEXCOORD2;
 	float3 Binormal			: TEXCOORD3;
+	float3 ScreenUV			: TEXCOORD4;
 };
 
 VS_OUTPUT VSMain (VS_INPUT _Input)
@@ -32,6 +33,7 @@ VS_OUTPUT VSMain (VS_INPUT _Input)
 	Output.UV				= _Input.UV;
 	Output.Tangent			= _Input.Tangent;
 	Output.Binormal			= _Input.Binormal;
+	Output.ScreenUV			= Output.Position.xyw;
 
 	return Output;
 }

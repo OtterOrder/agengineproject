@@ -74,7 +74,5 @@ void AGShadowManager::RenderShadows (AGShadowMap* _pShadowMap)
 	AGDeviceManager::GetSingleton()->SetRenderTarget(0, _mShadows.GetSurface());
 	AGDeviceManager::GetSingleton()->SetDepthStencilSurface(AGDeviceManager::GetSingleton()->GetStencilBuffer());
 
-	AGDeviceManager::GetSingleton()->RestoreBackBuffer();	////.
-
 	AGRenderer::GetSingleton()->RenderShadow((AG3DScene*)_pShadowMap->GetScene(), _pShadowMap->GetViewProj(), _mShadowMap.GetTexture());
 }

@@ -25,7 +25,7 @@ void AGShadowMap::Update()
 	{
 		AGVector3f Eye = _mpLight->mPosition;
 		AGVector3f At  = Eye + ((AGSpotLight*)_mpLight)->mDirection;
-		AGVector3f Up  = AGVector3f(0.f, 0.f, 1.f);		////.
+		AGVector3f Up  = AGVector3f(0.f, 1.f, 0.f);		////.
 
 		AGMatrixLookAtLH(&_mView, &Eye, &At, &Up);
 		AGMatrixMultiply(&_mViewProj, &_mView, &_mProjection);

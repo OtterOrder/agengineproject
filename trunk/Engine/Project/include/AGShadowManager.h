@@ -20,17 +20,19 @@ private:
 	AGRenderTarget				_mShadows;
 
 protected:
-					AGShadowManager		();
-					~AGShadowManager	();
-			void	Destroy				();
+						AGShadowManager		();
+						~AGShadowManager	();
+			void		Destroy				();
 
 public:
-			void	Initialize	();
-			void	Update		();
+			void		Initialize	();
+			void		Update		();
 
-			void	AddNewShadowMap (AGLight* _pLight, float _ZNear, float _ZFar, AG3DScene* _pScene);
+			void		AddNewShadowMap (AGLight* _pLight, float _ZNear, float _ZFar, AG3DScene* _pScene);
+
+	inline	AGPTexture	GetShadows		()		{ return _mShadows.GetTexture(); }
 
 private:
-			void	RenderShadowMap (AGShadowMap* _pShadowMap, AGSpotLight* _pLight);
-			void	RenderShadows	(AGShadowMap* _pShadowMap);
+			void		RenderShadowMap (AGShadowMap* _pShadowMap, AGSpotLight* _pLight);
+			void		RenderShadows	(AGShadowMap* _pShadowMap);
 };
