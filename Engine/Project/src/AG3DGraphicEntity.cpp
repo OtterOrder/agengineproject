@@ -33,7 +33,9 @@ AG3DGraphicEntity::~AG3DGraphicEntity()
 void AG3DGraphicEntity::Update ()
 {
 	AG3DEntity::Update();
-	AGMatrixScaling(&_mWorld, mScale.x, mScale.y, mScale.z);
+	AGMatrix Scale;
+	AGMatrixScaling(&Scale, mScale.x, mScale.y, mScale.z);
+	AGMatrixMultiply(&_mWorld, &_mWorld, &Scale);
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
