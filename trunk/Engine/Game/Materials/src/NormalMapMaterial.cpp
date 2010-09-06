@@ -12,8 +12,9 @@ NormalMapMaterial::NormalMapMaterial()
 	AG3DMaterial::AG3DMaterial();
 
 	SetShader(".\\Data\\Shaders\\NormalMap.vsh", "VSMain", ".\\Data\\Shaders\\NormalMap.psh", "PSMain");
-	_mpDiffuseTex = NULL;
-	_mpNormalTex  = NULL;
+	_mpDiffuseTex	= NULL;
+	_mpNormalTex	= NULL;
+	_mpSpecularTex	= NULL;
 	mBumpCoef = 1.0f;
 }
 
@@ -22,6 +23,7 @@ NormalMapMaterial::~NormalMapMaterial()
 {
 	SAFE_RELEASE(_mpDiffuseTex);
 	SAFE_RELEASE(_mpNormalTex);
+	SAFE_RELEASE(_mpSpecularTex);
 
 	AG3DMaterial::~AG3DMaterial();
 }
@@ -40,6 +42,7 @@ void NormalMapMaterial::Apply (AG3DScene* _pScene, AG3DGraphicEntity* _pEntity)
 	// Pixel Shader
 	_mpPixelShader->SetTexture("DiffuseSampler", _mpDiffuseTex);
 	_mpPixelShader->SetTexture("NormalSampler",  _mpNormalTex);
+	_mpPixelShader->SetTexture("SpecularSampler",  _mpSpecularTex);
 
 	AGTextureFilter Filter;
 	_mpPixelShader->SetTexture("ShadowSampler",  AGShadowManager::GetSingleton()->GetShadows(), &Filter);
@@ -83,4 +86,11 @@ void NormalMapMaterial::SetNormal (cStr _FileName)
 {
 	SAFE_DECREF(_mpNormalTex);
 	_mpNormalTex = AGResourceManager::GetSingleton()->Load<AGTexture>(_FileName);
+}
+
+//------------------------------------------------------------------------------------------------------------------------------
+void NormalMapMaterial::SetSpecular (cStr _FileName)
+{
+	SAFE_DECREF(_mpSpecularTex);
+	_mpSpecularTex = AGResourceManager::GetSingleton()->Load<AGTexture>(_FileName);
 }

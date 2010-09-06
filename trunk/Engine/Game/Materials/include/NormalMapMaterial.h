@@ -12,6 +12,7 @@ class NormalMapMaterial : public AG3DMaterial
 private:
 	AGTexture*		_mpDiffuseTex;
 	AGTexture*		_mpNormalTex;
+	AGTexture*		_mpSpecularTex;
 
 public:
 	float			mBumpCoef;
@@ -24,4 +25,5 @@ public:
 
 			void	SetDiffuse	(cStr _FileName);
 			void	SetNormal	(cStr _FileName);
+			void	SetSpecular	(cStr _FileName);
 };

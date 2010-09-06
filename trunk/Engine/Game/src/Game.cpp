@@ -49,8 +49,9 @@ void Game::Init()
 	pGraphicEntity = _mScene->GetNewGraphicEntity();
 	pGraphicEntity->SetMesh(".\\Data\\Floor.x");
 	pMaterial = new NormalMapMaterial();
-	pMaterial->SetDiffuse(".\\Data\\Floor_Diff.dds");
-	pMaterial->SetNormal (".\\Data\\Floor_Normal.dds");
+	pMaterial->SetDiffuse	(".\\Data\\Floor_Diff.dds");
+	pMaterial->SetNormal	(".\\Data\\Floor_Normal.dds");
+	pMaterial->SetSpecular	(".\\Data\\Floor_Spec.dds");
 	pGraphicEntity->SetMaterial(pMaterial);
 	pZMaterial = new NormalMapZMaterial();
 	pGraphicEntity->SetZMaterial(pZMaterial);
@@ -61,8 +62,9 @@ void Game::Init()
 	pGraphicEntity = _mScene->GetNewGraphicEntity();
 	pGraphicEntity->SetMesh(".\\Data\\Walls.x");
 	pMaterial = new NormalMapMaterial();
-	pMaterial->SetDiffuse(".\\Data\\Walls_Diff.dds");
-	pMaterial->SetNormal (".\\Data\\Walls_Normal.dds");
+	pMaterial->SetDiffuse	(".\\Data\\Walls_Diff.dds");
+	pMaterial->SetNormal	(".\\Data\\Walls_Normal.dds");
+	pMaterial->SetSpecular	(".\\Data\\Walls_Spec.dds");
 	pGraphicEntity->SetMaterial(pMaterial);
 	pZMaterial = new NormalMapZMaterial();
 	pGraphicEntity->SetZMaterial(pZMaterial);
@@ -78,8 +80,9 @@ void Game::Init()
 		pGraphicEntity = _mScene->GetNewGraphicEntity();
 		pGraphicEntity->SetMesh(".\\Data\\Column.x");
 		pMaterial = new NormalMapMaterial();
-		pMaterial->SetDiffuse(".\\Data\\Column_Diff.dds"  );
-		pMaterial->SetNormal (".\\Data\\Column_Normal.dds");
+		pMaterial->SetDiffuse	(".\\Data\\Column_Diff.dds"  );
+		pMaterial->SetNormal	(".\\Data\\Column_Normal.dds");
+		pMaterial->SetSpecular	(".\\Data\\Column_Spec.dds");
 		pMaterial->mBumpCoef = 2.f;
 		pGraphicEntity->SetMaterial(pMaterial);
 		pZMaterial = new NormalMapZMaterial();
@@ -91,17 +94,18 @@ void Game::Init()
 
 	//Light
 	AGSpotLight* pSpotLight = _mScene->GetNewSpotLight();
-	pSpotLight->mPosition = AGVector3f(0.f, 400.f, -500.f);
+	pSpotLight->mPosition = AGVector3f(0.f, 150.f, -550.f);
 	pSpotLight->SetDiffuse (0.7f, 0.7f, 0.7f);
 	pSpotLight->SetSpecular(1.0f, 1.0f, 1.0f);
-	AGVector3f Direction = AGVector3f(0.f, 0.f, 0.f) - pSpotLight->mPosition;
+	/*AGVector3f Direction = AGVector3f(0.f, 0.f, 0.f) - pSpotLight->mPosition;
 	AGVector3fNormalize(Direction);
-	pSpotLight->mDirection = Direction;
+	pSpotLight->mDirection = Direction;*/
+	pSpotLight->mDirection = AGVector3f(0.f, 0.f, 1.f);
 	pSpotLight->mInHalfAngle  = AGPi / 4.f;
 	pSpotLight->mOutHalfAngle = AGPi / 3.f;
 
 	//ShadowMap
-	AGShadowManager::GetSingleton()->AddNewShadowMap(pSpotLight, 200.f, 1200.f, _mScene);
+	AGShadowManager::GetSingleton()->AddNewShadowMap(pSpotLight, 100.f, 1200.f, _mScene);
 
 	_mCamera = new AG3DCamera ();
 	_mCamera->mFOV = AGDegToRad (45.f);
@@ -114,8 +118,8 @@ void Game::Init()
 	_mMouseInputsId = AGInputManager::GetSingleton()->AddInputs(new MouseInputs());
 
 	AGRenderer::GetSingleton()->mCamera.SetProjParams(AGDegToRad(45.f), 1920.f / 1080.f, 10.f, 10000.f);
-	D3DXVECTOR3 Eye    (-1193.999756f, 292.999969f, 191.999969f);
-	D3DXVECTOR3 LookAt (-1193.118530f, 292.629089f, 191.707870f);
+	D3DXVECTOR3 Eye    (572.883f, 281.734f, -745.927f);
+	D3DXVECTOR3 LookAt (572.398f, 281.624f, -745.059f);
 	AGRenderer::GetSingleton()->mCamera.SetViewParams(&Eye, &LookAt);
 
 	_mScene->Get3DCamera()->mPosition  = AGVector3f(-1193.999756f, 292.999969f, 191.999969f);
