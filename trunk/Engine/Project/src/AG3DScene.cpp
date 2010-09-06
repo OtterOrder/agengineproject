@@ -110,3 +110,12 @@ AGSkybox* AG3DScene::GetNewSkybox ()
 	_mpGraphicEntites.push_back(Ptr);
 	return pSkybox;
 }
+
+//------------------------------------------------------------------------------------------------------------------------------
+AGPRTLightProbe* AG3DScene::GetNewPRTSkybox ()
+{
+	AGPRTLightProbe* pSkybox = new AGPRTLightProbe();
+	AG3DGraphicEntity * Ptr=dynamic_cast<AG3DGraphicEntity*>(pSkybox);
+	_mpGraphicEntites.push_back(Ptr);
+	return pSkybox;
+}
