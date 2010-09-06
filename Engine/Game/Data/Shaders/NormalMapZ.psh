@@ -1,0 +1,1 @@
+float4 PSMain (float2 _Depth : TEXCOORD0)	: COLOR0{	float Depth = _Depth.x / _Depth.y;	return float4(Depth, Depth, Depth, 1.f);}
