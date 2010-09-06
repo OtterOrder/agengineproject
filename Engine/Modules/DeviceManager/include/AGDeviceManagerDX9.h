@@ -2,41 +2,53 @@
 
 #include "AGTypesDX9.h"
 #include "AGSingleton.h"
+#include "AGTextureFilter.h"
 
 //------------------------------------------------------------------------------------------------------------------------------
 class AGDeviceManager : public AGSingleton <AGDeviceManager>
 {
+friend class AGSingleton<AGDeviceManager>;
+
 private:
 	AGPD3D		_mpD3d;
 	AGPDevice	_mpDevice;
+	AGPSurface	_mpBackBuffer;
+	AGPSurface	_mpStencileBuffer;
+
+protected:
+								AGDeviceManager		();
+								~AGDeviceManager	();
+			void				Destroy				();
 
 public:
-	AGDeviceManager		();
-	~AGDeviceManager	();
+			bool				Initialize			();
+	inline	const AGPDevice&	GetDevice			()	const	{ return _mpDevice;			}
+	inline	const AGPSurface&	GetBackBuffer		()	const	{ return _mpBackBuffer;		}
+	inline	const AGPSurface&	GetStencilBuffer	()	const	{ return _mpStencileBuffer; }
+			void				RestoreBackBuffer	();
 
-	bool	Initialize	();
-	void	Destroy		();
+	inline	bool				BeginScene	()								{ if( SUCCEEDED(_mpDevice->BeginScene()) ) return true; return false; }
+	inline	void				EndScene	()								{ _mpDevice->EndScene(); }
 
-	inline const AGPDevice&	GetDevice	()	const	{ return _mpDevice; };
+	inline	void				Present		()								{ _mpDevice->Present(NULL, NULL, NULL, NULL); }
 
-	inline bool		BeginScene	()								{ if( SUCCEEDED(_mpDevice->BeginScene()) ) return true; return false; };
-	inline void		EndScene	()								{ _mpDevice->EndScene(); };
+	inline	void				Clear (u32 _Flags, u32 _Color, float _Z)	{ _mpDevice->Clear( 0, NULL, _Flags, _Color, _Z, 0 ); }
 
-	inline void		Present		()								{ _mpDevice->Present(NULL, NULL, NULL, NULL); };
+			void				DrawMesh				(AGPVertexDeclaration& _VertDelc, AGPVertexBuffer& _VB, u32& _VertexSize, AGPIndexBuffer& _IB, u32& _NbVertices, u32& _NbFaces);
+			void				DrawMeshTriangleStrip	(AGPVertexDeclaration& _VertDelc, AGPVertexBuffer& _VB, u32& _VertexSize, u32& _NbVertices);
 
-	inline void		Clear (u32 _Flags, u32 _Color, float _Z)	{ _mpDevice->Clear( 0, NULL, _Flags, _Color, _Z, 0 ); };
+	inline	void				SetVertexShader	(AGPVertexShader _VertexShader)		{ _mpDevice->SetVertexShader(_VertexShader);	}
+	inline	void				SetPixelShader	(AGPPixelShader _PixelShader  )		{ _mpDevice->SetPixelShader(_PixelShader);		}
 
-	void	DrawMesh (AGPVertexDeclaration& _VertDelc, AGPVertexBuffer& _VB, u32& _VertexSize, AGPIndexBuffer& _IB, u32& _NbVertices, u32& _NbFaces);
+			void				SetInt		(AGPConstantTable& _ConstTable, cStr _VarName, s32&			_Int	);
+			void				SetFloat	(AGPConstantTable& _ConstTable, cStr _VarName, float&		_Float	);
+			void				SetVector2f	(AGPConstantTable& _ConstTable, cStr _VarName, AGVector2f&	_Vector	);
+			void				SetVector3f	(AGPConstantTable& _ConstTable, cStr _VarName, AGVector3f&	_Vector	);
+			void				SetVector4f	(AGPConstantTable& _ConstTable, cStr _VarName, AGVector4f&	_Vector	);
+			void				SetMatrix	(AGPConstantTable& _ConstTable, cStr _VarName, AGMatrix&	_Matrix	);
+			void				SetTexture	(AGPConstantTable& _ConstTable, cStr _VarName, AGPTexture&	_Texture, AGTextureFilter* _Filter);
 
-	inline void		SetVertexShader	(AGPVertexShader _VertexShader)		{ _mpDevice->SetVertexShader(_VertexShader); };
-	inline void		SetPixelShader	(AGPPixelShader _PixelShader)		{ _mpDevice->SetPixelShader(_PixelShader); };
-
-	void	SetInt		(AGPConstantTable& _ConstTable, cStr _VarName, s32& _Int);
-	void	SetFloat	(AGPConstantTable& _ConstTable, cStr _VarName, float& _Float);
-	void	SetVector2f	(AGPConstantTable& _ConstTable, cStr _VarName, AGVector2f& _Vector);
-	void	SetVector3f	(AGPConstantTable& _ConstTable, cStr _VarName, AGVector3f& _Vector);
-	void	SetVector4f	(AGPConstantTable& _ConstTable, cStr _VarName, AGVector4f& _Vector);
-	void	SetMatrix	(AGPConstantTable& _ConstTable, cStr _VarName, AGMatrix& _Matrix);
-	void	SetTexture	(AGPConstantTable& _ConstTable, cStr _VarName, AGPTexture& _Texture);
+	inline	void				SetRenderTarget			(u32 _Index, AGPSurface _PSurface)		{ _mpDevice->SetRenderTarget(_Index, (LPDIRECT3DSURFACE9)(_PSurface));	}
+	inline	void				SetDepthStencilSurface	(AGPSurface _PSurface)					{ _mpDevice->SetDepthStencilSurface( (LPDIRECT3DSURFACE9)(_PSurface));	}
 	void	SetTexture	(AGPConstantTable& _ConstTable, cStr _VarName, AGPTextureCube& _Texture);
 };

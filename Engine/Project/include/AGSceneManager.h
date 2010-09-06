@@ -13,8 +13,9 @@ friend class AGSingleton<AGSceneManager>;
 vector<AGScene*>	_mpScenes;
 
 protected:
-	AGSceneManager		();
-	~AGSceneManager		();
+			AGSceneManager		();
+			~AGSceneManager		();
+	void	Destroy				();
 
 public:
 			void				Update	();

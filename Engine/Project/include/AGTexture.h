@@ -1,12 +1,15 @@
 #pragma once
 #include "AGResource.h"
 
+#include "AGTextureFilter.h"
+
 //------------------------------------------------------------------------------------------------------------------------------
 class AGTexture : public AGResource
 {
 private:
-	AGImageInfo	_mTextureInfo;
-	AGPTexture	_mPTexture;
+	AGImageInfo		_mTextureInfo;
+	AGPTexture		_mPTexture;
+	AGTextureFilter	_mFiltering;
 
 public:
 								AGTexture	();
@@ -15,5 +18,6 @@ public:
 			AGResourceResult	Load (cStr _FileName, void* _Parameters = NULL);
 			void				Release ();
 
-	inline	AGPTexture			GetTexture ()	{ return _mPTexture; }
+	inline	AGPTexture			GetTexture		()	{ return _mPTexture;	}
+	inline	AGTextureFilter*	GetFilter		()	{ return &_mFiltering;	}
 };

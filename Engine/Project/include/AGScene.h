@@ -14,8 +14,8 @@ public:
 	DefineVectorIterator(AGScene, Iterator);
 
 public:
-	AGScene  ();
-	~AGScene ();
+						AGScene  ();
+	virtual				~AGScene ();
 
 	virtual AGCamera*	GetCamera () =0;
 	virtual void		Update () =0;

@@ -11,6 +11,13 @@
 
 #include "NormalMapMaterial.h"
 
+////.
+#include "NormalMapZMaterial.h"
+#include "NormalMapShadowMaterial.h"
+////.
+
+#include "AGShadowManager.h"
+
 #include "AGTypesDX9.h"
 
 #include <iostream>
@@ -24,7 +31,7 @@ void Game::InitEngine()
 {
 	cout << "Game Init Engine" << endl;
 
-	AGWindowManager::GetSingleton()->SetSize(1920, 1080);
+	AGWindowManager::GetSingleton()->SetSize(1920, 1000);
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
@@ -32,16 +39,24 @@ void Game::Init()
 {
 	_mScene = AGSceneManager::GetSingleton()->GetNew3DScene();
 
-	NormalMapMaterial* Material;
-	AG3DGraphicEntity* pGraphicEntity;
+	NormalMapMaterial*			pMaterial;
+	NormalMapZMaterial*			pZMaterial;
+	NormalMapShadowMaterial*	pShadowMaterial;
+	AG3DGraphicEntity*			pGraphicEntity;
 
+	
 	// Floor
 	pGraphicEntity = _mScene->GetNewGraphicEntity();
 	pGraphicEntity->SetMesh(".\\Data\\Floor.x");
-	Material = new NormalMapMaterial();
-	Material->SetDiffuse(".\\Data\\Floor_Diff.dds");
-	Material->SetNormal (".\\Data\\Floor_Normal.dds");
-	pGraphicEntity->SetMaterial(Material);
+	pMaterial = new NormalMapMaterial();
+	pMaterial->SetDiffuse(".\\Data\\Floor_Diff.dds");
+	pMaterial->SetNormal (".\\Data\\Floor_Normal.dds");
+	pGraphicEntity->SetMaterial(pMaterial);
+	pZMaterial = new NormalMapZMaterial();
+	pGraphicEntity->SetZMaterial(pZMaterial);
+	pShadowMaterial = new NormalMapShadowMaterial();
+	pGraphicEntity->SetShadowMaterial(pShadowMaterial);
+
 
 	// Columns
 	float NbColumns = 10.f;
@@ -51,12 +66,16 @@ void Game::Init()
 	{
 		pGraphicEntity = _mScene->GetNewGraphicEntity();
 		pGraphicEntity->SetMesh(".\\Data\\Column.x");
-		Material = new NormalMapMaterial();
-		Material->SetDiffuse(".\\Data\\Column_Diff.dds"  );
-		Material->SetNormal (".\\Data\\Column_Normal.dds");
-		Material->mBumpCoef = 2.f;
-		pGraphicEntity->SetMaterial(Material);
-		pGraphicEntity->mPosition = AGVector3f( (i - (NbColumns-1.f)/2.f) * Distance , 0.f, -412.f);
+		pMaterial = new NormalMapMaterial();
+		pMaterial->SetDiffuse(".\\Data\\Column_Diff.dds"  );
+		pMaterial->SetNormal (".\\Data\\Column_Normal.dds");
+		pMaterial->mBumpCoef = 2.f;
+		pGraphicEntity->SetMaterial(pMaterial);
+		pZMaterial = new NormalMapZMaterial();
+		pGraphicEntity->SetZMaterial(pZMaterial);
+		pShadowMaterial = new NormalMapShadowMaterial();
+		pGraphicEntity->SetShadowMaterial(pShadowMaterial);
+		pGraphicEntity->mPosition = AGVector3f( (i - (NbColumns-1.f)/2.f) * Distance , -10.f, -412.f);
 	}
 
 	//Light
@@ -68,6 +87,9 @@ void Game::Init()
 	pSpotLight->mInHalfAngle  = AGPi / 4.f;
 	pSpotLight->mOutHalfAngle = AGPi / 3.f;
 
+	//ShadowMap
+	AGShadowManager::GetSingleton()->AddNewShadowMap(pSpotLight, 80.f, 303.f, _mScene);
+
 	_mCamera = new AG3DCamera ();
 	_mCamera->mFOV = AGDegToRad (45.f);
 	_mCamera->mRatio = 1.f;
@@ -78,7 +100,7 @@ void Game::Init()
 
 	_mMouseInputsId = AGInputManager::GetSingleton()->AddInputs(new MouseInputs());
 
-	AGRenderer::GetSingleton()->mCamera.SetProjParams(AGDegToRad(45.f), 1920.f / 1080.f, 10.f, 100000.f);
+	AGRenderer::GetSingleton()->mCamera.SetProjParams(AGDegToRad(45.f), 1920.f / 1080.f, 10.f, 3000.f);
 	D3DXVECTOR3 Eye    (-1193.999756f, 292.999969f, 191.999969f);
 	D3DXVECTOR3 LookAt (-1193.118530f, 292.629089f, 191.707870f);
 	AGRenderer::GetSingleton()->mCamera.SetViewParams(&Eye, &LookAt);

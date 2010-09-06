@@ -16,6 +16,7 @@ private:
 protected:
 	AGInputManager	();
 	~AGInputManager	();
+	void	Destroy	();
 
 public:
 	void	Update	();
