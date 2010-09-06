@@ -1,5 +1,7 @@
 #include "AGWDX9.h"
 
+#include "AGMesh.h"
+
 //------------------------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------------
 bool AGLoadMeshFromX (cStr _FileName,
@@ -17,13 +19,13 @@ bool AGLoadMeshFromX (cStr _FileName,
 	LPD3DXMESH pMesh = NULL;
 
 	result = D3DXLoadMeshFromX( _FileName,
-		D3DXMESH_MANAGED,
-		AGDeviceManager::GetSingleton()->GetDevice(),
-		NULL,				// Adjacency
-		NULL,				// Materials
-		NULL,				// EffectInstances
-		NULL,				// NumMaterials
-		&pMesh );			// Mesh
+								D3DXMESH_MANAGED,
+								AGDeviceManager::GetSingleton()->GetDevice(),
+								NULL,				// Adjacency
+								NULL,				// Materials
+								NULL,				// EffectInstances
+								NULL,				// NumMaterials
+								&pMesh );			// Mesh
 
 	if( SUCCEEDED(result) )
 	{
@@ -210,6 +212,44 @@ bool AGDrawVertexBuffer (UINT _Lenght, DWORD _FVF, AGPVertexBuffer& _VertexBuffe
 	AGDeviceManager::GetSingleton()->GetDevice()->SetStreamSource(0, _VertexBuffer, 0, _Lenght);
 
 	AGDeviceManager::GetSingleton()->GetDevice()->DrawPrimitive( D3DPT_TRIANGLESTRIP, _StartVertex, _PrimitiveCount );
+
+	return true;
+}
+//------------------------------------------------------------------------------------------------------------------------------
+bool AGCreateRenderTarget	(AGVector2u _Size, AGTextureFormat _Format,AGPTexture& _PTexture)
+{
+	if( FAILED( D3DXCreateTexture(	AGDeviceManager::GetSingleton()->GetDevice(),
+									_Size.x,
+									_Size.y,
+									1,
+									D3DUSAGE_RENDERTARGET,
+									(D3DFORMAT)_Format,
+									D3DPOOL_DEFAULT,
+									&_PTexture ) ) )
+	{
+		_PTexture = NULL;
+		return false;
+	}
+
+	return true;
+}
+
+//------------------------------------------------------------------------------------------------------------------------------
+bool AGCreateStencilSurface(AGVector2u _Size, AGTextureFormat _Format, AGPSurface& _PSurface)
+{
+	if( FAILED( AGDeviceManager::GetSingleton()->GetDevice()->CreateDepthStencilSurface(
+					_Size.x,
+					_Size.y,
+					(D3DFORMAT)_Format,
+					D3DMULTISAMPLE_NONE,
+					0,
+					TRUE,
+					&_PSurface,
+					NULL) ) )
+	{
+		_PSurface = NULL;
+		return false;
+	}
 
 	return true;
 }

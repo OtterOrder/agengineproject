@@ -50,14 +50,27 @@ bool AGDeviceManager::Initialize()
 
 	_mpDevice->SetRenderState( D3DRS_LIGHTING, FALSE);
 
+	_mpDevice->GetBackBuffer(0,0,D3DBACKBUFFER_TYPE_MONO, &_mpBackBuffer);
+	_mpDevice->GetDepthStencilSurface(&_mpStencileBuffer);
+
 	return true;
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
 void AGDeviceManager::Destroy()
 {
+	SAFE_RELEASE(_mpStencileBuffer);
+	SAFE_RELEASE(_mpBackBuffer);
 	SAFE_RELEASE(_mpDevice);
 	SAFE_RELEASE(_mpD3d);
+}
+
+//------------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------------
+void AGDeviceManager::RestoreBackBuffer()
+{
+	SetRenderTarget(0, _mpBackBuffer);
+	SetDepthStencilSurface(_mpStencileBuffer);
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
@@ -70,6 +83,16 @@ void AGDeviceManager::DrawMesh (AGPVertexDeclaration& _VertDelc, AGPVertexBuffer
 	_mpDevice->SetIndices(_IB);
 
 	_mpDevice->DrawIndexedPrimitive( D3DPT_TRIANGLELIST, 0, 0, _NbVertices, 0, _NbFaces);
+}
+
+//------------------------------------------------------------------------------------------------------------------------------
+void AGDeviceManager::DrawMeshTriangleStrip (AGPVertexDeclaration& _VertDelc, AGPVertexBuffer& _VB, u32& _VertexSize, u32& _NbVertices)
+{
+	_mpDevice->SetVertexDeclaration(_VertDelc);
+
+	_mpDevice->SetStreamSource(0, _VB, 0, _VertexSize);
+
+	_mpDevice->DrawPrimitive( D3DPT_TRIANGLESTRIP, 0, _NbVertices -2);
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
@@ -152,7 +175,7 @@ void AGDeviceManager::SetMatrix (AGPConstantTable& _ConstTable, cStr _VarName, A
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
-void AGDeviceManager::SetTexture(AGPConstantTable& _ConstTable, cStr _VarName, AGPTexture& _Texture)
+void AGDeviceManager::SetTexture(AGPConstantTable& _ConstTable, cStr _VarName, AGPTexture& _Texture, AGTextureFilter* _Filter)
 {
 	assert(_ConstTable);
 
@@ -165,8 +188,9 @@ void AGDeviceManager::SetTexture(AGPConstantTable& _ConstTable, cStr _VarName, A
 
 	_ConstTable->GetConstantDesc(textureHdl, &textureDesc, &count);
 	_mpDevice->SetTexture(textureDesc.RegisterIndex, _Texture);
-	_mpDevice->SetSamplerState(textureDesc.RegisterIndex, D3DSAMP_MINFILTER, D3DTEXF_LINEAR);
-	_mpDevice->SetSamplerState(textureDesc.RegisterIndex, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR);
+
+	_mpDevice->SetSamplerState(textureDesc.RegisterIndex, D3DSAMP_MINFILTER, (DWORD)_Filter->GetMinFilter());
+	_mpDevice->SetSamplerState(textureDesc.RegisterIndex, D3DSAMP_MAGFILTER, (DWORD)_Filter->GetMagFilter());
 }
 
 //------------------------------------------------------------------------------------------------------------------------------

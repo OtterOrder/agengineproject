@@ -8,25 +8,26 @@ template< typename T >
 class AGSingleton
 {
 private:
-	static T*	_mInstance;
+	static T	_mInstance;
 
 protected:
-			 AGSingleton	()	{};
-	virtual ~AGSingleton	()	{};
+					AGSingleton		()	{};
+	virtual			~AGSingleton	()	{};
+
+	virtual	void	Destroy			()	=0;
 
 public:
 	static inline T* GetSingleton()
 	{
-		SAFE_NEW(_mInstance, T);
-		return _mInstance;
+		return &_mInstance;
 	};
 
 	static void DestroySingleton()
 	{
-		SAFE_DELETE(_mInstance);
+		_mInstance.Destroy();
 	};
 };
 
 //------------------------------------------------------------------------------------------------------------------------------
 template< typename T >
-T* AGSingleton< T >::_mInstance = NULL;
+T AGSingleton< T >::_mInstance;

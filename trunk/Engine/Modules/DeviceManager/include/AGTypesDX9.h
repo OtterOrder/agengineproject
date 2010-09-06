@@ -58,6 +58,7 @@ typedef		D3DXMATRIX						AGMatrix;
 
 #define		AGMatrixScaling					D3DXMatrixScaling
 
+#define		AGMatrixLookAtLH				D3DXMatrixLookAtLH
 #define		AGMatrixPerspectiveFovLH		D3DXMatrixPerspectiveFovLH
 
 //------------------------------------------------------------------------------------------------------------------------------

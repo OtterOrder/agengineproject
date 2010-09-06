@@ -16,9 +16,9 @@ AG3DCamera::~AG3DCamera()
 void AG3DCamera::Update ()
 {
 	AGMatrix M1, M2, M3;
-	AGMatrixRotationX(&M1,  AGDegToRad(-mOrientation.x) );
-	AGMatrixRotationY(&M2,  AGDegToRad(-mOrientation.y) );
-	AGMatrixRotationZ(&M3,  AGDegToRad(-mOrientation.z) );
+	AGMatrixRotationX(&M1,  -mOrientation.x);
+	AGMatrixRotationY(&M2,  -mOrientation.y);
+	AGMatrixRotationZ(&M3,  -mOrientation.z);
 
 	M2 = M1 * M2 * M3;
 

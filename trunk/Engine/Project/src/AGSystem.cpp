@@ -4,6 +4,7 @@
 #include "AGDeviceManager.h"
 #include "AGInputManager.h"
 #include "AGSceneManager.h"
+#include "AGShadowManager.h"
 
 extern	AGGame* gGame;
 
@@ -29,7 +30,7 @@ void AGSystem::Initialize( void )
 	// Managers
 	AGWindowManager::GetSingleton()->Initialize();
 	AGDeviceManager::GetSingleton()->Initialize();
-
+	AGShadowManager::GetSingleton()->Initialize();
 
 	gGame->Init();
 }
@@ -40,10 +41,11 @@ void AGSystem::Destroy( void )
 	gGame->Destroy();
 	SAFE_DELETE(gGame);
 
-	AGDeviceManager::DestroySingleton();
-	AGWindowManager::DestroySingleton();
-	AGInputManager::DestroySingleton();
-	AGSceneManager::DestroySingleton();
+	AGInputManager::DestroySingleton	();
+	AGShadowManager::DestroySingleton	();
+	AGSceneManager::DestroySingleton	();
+	AGDeviceManager::DestroySingleton	();
+	AGWindowManager::DestroySingleton	();
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
@@ -59,6 +61,8 @@ void AGSystem::MainLoop( void )
 
 		AGSceneManager::GetSingleton()->Update();
 
+		AGShadowManager::GetSingleton()->Update();
+
 		AGSceneManager::GetSingleton()->Draw();
 	}
 }
@@ -71,8 +75,6 @@ int APIENTRY WinMain (HINSTANCE, HINSTANCE, LPSTR, int)
 {
 	AGSystem::GetSingleton()->Initialize();
 	AGSystem::GetSingleton()->MainLoop();
-	AGSystem::GetSingleton()->Destroy();
-
 	AGSystem::DestroySingleton();
 
 	return 0;

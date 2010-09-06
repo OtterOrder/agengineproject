@@ -182,6 +182,22 @@
 				RelativePath=".\Materials\include\NormalMapMaterial.h"
 				>
 			</File>
+			<File
+				RelativePath=".\Materials\src\NormalMapShadowMaterial.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Materials\include\NormalMapShadowMaterial.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Materials\src\NormalMapZMaterial.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Materials\include\NormalMapZMaterial.h"
+				>
+			</File>
 		</Filter>
 		<File
 			RelativePath=".\src\Game.cpp"

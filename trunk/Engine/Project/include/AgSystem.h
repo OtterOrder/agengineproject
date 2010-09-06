@@ -21,12 +21,12 @@ public:
 	AGTimer	mTimer;
 
 protected:
-	AGSystem	()	{};
-	~AGSystem	()	{};
+			AGSystem	()	{};
+			~AGSystem	()	{};
+	void	Destroy		();
 
 public:
 	void	Initialize	();
-	void	Destroy		();
 	void	MainLoop	();
 
 	void	ShutDown	()	{ _mShutDown = true; };

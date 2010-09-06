@@ -9,6 +9,12 @@ AGSceneManager::AGSceneManager()
 //------------------------------------------------------------------------------------------------------------------------------
 AGSceneManager::~AGSceneManager()
 {
+	Destroy();
+}
+
+//------------------------------------------------------------------------------------------------------------------------------
+void AGSceneManager::Destroy()
+{
 	AGScene::Iterator SceneIt;
 
 	for (SceneIt = _mpScenes.begin(); SceneIt != _mpScenes.end(); SceneIt++)

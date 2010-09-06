@@ -421,6 +421,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\AGTextureFilter.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\AGTextureFilter.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\AGVertexShader.cpp"
 				>
 			</File>
@@ -432,16 +440,8 @@
 		<Filter
 			Name="Managers"
 			>
-			<File
-				RelativePath=".\src\AGResourceManager.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\include\AGResourceManager.h"
-				>
-			</File>
 			<Filter
-				Name="Inputs"
+				Name="InputManager"
 				>
 				<File
 					RelativePath=".\src\AGInputManager.cpp"
@@ -457,6 +457,38 @@
 				</File>
 				<File
 					RelativePath=".\include\AGInputs.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="ResourceManager"
+				>
+				<File
+					RelativePath=".\src\AGResourceManager.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\AGResourceManager.h"
+					>
+				</File>
+			</Filter>
+			<Filter
+				Name="ShadowManager"
+				>
+				<File
+					RelativePath=".\src\AGShadowManager.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\AGShadowManager.h"
+					>
+				</File>
+				<File
+					RelativePath=".\src\AGShadowMap.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\include\AGShadowMap.h"
 					>
 				</File>
 			</Filter>
@@ -506,6 +538,18 @@
 			</File>
 			<File
 				RelativePath=".\include\AGSceneManager.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="PostProcesses"
+			>
+			<File
+				RelativePath=".\src\AGRenderTarget.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\AGRenderTarget.h"
 				>
 			</File>
 		</Filter>

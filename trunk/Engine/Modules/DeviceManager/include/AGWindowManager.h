@@ -25,8 +25,9 @@ private:
 
 
 protected:
-	AGWindowManager		()	{};
-	~AGWindowManager	();
+			AGWindowManager		()	{};
+			~AGWindowManager	()	{};
+	void	Destroy				();
 
 public:
 	//

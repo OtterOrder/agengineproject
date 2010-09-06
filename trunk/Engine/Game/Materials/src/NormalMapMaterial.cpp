@@ -19,6 +19,9 @@ NormalMapMaterial::NormalMapMaterial()
 //------------------------------------------------------------------------------------------------------------------------------
 NormalMapMaterial::~NormalMapMaterial()
 {
+	SAFE_RELEASE(_mpDiffuseTex);
+	SAFE_RELEASE(_mpNormalTex);
+
 	AG3DMaterial::~AG3DMaterial();
 }
 
@@ -34,8 +37,8 @@ void NormalMapMaterial::Apply (AG3DScene* _pScene, AG3DGraphicEntity* _pEntity)
 	_mpVertexShader->SetMatrix	("gWorldIT",		WorldMatrix);
 
 	// Pixel Shader
-	_mpPixelShader->SetTexture("DiffuseSampler", _mpDiffuseTex->GetTexture());
-	_mpPixelShader->SetTexture("NormalSampler",  _mpNormalTex->GetTexture() );
+	_mpPixelShader->SetTexture("DiffuseSampler", _mpDiffuseTex);
+	_mpPixelShader->SetTexture("NormalSampler",  _mpNormalTex);
 
 	_mpPixelShader->SetFloat("gBumpCoef", mBumpCoef);
 

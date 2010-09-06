@@ -19,6 +19,9 @@ private:
 	vector<AGLight*>			_mpLights;
 
 public:
+	bool						mShadowed;
+
+public:
 										AG3DScene  ();
 										~AG3DScene ();
 

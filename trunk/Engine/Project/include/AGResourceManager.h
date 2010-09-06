@@ -16,8 +16,9 @@ private:
 	map<u32, AGResource*> _mResourcesList;
 
 protected:
-	AGResourceManager		();
-	~AGResourceManager		();
+			AGResourceManager	();
+			~AGResourceManager	();
+	void	Destroy				();
 
 private:
 	void Add(cStr _FileName, u32 _Crc, AGResource* _pResource);
