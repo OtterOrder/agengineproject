@@ -4,7 +4,7 @@
 
 #include "AG3DGraphicEntity.h"
 #include "AGSpotLight.h"
-#include "AGSkybox.h"
+#include "AGPRTLightProbe.h"
 class AG3DCamera;
 class AGLight;
 
@@ -40,4 +40,5 @@ public:
 	inline	void						DeleteLight			(AGLight* _pLight)					{ RemoveLight(_pLight); SAFE_DELETE(_pLight); }
 
 			AGSkybox*					GetNewSkybox		();
+			AGPRTLightProbe*			GetNewPRTSkybox		();
 };

@@ -27,6 +27,7 @@ typedef		LPDIRECT3DINDEXBUFFER9			AGPIndexBuffer;
 typedef		LPDIRECT3DVERTEXDECLARATION9	AGPVertexDeclaration;
 typedef		D3DVERTEXELEMENT9				AGVertexElement;
 #define		AGMaxDecLength					MAXD3DDECLLENGTH
+#define		AGSHMaxOrder					D3DXSH_MAXORDER
 
 //--------------------------------------------------------------
 typedef		LPDIRECT3DVERTEXSHADER9			AGPVertexShader;
