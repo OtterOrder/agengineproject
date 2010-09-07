@@ -168,6 +168,15 @@ bool AGLoadTextureCube (cStr _FileName, AGPTextureCube& _PTexture, AGImageInfo& 
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
+bool AGCreateTextureCube (AGPTextureCube* _PTexture, UINT _Size)
+{
+	if( FAILED( D3DXCreateCubeTexture( AGDeviceManager::GetSingleton()->GetDevice(), _Size, 1, 0, D3DFMT_A16B16G16R16F, D3DPOOL_MANAGED, _PTexture )))
+		return false;
+
+	return true;
+}
+
+//------------------------------------------------------------------------------------------------------------------------------
 bool AGCreateVertexBuffer (UINT _Lenght, DWORD _FVF, AGPVertexBuffer& _VertexBuffer)
 {
 	if( FAILED( AGDeviceManager::GetSingleton()->GetDevice()->CreateVertexBuffer(
@@ -215,6 +224,7 @@ bool AGDrawVertexBuffer (UINT _Lenght, DWORD _FVF, AGPVertexBuffer& _VertexBuffe
 
 	return true;
 }
+
 //------------------------------------------------------------------------------------------------------------------------------
 bool AGCreateRenderTarget	(AGVector2u _Size, AGTextureFormat _Format,AGPTexture& _PTexture)
 {
@@ -250,6 +260,15 @@ bool AGCreateStencilSurface(AGVector2u _Size, AGTextureFormat _Format, AGPSurfac
 		_PSurface = NULL;
 		return false;
 	}
+
+	return true;
+}
+
+//------------------------------------------------------------------------------------------------------------------------------
+bool AGSHProjectCubeMap (UINT _Order, AGPTextureCube& _PTexture, float* _pROut, float* _pGOut, float* _pBOut)
+{
+	if( FAILED(D3DXSHProjectCubeMap( _Order, _PTexture, _pROut,_pGOut, _pBOut)))
+		return false;
 
 	return true;
 }
