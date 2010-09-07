@@ -33,6 +33,9 @@ bool AGLoadTexture			(cStr _FileName, AGPTexture& _PTexture, AGImageInfo& _Textu
 bool AGLoadTextureCube (cStr _FileName, AGPTextureCube& _PTexture, AGImageInfo& _TextureInfo);
 
 //------------------------------------------------------------------------------------------------------------------------------
+bool AGCreateTextureCube (AGPTextureCube* _PTexture, UINT _Size);
+
+//------------------------------------------------------------------------------------------------------------------------------
 bool AGCreateVertexBuffer (UINT _Lenght, DWORD _FVF, AGPVertexBuffer& _VertexBuffer);
 
 //------------------------------------------------------------------------------------------------------------------------------
@@ -49,3 +52,6 @@ bool AGCreateRenderTarget	(AGVector2u _Size, AGTextureFormat _Format,AGPTexture&
 
 //------------------------------------------------------------------------------------------------------------------------------
 bool AGCreateStencilSurface (AGVector2u _Size, AGTextureFormat _Format, AGPSurface& _PSurface);
+
+//------------------------------------------------------------------------------------------------------------------------------
+bool AGSHProjectCubeMap (UINT _Order, AGPTextureCube& _PTexture, float* _pROut, float* _pGOut, float* _pBOut);
