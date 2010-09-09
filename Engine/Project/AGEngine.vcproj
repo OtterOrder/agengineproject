@@ -545,11 +545,35 @@
 			Name="PostProcesses"
 			>
 			<File
+				RelativePath=".\src\AGPostProcess.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\AGPostProcess.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\AGRenderTarget.cpp"
 				>
 			</File>
 			<File
 				RelativePath=".\include\AGRenderTarget.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\AGShadowHBlur.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\AGShadowHBlur.h"
+				>
+			</File>
+			<File
+				RelativePath=".\src\AGShadowVBlur.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\AGShadowVBlur.h"
 				>
 			</File>
 		</Filter>

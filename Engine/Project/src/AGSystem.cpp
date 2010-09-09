@@ -5,6 +5,7 @@
 #include "AGInputManager.h"
 #include "AGSceneManager.h"
 #include "AGShadowManager.h"
+#include "AGPostProcess.h"
 
 extern	AGGame* gGame;
 
@@ -31,6 +32,7 @@ void AGSystem::Initialize( void )
 	AGWindowManager::GetSingleton()->Initialize();
 	AGDeviceManager::GetSingleton()->Initialize();
 	AGShadowManager::GetSingleton()->Initialize();
+	AGPostProcess::Initialize();
 
 	gGame->Init();
 }
@@ -42,6 +44,7 @@ void AGSystem::Destroy( void )
 	SAFE_DELETE(gGame);
 
 	AGInputManager::DestroySingleton	();
+	AGPostProcess::Destroy				();
 	AGShadowManager::DestroySingleton	();
 	AGSceneManager::DestroySingleton	();
 	AGDeviceManager::DestroySingleton	();

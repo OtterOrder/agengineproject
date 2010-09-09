@@ -12,6 +12,7 @@ struct VS_OUTPUT
 {
 	float4 Position	: POSITION;
 	float4 PosProj	: TEXCOORD0;
+	float2 ZW		: TEXCOORD1;
 };
 
 VS_OUTPUT VSMain (VS_INPUT _Input)
@@ -21,6 +22,7 @@ VS_OUTPUT VSMain (VS_INPUT _Input)
 	Output.Position 	= mul(float4(_Input.Position, 1.0f), g_mWorldViewProjection);
 	
 	Output.PosProj		= mul(mul(float4(_Input.Position, 1.0f), gWorld), gLightViewProj);
+	Output.ZW			= Output.Position.zw;
 
 	return Output;
 }

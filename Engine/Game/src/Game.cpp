@@ -97,9 +97,6 @@ void Game::Init()
 	pSpotLight->mPosition = AGVector3f(0.f, 150.f, -550.f);
 	pSpotLight->SetDiffuse (0.7f, 0.7f, 0.7f);
 	pSpotLight->SetSpecular(1.0f, 1.0f, 1.0f);
-	/*AGVector3f Direction = AGVector3f(0.f, 0.f, 0.f) - pSpotLight->mPosition;
-	AGVector3fNormalize(Direction);
-	pSpotLight->mDirection = Direction;*/
 	pSpotLight->mDirection = AGVector3f(0.f, 0.f, 1.f);
 	pSpotLight->mInHalfAngle  = AGPi / 4.f;
 	pSpotLight->mOutHalfAngle = AGPi / 3.f;
