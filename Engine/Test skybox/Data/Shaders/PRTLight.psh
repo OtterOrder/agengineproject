@@ -1,0 +1,140 @@
+
+sampler DiffuseSampler = 
+sampler_state
+{
+    AddressU  = WRAP;        
+	AddressV  = WRAP;
+    MipFilter = LINEAR;
+    MinFilter = LINEAR;
+    MagFilter = LINEAR;
+};
+
+sampler NormalSampler = 
+sampler_state
+{
+    AddressU  = WRAP;        
+	AddressV  = WRAP;
+    MipFilter = LINEAR;
+    MinFilter = LINEAR;
+    MagFilter = LINEAR;
+};
+
+samplerCUBE YlmCoeff0Sampler = 
+sampler_state
+{
+    MipFilter = LINEAR;
+    MinFilter = LINEAR;
+    MagFilter = POINT;
+};
+
+samplerCUBE YlmCoeff4Sampler = 
+sampler_state
+{
+    MipFilter = LINEAR;
+    MinFilter = LINEAR;
+    MagFilter = POINT;
+};
+
+samplerCUBE YlmCoeff8Sampler = 
+sampler_state
+{
+    MipFilter = LINEAR;
+    MinFilter = LINEAR;
+    MagFilter = POINT;
+};
+
+samplerCUBE YlmCoeff12Sampler = 
+sampler_state
+{
+    MipFilter = LINEAR;
+    MinFilter = LINEAR;
+    MagFilter = POINT;
+};
+
+void BuildSHTransferVector(float4 vLDPRTCoeffs, float4 vSHCoeffs[4], out float4 vTransferVector[4]) 
+{
+    vTransferVector[0] = float4(vLDPRTCoeffs.x, vLDPRTCoeffs.y, vLDPRTCoeffs.y, vLDPRTCoeffs.y)*vSHCoeffs[0];
+    vTransferVector[1] = float4(vLDPRTCoeffs.z, vLDPRTCoeffs.z, vLDPRTCoeffs.z, vLDPRTCoeffs.z)*vSHCoeffs[1];
+    vTransferVector[2] = float4(vLDPRTCoeffs.z, vLDPRTCoeffs.w, vLDPRTCoeffs.w, vLDPRTCoeffs.w)*vSHCoeffs[2];
+    vTransferVector[3] = float4(vLDPRTCoeffs.w, vLDPRTCoeffs.w, vLDPRTCoeffs.w, vLDPRTCoeffs.w)*vSHCoeffs[3];
+} 
+
+void Ylm(float3 vSHCoeffDir, out float4 vYlm[4]) 
+{  
+    vYlm[0] = texCUBE(YlmCoeff0Sampler,  vSHCoeffDir);
+    vYlm[1] = texCUBE(YlmCoeff4Sampler,  vSHCoeffDir);
+    vYlm[2] = texCUBE(YlmCoeff8Sampler,  vSHCoeffDir);
+    vYlm[3] = texCUBE(YlmCoeff12Sampler, vSHCoeffDir);  
+} 
+
+//--------------------------------------------------------------------------------------
+// 1 channel LDPRT, 3 channel lighting 
+//--------------------------------------------------------------------------------------
+float4 LDPRTCoeffLighting(float2 vTexCoord, float3 vSHCoeffDir) 
+{
+    float4 vExitRadiance[3] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+    float4 vTransferVector[4], vYlm[4];
+    Ylm(vSHCoeffDir, vYlm);
+
+    // A 4 channel texture can hold a cubics worth of LDPRT coefficients.
+    float4 vLDPRTCoeffs = { 1,  2.0/3.0, 0.25, 0};
+    BuildSHTransferVector(vLDPRTCoeffs, vYlm, vTransferVector);
+    
+    // Calculate sub-surface contribution
+    
+    // Negating the odd-order coefficients will mirror the lobe across the tangent plane
+    vLDPRTCoeffs.y *= -1; 
+    float4 vTransferVectorBehind[4];
+    BuildSHTransferVector(vLDPRTCoeffs, vYlm, vTransferVectorBehind);
+    
+    // The alpha channel of the albedo texture is being used to store how 'thin'
+    // the material is, where higher values allow more light to transmit.
+    // Although each color channel could have a separate thickness texture, we're
+    // simply scaling the amount of transmitted light by a channel scalar. 
+    float4 vAlbedo = tex2D(DiffuseSampler, vTexCoord);
+    for( int i=0; i < 4; i++ )
+    {
+        vTransferVectorBehind[i] *= vAlbedo.a;
+    }
+
+    // Red
+    vExitRadiance[0] += /*g_vLightCoeffsR[0] **/ (vTransferVector[0] + /*g_vColorTransmit.r **/ vTransferVectorBehind[0]);
+    vExitRadiance[0] += /*g_vLightCoeffsR[1] **/ (vTransferVector[1] + /*g_vColorTransmit.r **/ vTransferVectorBehind[1]);
+    vExitRadiance[0] += /*g_vLightCoeffsR[2] **/ (vTransferVector[2] + /*g_vColorTransmit.r **/ vTransferVectorBehind[2]);
+    vExitRadiance[0] += /*g_vLightCoeffsR[3] **/ (vTransferVector[3] + /*g_vColorTransmit.r **/ vTransferVectorBehind[3]);
+
+    // Green
+    vExitRadiance[1] += /*g_vLightCoeffsG[0] **/ (vTransferVector[0] + /*g_vColorTransmit.g **/ vTransferVectorBehind[0]);
+    vExitRadiance[1] += /*g_vLightCoeffsG[1] **/ (vTransferVector[1] + /*g_vColorTransmit.g **/ vTransferVectorBehind[1]);
+    vExitRadiance[1] += /*g_vLightCoeffsG[2] **/ (vTransferVector[2] + /*g_vColorTransmit.g **/ vTransferVectorBehind[2]);
+    vExitRadiance[1] += /*g_vLightCoeffsG[3] **/ (vTransferVector[3] + /*g_vColorTransmit.g **/ vTransferVectorBehind[3]);
+
+    // Blue
+    vExitRadiance[2] += /*g_vLightCoeffsB[0] **/ (vTransferVector[0] + /*g_vColorTransmit.b **/ vTransferVectorBehind[0]);
+    vExitRadiance[2] += /*g_vLightCoeffsB[1] **/ (vTransferVector[1] + /*g_vColorTransmit.b **/ vTransferVectorBehind[1]);
+    vExitRadiance[2] += /*g_vLightCoeffsB[2] **/ (vTransferVector[2] + /*g_vColorTransmit.b **/ vTransferVectorBehind[2]);
+    vExitRadiance[2] += /*g_vLightCoeffsB[3] **/ (vTransferVector[3] + /*g_vColorTransmit.b **/ vTransferVectorBehind[3]);
+
+    return float4( dot(vExitRadiance[0], 1), 
+                   dot(vExitRadiance[1], 1), 
+                   dot(vExitRadiance[2], 1), 
+                   1 );
+} 
+
+struct PS_INPUT
+{
+	float2 UV				: TEXCOORD0;
+	float3 WorldPosition	: TEXCOORD1;
+	float3 WorldNormal		: NORMAL;
+	float3 Tangent			: TEXCOORD2;
+	float3 Binormal			: TEXCOORD3;
+};
+
+float4 PSMain (PS_INPUT _Input)	: COLOR0
+{
+	// Albedo
+    float4 Color = tex2D(DiffuseSampler, _Input.UV);
+	float3 Normal = tex2D(NormalSampler, _Input.UV);
+	Color *= LDPRTCoeffLighting( _Input.UV, Normal );
+	return Color;
+}
