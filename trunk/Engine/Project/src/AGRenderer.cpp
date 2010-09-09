@@ -102,7 +102,6 @@ void AGRenderer::RenderShadow (AG3DScene* _pScene, AGMatrix _LightViewProjMatrix
 		pDeviceManager->EndScene();
 	}
 }
-////.
 
 //------------------------------------------------------------------------------------------------------------------------------
 void AGRenderer::Render (AG2DScene* _pScene)

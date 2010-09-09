@@ -50,5 +50,7 @@ public:
 
 	inline	void				SetRenderTarget			(u32 _Index, AGPSurface _PSurface)		{ _mpDevice->SetRenderTarget(_Index, (LPDIRECT3DSURFACE9)(_PSurface));	}
 	inline	void				SetDepthStencilSurface	(AGPSurface _PSurface)					{ _mpDevice->SetDepthStencilSurface( (LPDIRECT3DSURFACE9)(_PSurface));	}
-	void	SetTexture	(AGPConstantTable& _ConstTable, cStr _VarName, AGPTextureCube& _Texture);
+			void				SetTexture				(AGPConstantTable& _ConstTable, cStr _VarName, AGPTextureCube& _Texture);
+
+	inline	void				SetZTest				(bool _ZTest)							{ _mpDevice->SetRenderState(D3DRS_ZENABLE, _ZTest); }
 };
