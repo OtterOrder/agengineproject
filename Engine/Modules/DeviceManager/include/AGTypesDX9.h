@@ -42,6 +42,7 @@ typedef		LPDIRECT3DCUBETEXTURE9			AGPTextureCube;
 typedef		LPDIRECT3DSURFACE9				AGPSurface;
 typedef		D3DXIMAGE_INFO					AGImageInfo;
 typedef		D3DFORMAT						AGFormat;
+typedef		LPD3DXFILL3D					AGFill3D;
 
 //--------------------------------------------------------------
 typedef		D3DXMATRIX						AGMatrix;
@@ -60,6 +61,8 @@ typedef		D3DXMATRIX						AGMatrix;
 
 #define		AGMatrixLookAtLH				D3DXMatrixLookAtLH
 #define		AGMatrixPerspectiveFovLH		D3DXMatrixPerspectiveFovLH
+#define		AGVec3Normalize					D3DXVec3Normalize
+#define		AGSHEvalDirection				D3DXSHEvalDirection
 
 //------------------------------------------------------------------------------------------------------------------------------
 typedef		D3DXVECTOR2				AGVector2f;

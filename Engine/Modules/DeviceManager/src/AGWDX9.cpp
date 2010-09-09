@@ -44,13 +44,13 @@ bool AGLoadMeshFromX (cStr _FileName,
 
 		LPD3DXMESH pMeshTemp = pMesh;
 		pMesh = NULL;
-		pMeshTemp->CloneMesh(D3DXMESH_VB_MANAGED, vertDecl, AGDeviceManager::GetSingleton()->GetDevice(), &pMesh);
+		HRESULT hr = pMeshTemp->CloneMesh(D3DXMESH_VB_MANAGED, vertDecl, AGDeviceManager::GetSingleton()->GetDevice(), &pMesh);
 
 		SAFE_RELEASE(pMeshTemp);
 		pMeshTemp = pMesh;
 		pMesh = NULL;
 
-		D3DXComputeTangentFrameEx(	pMeshTemp, D3DDECLUSAGE_TEXCOORD, 0, D3DDECLUSAGE_TANGENT, 0,
+		HRESULT hr2 = D3DXComputeTangentFrameEx(	pMeshTemp, D3DDECLUSAGE_TEXCOORD, 0, D3DDECLUSAGE_TANGENT, 0,
 			D3DX_DEFAULT, 0, D3DDECLUSAGE_NORMAL, 0,
 			D3DXTANGENT_CALCULATE_NORMALS,
 			NULL, -1, 0, -1, &pMesh, NULL );
@@ -270,5 +270,13 @@ bool AGSHProjectCubeMap (UINT _Order, AGPTextureCube& _PTexture, float* _pROut, 
 	if( FAILED(D3DXSHProjectCubeMap( _Order, _PTexture, _pROut,_pGOut, _pBOut)))
 		return false;
 
+	return true;
+}
+
+//------------------------------------------------------------------------------------------------------------------------------
+bool AGFillCubeTexture (AGPTextureCube _PTexture, AGFill3D _PFunction, LPVOID _Data)
+{
+	if( FAILED(D3DXFillCubeTexture(_PTexture,_PFunction,_Data)))
+		return false;
 	return true;
 }
