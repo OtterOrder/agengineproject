@@ -1,0 +1,22 @@
+
+samplerCUBE DiffuseSampler = 
+sampler_state
+{
+    MipFilter = LINEAR;
+    MinFilter = LINEAR;
+    MagFilter = POINT;
+};
+
+
+struct PS_INPUT
+{
+    float4 Position : POSITION;
+    float3 CoordTex : TEXCOORD2;
+};
+
+float4 PSMain (PS_INPUT _Input)	: COLOR0
+{
+	float4 color=texCUBE( DiffuseSampler, _Input.CoordTex);
+	float4 color2=float4(1.0f, 0.0f, 0.0f, 1.0f);
+	return color;
+}
