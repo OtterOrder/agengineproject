@@ -55,3 +55,6 @@ bool AGCreateStencilSurface (AGVector2u _Size, AGTextureFormat _Format, AGPSurfa
 
 //------------------------------------------------------------------------------------------------------------------------------
 bool AGSHProjectCubeMap (UINT _Order, AGPTextureCube& _PTexture, float* _pROut, float* _pGOut, float* _pBOut);
+
+//------------------------------------------------------------------------------------------------------------------------------
+bool AGFillCubeTexture (AGPTextureCube _PTexture, AGFill3D _PFunction, LPVOID _Data);

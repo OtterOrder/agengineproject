@@ -53,6 +53,42 @@ void AGPRTLightProbe::ComputeSHFromCubeMap(AGPTextureCube _CubeMap)
 	AGSHProjectCubeMap(6, _CubeMap, _mpSkyBoxLightSH[0], _mpSkyBoxLightSH[1], _mpSkyBoxLightSH[2]);
 
 	// Now compute the SH projection of the skybox...
-	AGPTextureCube pSHCubeTex=NULL;
-	AGCreateTextureCube(&pSHCubeTex, 256);
+	_mpSHCubeTex=NULL;
+	AGCreateTextureCube(&_mpSHCubeTex, 256);
+
+	SHCubeProj projData;
+	projData.Init(_mpSkyBoxLightSH[0],_mpSkyBoxLightSH[1],_mpSkyBoxLightSH[2]);
+
+	AGFillCubeTexture(_mpSHCubeTex,SHCubeFill,&projData);
+}
+
+void WINAPI SHCubeFill(AGVector4f* pOut, 
+					   CONST AGVector3f* pTexCoord, 
+					   CONST AGVector3f* pTexelSize, 
+					   LPVOID pData)
+{
+	SHCubeProj* pCP = (SHCubeProj*) pData;
+	D3DXVECTOR3 vDir;
+
+	AGVec3Normalize(&vDir,pTexCoord);
+
+	float fVals[36];
+	AGSHEvalDirection( fVals, pCP->iOrderUse, &vDir );
+
+	(*pOut) = AGVector4f(0,0,0,0); // just clear it out...
+
+	int l, m, uIndex = 0;
+	for( l=0; l<pCP->iOrderUse; l++ ) 
+	{
+		const float fConvUse = pCP->fConvCoeffs[l];
+		for( m=0; m<2*l+1; m++ ) 
+		{
+			pOut->x += fConvUse*fVals[uIndex]*pCP->pRed[uIndex];
+			pOut->y += fConvUse*fVals[uIndex]*pCP->pGreen[uIndex];
+			pOut->z += fConvUse*fVals[uIndex]*pCP->pBlue[uIndex];
+			pOut->w = 1;
+
+			uIndex++;
+		}
+	}
 }
