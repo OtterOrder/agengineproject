@@ -1,7 +1,6 @@
 #include "AGSkybox.h"
 
 #include "AGUtilities.h"
-#include "AGWDX9.h"
 
 struct SKYBOX_VERTEX
 {
@@ -17,7 +16,7 @@ AGSkybox::AGSkybox()
 	_mpCubeTex = NULL;
 	_mpSizeVB = 1.0f;
 
-	SKYBOX_VERTEX sommets[24]=
+	SKYBOX_VERTEX _Vertices[24]=
 	{
 		// Front quad, NOTE: All quads face inward
 		{-_mpSizeVB, -_mpSizeVB,  _mpSizeVB},
@@ -58,13 +57,13 @@ AGSkybox::AGSkybox()
 
 	};
 
-	AGCreateVertexBuffer(sizeof(sommets), SKYBOX_FVF, _mpSkyVB);
+	AGCreateVertexBuffer(sizeof(_Vertices), SKYBOX_FVF, _mpSkyVB);
 
 	void * psommets;
 
-	AGLockVertexBuffer(0, _mpSkyVB, sizeof(sommets), (void **)&psommets);
+	AGLockVertexBuffer(0, _mpSkyVB, sizeof(_Vertices), (void **)&psommets);
 
-	memcpy(psommets,sommets,sizeof(sommets));
+	memcpy(psommets,_Vertices,sizeof(_Vertices));
 
 	AGUnlockVertexBuffer(_mpSkyVB);
 }
