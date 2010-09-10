@@ -46,7 +46,7 @@ public:
 			void				SetVector3f	(AGPConstantTable& _ConstTable, cStr _VarName, AGVector3f&	_Vector	);
 			void				SetVector4f	(AGPConstantTable& _ConstTable, cStr _VarName, AGVector4f&	_Vector	);
 			void				SetMatrix	(AGPConstantTable& _ConstTable, cStr _VarName, AGMatrix&	_Matrix	);
-			void				SetTexture	(AGPConstantTable& _ConstTable, cStr _VarName, AGPTexture&	_Texture, AGTextureFilter* _Filter);
+			void				SetTexture	(AGPConstantTable& _ConstTable, cStr _VarName, AGPTexture&	_Texture, AGSamplerState* _SampState);
 
 	inline	void				SetRenderTarget			(u32 _Index, AGPSurface _PSurface)		{ _mpDevice->SetRenderTarget(_Index, (LPDIRECT3DSURFACE9)(_PSurface));	}
 	inline	void				SetDepthStencilSurface	(AGPSurface _PSurface)					{ _mpDevice->SetDepthStencilSurface( (LPDIRECT3DSURFACE9)(_PSurface));	}

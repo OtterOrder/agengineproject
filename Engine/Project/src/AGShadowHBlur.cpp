@@ -21,15 +21,16 @@ AGShadowHBlur::~AGShadowHBlur ()
 //------------------------------------------------------------------------------------------------------------------------------
 void AGShadowHBlur::Setup ()
 {
-	AGTextureFilter Filter;
-	_mMaterial.GetPixelShader()->SetTexture("ShadowSampler", mpTexture, &Filter);
-	_mMaterial.GetPixelShader()->SetTexture("BlurSampler", mpBlurCoef, &Filter);
+	AGSamplerState SampState (AGSamplerState::Linear, AGSamplerState::Linear, AGSamplerState::Clamp, AGSamplerState::Clamp);
+	_mMaterial.GetPixelShader()->SetTexture("ShadowSampler", mpTexture, &SampState);
+	SampState = AGSamplerState ();
+	_mMaterial.GetPixelShader()->SetTexture("BlurSampler", mpBlurCoef, &SampState);
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
 void AGShadowHBlur::End ()
 {
-	AGTextureFilter Filter;
-	_mMaterial.GetPixelShader()->SetTexture("ShadowSampler", NULL, &Filter);
-	_mMaterial.GetPixelShader()->SetTexture("BlurSampler", NULL, &Filter);
+	AGSamplerState SampState;
+	_mMaterial.GetPixelShader()->SetTexture("ShadowSampler", NULL, &SampState);
+	_mMaterial.GetPixelShader()->SetTexture("BlurSampler", NULL, &SampState);
 }

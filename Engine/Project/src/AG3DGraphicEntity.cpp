@@ -88,13 +88,13 @@ void AG3DGraphicEntity::DrawShadow (CFirstPersonCamera* _pCamera, AGMatrix& _Lig
 	_mpShadowMaterial->GetVertexShader()->SetMatrix("g_mWorldViewProjection", viewProj);
 	_mpShadowMaterial->GetVertexShader()->SetMatrix("gWorld", _mWorld);
 	_mpShadowMaterial->GetVertexShader()->SetMatrix("gLightViewProj", _LightViewProjMatrix);
-	AGTextureFilter Filter (AGTextureFilter::Point, AGTextureFilter::Point);
-	_mpShadowMaterial->GetPixelShader()->SetTexture("gShadowMap", _ShadowMap, &Filter);
+	AGSamplerState SampState (AGSamplerState::Point, AGSamplerState::Point);
+	_mpShadowMaterial->GetPixelShader()->SetTexture("gShadowMap", _ShadowMap, &SampState);
 	////.
 
 	_mpMesh->Draw();
 
 	////.
-	_mpShadowMaterial->GetPixelShader()->SetTexture("gShadowMap", NULL, &Filter);
+	_mpShadowMaterial->GetPixelShader()->SetTexture("gShadowMap", NULL, &SampState);
 	////.
 }

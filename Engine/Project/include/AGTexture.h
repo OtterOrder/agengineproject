@@ -9,7 +9,7 @@ class AGTexture : public AGResource
 private:
 	AGImageInfo		_mTextureInfo;
 	AGPTexture		_mPTexture;
-	AGTextureFilter	_mFiltering;
+	AGSamplerState	_mSampState;
 
 public:
 								AGTexture	();
@@ -19,5 +19,5 @@ public:
 			void				Release ();
 
 	inline	AGPTexture			GetTexture		()	{ return _mPTexture;	}
-	inline	AGTextureFilter*	GetFilter		()	{ return &_mFiltering;	}
+	inline	AGSamplerState*		GetSamplerState	()	{ return &_mSampState;	}
 };
