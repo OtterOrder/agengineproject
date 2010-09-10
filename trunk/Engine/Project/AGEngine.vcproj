@@ -397,6 +397,14 @@
 				>
 			</File>
 			<File
+				RelativePath=".\src\AGSamplerState.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\include\AGSamplerState.h"
+				>
+			</File>
+			<File
 				RelativePath=".\src\AGSound.cpp"
 				>
 			</File>
@@ -418,14 +426,6 @@
 			</File>
 			<File
 				RelativePath=".\include\AGTextureCube.h"
-				>
-			</File>
-			<File
-				RelativePath=".\src\AGTextureFilter.cpp"
-				>
-			</File>
-			<File
-				RelativePath=".\include\AGTextureFilter.h"
 				>
 			</File>
 			<File

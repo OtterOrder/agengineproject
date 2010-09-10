@@ -117,6 +117,8 @@ void Game::Init()
 	AGRenderer::GetSingleton()->mCamera.SetProjParams(AGDegToRad(45.f), 1920.f / 1080.f, 10.f, 10000.f);
 	D3DXVECTOR3 Eye    (572.883f, 281.734f, -745.927f);
 	D3DXVECTOR3 LookAt (572.398f, 281.624f, -745.059f);
+	/*D3DXVECTOR3 Eye    (-29.0710f, 362.870f, 570.376f);
+	D3DXVECTOR3 LookAt (-29.1035f, 362.233f, 569.606f);*/
 	AGRenderer::GetSingleton()->mCamera.SetViewParams(&Eye, &LookAt);
 
 	_mScene->Get3DCamera()->mPosition  = AGVector3f(-1193.999756f, 292.999969f, 191.999969f);

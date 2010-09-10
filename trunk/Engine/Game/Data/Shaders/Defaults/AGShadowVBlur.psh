@@ -2,29 +2,30 @@
 sampler ShadowSampler;
 sampler BlurSampler;
 
-#define NBSAMPLES 12
+#define NBSAMPLES 24
 
 float4 PSMain (	float2 vUV : TEXCOORD0 )	: COLOR0
 {
 	float BlurFactor	= tex2D(BlurSampler, vUV).x;
-	
+
 	BlurFactor *= 0.5f;
-	
-	if (BlurFactor == 0.f)
-		return float4( (1.f).xxx, 1.f);
 
 	float Blurred0	= tex2D( ShadowSampler, vUV ).x;
 	float Blurred1	= Blurred0;
-	
+
+	if (BlurFactor == 0.f)
+		return float4( Blurred0.xxx, 1.f);	
+
 	for (int i= 1; i < NBSAMPLES; i++)
 	{
 		float2 Offset = float2(0.f, i*BlurFactor);
-		Blurred0 += tex2D( ShadowSampler, saturate(vUV + Offset) ).x;
-		Blurred1 += tex2D( ShadowSampler, saturate(vUV - Offset) ).x;
+
+		Blurred0 += tex2D( ShadowSampler, saturate(vUV + Offset)).x;
+		Blurred1 += tex2D( ShadowSampler, saturate(vUV - Offset)).x;
 	}
-	
+
 	Blurred0 /= NBSAMPLES;
 	Blurred1 /= NBSAMPLES;
-	
+
 	return float4( max(Blurred0, Blurred1).xxx, 1.f);
 }

@@ -1,14 +1,17 @@
-#include "AGTextureFilter.h"
+#include "AGSamplerState.h"
 
 //------------------------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------------
-AGTextureFilter::AGTextureFilter(AGFiltering _MinFilter, AGFiltering _MagFilter)
+AGSamplerState::AGSamplerState(AGFiltering _MinFilter, AGFiltering _MagFilter,
+							   AGAdressing _AdreesU,   AGAdressing _AdressV)
 {
 	SetMinFilter(_MinFilter);
 	SetMagFilter(_MagFilter);
+	SetAdressU  (_AdreesU);
+	SetAdressV  (_AdressV);
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
-AGTextureFilter::~AGTextureFilter()
+AGSamplerState::~AGSamplerState()
 {
 }

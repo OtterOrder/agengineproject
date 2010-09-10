@@ -175,7 +175,7 @@ void AGDeviceManager::SetMatrix (AGPConstantTable& _ConstTable, cStr _VarName, A
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
-void AGDeviceManager::SetTexture(AGPConstantTable& _ConstTable, cStr _VarName, AGPTexture& _Texture, AGTextureFilter* _Filter)
+void AGDeviceManager::SetTexture(AGPConstantTable& _ConstTable, cStr _VarName, AGPTexture& _Texture, AGSamplerState* _SampState)
 {
 	assert(_ConstTable);
 
@@ -189,8 +189,10 @@ void AGDeviceManager::SetTexture(AGPConstantTable& _ConstTable, cStr _VarName, A
 	_ConstTable->GetConstantDesc(textureHdl, &textureDesc, &count);
 	_mpDevice->SetTexture(textureDesc.RegisterIndex, _Texture);
 
-	_mpDevice->SetSamplerState(textureDesc.RegisterIndex, D3DSAMP_MINFILTER, (DWORD)_Filter->GetMinFilter());
-	_mpDevice->SetSamplerState(textureDesc.RegisterIndex, D3DSAMP_MAGFILTER, (DWORD)_Filter->GetMagFilter());
+	_mpDevice->SetSamplerState(textureDesc.RegisterIndex, D3DSAMP_MINFILTER, (DWORD)_SampState->GetMinFilter());
+	_mpDevice->SetSamplerState(textureDesc.RegisterIndex, D3DSAMP_MAGFILTER, (DWORD)_SampState->GetMagFilter());
+	_mpDevice->SetSamplerState(textureDesc.RegisterIndex, D3DSAMP_ADDRESSU,  (DWORD)_SampState->GetAdressU()  );
+	_mpDevice->SetSamplerState(textureDesc.RegisterIndex, D3DSAMP_ADDRESSV,  (DWORD)_SampState->GetAdressV()  );
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
