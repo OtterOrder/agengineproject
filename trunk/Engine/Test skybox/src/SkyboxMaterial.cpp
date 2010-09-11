@@ -18,6 +18,7 @@ SkyboxMaterial::SkyboxMaterial()
 SkyboxMaterial::~SkyboxMaterial()
 {
 	AG3DMaterial::~AG3DMaterial();
+	SAFE_RELEASE(_mpCubeTex);
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
@@ -38,10 +39,4 @@ void SkyboxMaterial::SetCubeMapFromFile (cStr _FileName)
 {
 	SAFE_DECREF(_mpCubeTex);
 	_mpCubeTex = AGResourceManager::GetSingleton()->Load<AGTextureCube>(_FileName);
-}
-
-//------------------------------------------------------------------------------------------------------------------------------
-void SkyboxMaterial::SetCubeMap (AGPTextureCube _TexCube)
-{
-	_Textest = _TexCube;
 }

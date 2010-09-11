@@ -35,41 +35,43 @@ void Game::Init()
 {
 	_mScene = AGSceneManager::GetSingleton()->GetNew3DScene();
 
-	PRTLightMaterial* Material;
 	AG3DGraphicEntity* pGraphicEntity;
+
+	
+	// Skybox
+	SkyboxMaterial* pSkyMaterial = new SkyboxMaterial();
+	pSkyMaterial->SetCubeMapFromFile(".\\Data\\rnl_cross.dds");
+	//pSkyMaterial->SetCubeMapFromFile(".\\Data\\uffizi_cross.dds");
+
+	AGPRTLightProbe* pLightProbe = _mScene->GetNewPRTSkybox();
+	pLightProbe->mScale = AGVector3f(1000.f, 1000.f, 1000.f);
+	pLightProbe->SetMaterial(pSkyMaterial);
+	float** SHCoef = pLightProbe->ComputeSHFromCubeMap(pSkyMaterial->GetCubeMap());
+	pLightProbe->Update();
 
 	// Object
 	pGraphicEntity = _mScene->GetNewGraphicEntity();
 	pGraphicEntity->SetMesh(".\\Data\\bat.x");
-	Material = new PRTLightMaterial();
-	pGraphicEntity->SetMaterial(Material);
-	Material->SetDiffuse(".\\Data\\batalbedo.dds");
-	Material->SetNormal	(".\\Data\\BatNormalMap.dds");
 
-	/*NormalMapMaterial*			pMaterial;
-	pGraphicEntity = _mScene->GetNewGraphicEntity();
-	pGraphicEntity->SetMesh(".\\Data\\dragon.x");
-	pMaterial = new NormalMapMaterial();
-	pMaterial->SetDiffuse	(".\\Data\\Floor_Diff.dds");
-	pMaterial->SetNormal	(".\\Data\\Floor_Normal.dds");
-	pMaterial->SetSpecular	(".\\Data\\Floor_Spec.dds");
-	pGraphicEntity->SetMaterial(pMaterial);*/
-
-	SkyboxMaterial* Material_0 = new SkyboxMaterial();
-	Material_0->SetCubeMapFromFile(".\\Data\\uffizi_cross.dds");
-
-	AGPRTLightProbe* pSkybox = _mScene->GetNewPRTSkybox();
-	pSkybox->mScale = AGVector3f(1000.f, 1000.f, 1000.f);
-	pSkybox->SetMaterial(Material_0);
-	pSkybox->ComputeSHFromCubeMap(Material_0->GetCubeMap());
-	pSkybox->Update();
+	PRTLightMaterial* pPRTMaterial = new PRTLightMaterial();
+	pGraphicEntity->SetMaterial(pPRTMaterial);
+	pPRTMaterial->SetDiffuse(".\\Data\\batalbedo.dds");
+	pPRTMaterial->SetNormal	(".\\Data\\BatNormalMap.dds");
+	pPRTMaterial->SetSHCoefFromCubeMap(SHCoef);
+	pPRTMaterial->SetYlmCoef0(pLightProbe->GetYlmCoeff0());
+	pPRTMaterial->SetYlmCoef4(pLightProbe->GetYlmCoeff4());
+	pPRTMaterial->SetYlmCoef8(pLightProbe->GetYlmCoeff8());
+	pPRTMaterial->SetYlmCoef12(pLightProbe->GetYlmCoeff12());
+	pPRTMaterial->SetTransmitColor(AGVector3f(1.0f, 1.0f, 1.0f));
+	pPRTMaterial->SetLightContribution(0.0f);
+	pPRTMaterial->SetEnvironmentContribution(0.5f);
 
 	//Light
 	AGSpotLight* pSpotLight = _mScene->GetNewSpotLight();
 	pSpotLight->mPosition = AGVector3f(0.f, 300.f, 0.f);
 	pSpotLight->SetDiffuse (0.7f, 0.7f, 0.7f);
 	pSpotLight->SetSpecular(1.0f, 1.0f, 1.0f);
-	pSpotLight->mDirection = AGVector3f(0.f, -1.f, 0.f);
+	pSpotLight->mDirection = AGVector3f(-0.7f, 0.5f, 0.3f);
 	pSpotLight->mInHalfAngle  = AGPi / 4.f;
 	pSpotLight->mOutHalfAngle = AGPi / 3.f;
 
@@ -84,11 +86,9 @@ void Game::Init()
 	_mMouseInputsId = AGInputManager::GetSingleton()->AddInputs(new MouseInputs());
 
 	AGRenderer::GetSingleton()->mCamera.SetProjParams(AGDegToRad(45.f), 1280.f / 1024.f, 0.1f, 100000.f);
-	D3DXVECTOR3 Eye    (100.0f, 100.0f, 100.0f);
+	D3DXVECTOR3 Eye    (0.0f, 0.0f, -10.0f);
 	D3DXVECTOR3 LookAt (0.0f, 0.0f, 0.0f);
 	AGRenderer::GetSingleton()->mCamera.SetViewParams(&Eye, &LookAt);
-
-	//_mScene->Get3DCamera()->mPosition  = AGVector3f(-1193.999756f, 292.999969f, 191.999969f);
 }
 
 //------------------------------------------------------------------------------------------------------------------------------

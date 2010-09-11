@@ -7,20 +7,26 @@
 class AGPRTLightProbe : public AGSkybox
 {
 protected:
-	float			_mpSkyBoxLightSH[3][AGSHMaxOrder*AGSHMaxOrder]; 
-	AGPTextureCube	_mpSHCubeTex;
+	float**			_mpSkyBoxLightSH; 
+	AGPTextureCube  _mpYlmCoeff0;
+	AGPTextureCube  _mpYlmCoeff4;
+	AGPTextureCube  _mpYlmCoeff8;
+	AGPTextureCube  _mpYlmCoeff12;
 
 public:
 				AGPRTLightProbe(const std::string& Name);
 				AGPRTLightProbe();
 	virtual		~AGPRTLightProbe();
 
-	void			ComputeSHFromCubeMap(AGPTextureCube _CubeMap);
-	AGPTextureCube	GetSHCubeMap() {return _mpSHCubeTex;}
+	float**			ComputeSHFromCubeMap(AGPTextureCube _CubeMap);
+	AGPTextureCube  GetYlmCoeff0();
+	AGPTextureCube  GetYlmCoeff4();
+	AGPTextureCube  GetYlmCoeff8();
+	AGPTextureCube  GetYlmCoeff12();
 
 };
 
-void WINAPI SHCubeFill(AGVector4f* pOut, 
-					   CONST AGVector3f* pTexCoord, 
-					   CONST AGVector3f* pTexelSize, 
-					   LPVOID pData);
+void WINAPI myFillBF(AGVector4f* pOut, 
+					 CONST AGVector3f* pTexCoord, 
+					 CONST AGVector3f* pTexelSize, 
+					 LPVOID pData);

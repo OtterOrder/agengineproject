@@ -31,7 +31,7 @@ VS_OUTPUT VSMain (VS_INPUT _Input)
 	Output.WorldNormal		= mul(float4(_Input.Normal,   0.0f), gWorldIT);
 	Output.UV				= _Input.UV;
 	Output.Tangent			= _Input.Tangent;
-	Output.Binormal			= _Input.Binormal;
+	Output.Binormal = cross( Output.WorldNormal	, Output.Tangent); 
 
 	return Output;
 }

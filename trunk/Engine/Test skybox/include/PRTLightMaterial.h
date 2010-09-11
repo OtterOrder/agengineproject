@@ -17,17 +17,27 @@ private:
 
 	AGTexture*	   _mpDiffuseTex;
 	AGTexture*	   _mpNormalTex;
+	float**		   _mpSHCoef;
+	FLOAT          _mpFRLC[D3DXSH_MAXORDER*D3DXSH_MAXORDER];
+	FLOAT          _mpFGLC[D3DXSH_MAXORDER*D3DXSH_MAXORDER];
+	FLOAT          _mpFBLC[D3DXSH_MAXORDER*D3DXSH_MAXORDER];
+	AGVector3f	   _mpTransmitColor;
+	float		   _mpLightContribution;
+	float		   _mpEnvironmentContribution;
 
 public:
 	PRTLightMaterial		();
 	virtual					~PRTLightMaterial	();
 
 	virtual	void			Apply (AG3DScene* _pScene, AG3DGraphicEntity* _pEntity);
-			void			SetDiffuse	(cStr _FileName);
-			void			SetNormal	(cStr _FileName);
+			void			SetDiffuse (cStr _FileName);
+			void			SetNormal (cStr _FileName);
+			void			SetSHCoefFromCubeMap (float** _Data);
+			void			SetTransmitColor (AGVector3f _Color);
+			void			SetLightContribution (float _Contrib);
+			void			SetEnvironmentContribution (float _Contrib);
+			void			SetYlmCoef0(AGPTextureCube _CubeMap) {_mpYlmCoeff0 = _CubeMap;}
+			void			SetYlmCoef4(AGPTextureCube _CubeMap) {_mpYlmCoeff4 = _CubeMap;}
+			void			SetYlmCoef8(AGPTextureCube _CubeMap) {_mpYlmCoeff8 = _CubeMap;}
+			void			SetYlmCoef12(AGPTextureCube _CubeMap) {_mpYlmCoeff12 = _CubeMap;}
 };
-
-void WINAPI myFillBF(AGVector4f* pOut, 
-					 CONST AGVector3f* pTexCoord, 
-					 CONST AGVector3f* pTexelSize, 
-					 LPVOID pData);

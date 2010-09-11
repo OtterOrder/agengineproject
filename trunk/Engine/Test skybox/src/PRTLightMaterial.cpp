@@ -14,27 +14,17 @@ PRTLightMaterial::PRTLightMaterial()
 
 	SetShader(".\\Data\\Shaders\\PRTLight.vsh", "VSMain", ".\\Data\\Shaders\\PRTLight.psh", "PSMain");
 
-	AGCreateTextureCube(&_mpYlmCoeff0, 32);
-	AGFillCubeTexture(_mpYlmCoeff0,myFillBF,(LPVOID)(INT_PTR)(0*4));
-
-	AGCreateTextureCube(&_mpYlmCoeff4, 32);
-	AGFillCubeTexture(_mpYlmCoeff4,myFillBF,(LPVOID)(INT_PTR)(1*4));
-
-	AGCreateTextureCube(&_mpYlmCoeff8, 32);
-	AGFillCubeTexture(_mpYlmCoeff8,myFillBF,(LPVOID)(INT_PTR)(2*4));
-
-	AGCreateTextureCube(&_mpYlmCoeff12, 32);
-	AGFillCubeTexture(_mpYlmCoeff12,myFillBF,(LPVOID)(INT_PTR)(3*4));
+	_mpTransmitColor = AGVector3f(1.0f, 1.0f, 1.0f);
+	_mpLightContribution = 5.0f;
+	_mpEnvironmentContribution = 0.6f;
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
 PRTLightMaterial::~PRTLightMaterial()
 {
 	AG3DMaterial::~AG3DMaterial();
-	/*SAFE_RELEASE(_mpYlmCoeff0);
-	SAFE_RELEASE(_mpYlmCoeff4);
-	SAFE_RELEASE(_mpYlmCoeff8);
-	SAFE_RELEASE(_mpYlmCoeff12);*/
+	SAFE_RELEASE(_mpDiffuseTex);
+	SAFE_RELEASE(_mpNormalTex);
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
@@ -44,14 +34,56 @@ void PRTLightMaterial::Apply (AG3DScene* _pScene, AG3DGraphicEntity* _pEntity)
 	// Vertex Shader
 	AGMatrix WorldMatrix = _pEntity->GetWorldMatrix();
 	_mpVertexShader->SetMatrix	("gWorld",			WorldMatrix);
+	AGMatrixInverse	 (&WorldMatrix, NULL, &WorldMatrix);
+	AGMatrixTranspose(&WorldMatrix, &WorldMatrix);
+	_mpVertexShader->SetMatrix	("gWorldIT",		WorldMatrix);
 
 	_mpPixelShader->SetTexture("DiffuseSampler", _mpDiffuseTex);
 	_mpPixelShader->SetTexture("NormalSampler",  _mpNormalTex);
 
 	_mpPixelShader->SetTexture("YlmCoeff0Sampler", _mpYlmCoeff0);
-	_mpPixelShader->SetTexture("YlmCoeff0Sampler", _mpYlmCoeff4);
-	_mpPixelShader->SetTexture("YlmCoeff0Sampler", _mpYlmCoeff8);
-	_mpPixelShader->SetTexture("YlmCoeff0Sampler", _mpYlmCoeff12);
+	_mpPixelShader->SetTexture("YlmCoeff4Sampler", _mpYlmCoeff4);
+	_mpPixelShader->SetTexture("YlmCoeff8Sampler", _mpYlmCoeff8);
+	_mpPixelShader->SetTexture("YlmCoeff12Sampler", _mpYlmCoeff12);
+
+	vector<AGLight*> Lights = _pScene->GetLights();
+	AGLight::Iterator LightIt;
+
+	AGSpotLight* SpotLight;
+
+	for (LightIt = Lights.begin(); LightIt != Lights.end(); LightIt++)
+	{
+		if ((*LightIt)->GetType() == AGLight::Spot)
+		{
+			SpotLight = (AGSpotLight*)(*LightIt);
+
+			// Create the spotlight
+			D3DXSHEvalConeLight( D3DXSH_MAXORDER, &SpotLight->mDirection, D3DX_PI/8.0f, 
+				_mpLightContribution, _mpLightContribution, _mpLightContribution, 
+				_mpFRLC, _mpFGLC, _mpFBLC);
+
+			float fSkybox[3][D3DXSH_MAXORDER*D3DXSH_MAXORDER];  
+
+			// Scale the light probe environment contribution based on input options    
+			D3DXSHScale( fSkybox[0], D3DXSH_MAXORDER, _mpSHCoef[0], _mpEnvironmentContribution);
+			D3DXSHScale( fSkybox[1], D3DXSH_MAXORDER, _mpSHCoef[1], _mpEnvironmentContribution);
+			D3DXSHScale( fSkybox[2], D3DXSH_MAXORDER, _mpSHCoef[2], _mpEnvironmentContribution);
+
+			// Combine the environment and the spotlight
+			D3DXSHAdd( _mpFRLC, D3DXSH_MAXORDER, _mpFRLC, fSkybox[0] );
+			D3DXSHAdd( _mpFGLC, D3DXSH_MAXORDER, _mpFGLC, fSkybox[1] );
+			D3DXSHAdd( _mpFBLC, D3DXSH_MAXORDER, _mpFBLC, fSkybox[2] );
+
+			_mpPixelShader->SetVector3f("gTransmitColor", _mpTransmitColor);
+			_mpPixelShader->SetFloatArray("gLightCoeffsR", _mpFRLC, 4 * sizeof(float));
+			_mpPixelShader->SetFloatArray("gLightCoeffsG", _mpFGLC, 4 * sizeof(float));
+			_mpPixelShader->SetFloatArray("gLightCoeffsB", _mpFBLC, 4 * sizeof(float));
+
+			return;
+		}
+	}
+
+	
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
@@ -70,20 +102,26 @@ void PRTLightMaterial::SetNormal (cStr _FileName)
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
-//------------------------------------------------------------------------------------------------------------------------------
-void WINAPI myFillBF(AGVector4f* pOut, 
-					 CONST AGVector3f* pTexCoord, 
-					 CONST AGVector3f* pTexelSize, 
-					 LPVOID pData)
+void PRTLightMaterial::SetSHCoefFromCubeMap (float** _Data)
 {
-	AGVector3f vDir;
-
-	int iBase = (int)(INT_PTR)pData;
-
-	AGVec3Normalize(&vDir,pTexCoord);
-
-	float fVals[16];
-	AGSHEvalDirection( fVals, 4, &vDir );
-
-	(*pOut) = AGVector4f(fVals[iBase+0],fVals[iBase+1],fVals[iBase+2],fVals[iBase+3]);
+	_mpSHCoef = _Data;
 }
+
+//------------------------------------------------------------------------------------------------------------------------------
+void PRTLightMaterial::SetTransmitColor (AGVector3f _Color)
+{
+	_mpTransmitColor = _Color;
+}
+
+//------------------------------------------------------------------------------------------------------------------------------
+void PRTLightMaterial::SetLightContribution (float _Contrib)
+{
+	_mpLightContribution = _Contrib;
+}
+
+//------------------------------------------------------------------------------------------------------------------------------
+void PRTLightMaterial::SetEnvironmentContribution (float _Contrib)
+{
+	_mpEnvironmentContribution = _Contrib;
+}
+
