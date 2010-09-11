@@ -91,6 +91,21 @@ void Game::Init()
 		pGraphicEntity->SetShadowMaterial(pShadowMaterial);
 		pGraphicEntity->mPosition = AGVector3f( (i - (NbColumns-1.f)/2.f) * Distance , -10.f, -412.f);
 	}
+/*
+	pGraphicEntity = _mScene->GetNewGraphicEntity();
+	pGraphicEntity->SetMesh(".\\Data\\Column.x");
+	pMaterial = new NormalMapMaterial();
+	pMaterial->SetDiffuse	(".\\Data\\Column_Diff.dds"  );
+	pMaterial->SetNormal	(".\\Data\\Column_Normal.dds");
+	pMaterial->SetSpecular	(".\\Data\\Column_Spec.dds");
+	pMaterial->mBumpCoef = 2.f;
+	pGraphicEntity->SetMaterial(pMaterial);
+	pZMaterial = new NormalMapZMaterial();
+	pGraphicEntity->SetZMaterial(pZMaterial);
+	pShadowMaterial = new NormalMapShadowMaterial();
+	pGraphicEntity->SetShadowMaterial(pShadowMaterial);
+	pGraphicEntity->mPosition = AGVector3f(-289.f, -10.f, 300.f);
+*/
 
 	//Light
 	AGSpotLight* pSpotLight = _mScene->GetNewSpotLight();

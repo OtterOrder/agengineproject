@@ -90,6 +90,12 @@ void AG3DGraphicEntity::DrawShadow (CFirstPersonCamera* _pCamera, AGMatrix& _Lig
 	_mpShadowMaterial->GetVertexShader()->SetMatrix("gLightViewProj", _LightViewProjMatrix);
 	AGSamplerState SampState (AGSamplerState::Point, AGSamplerState::Point);
 	_mpShadowMaterial->GetPixelShader()->SetTexture("gShadowMap", _ShadowMap, &SampState);
+	AGMatrix LightViewProjInv; 
+	AGMatrixInverse(&LightViewProjInv, NULL, &_LightViewProjMatrix);
+	AGMatrix LightToView;
+	AGMatrixMultiply(&LightToView, _pCamera->GetViewMatrix(), _pCamera->GetProjMatrix());
+	AGMatrixMultiply(&LightToView, &LightToView, &LightViewProjInv);
+	//_mpShadowMaterial->GetPixelShader()->SetMatrix("gLightToView", LightToView);
 	////.
 
 	_mpMesh->Draw();
