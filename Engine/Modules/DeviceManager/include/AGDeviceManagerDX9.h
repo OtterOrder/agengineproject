@@ -2,7 +2,7 @@
 
 #include "AGTypesDX9.h"
 #include "AGSingleton.h"
-#include "AGTextureFilter.h"
+#include "AGSamplerState.h"
 
 //------------------------------------------------------------------------------------------------------------------------------
 class AGDeviceManager : public AGSingleton <AGDeviceManager>
