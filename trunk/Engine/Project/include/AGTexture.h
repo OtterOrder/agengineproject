@@ -1,7 +1,7 @@
 #pragma once
 #include "AGResource.h"
 
-#include "AGTextureFilter.h"
+#include "AGSamplerState.h"
 
 //------------------------------------------------------------------------------------------------------------------------------
 class AGTexture : public AGResource
