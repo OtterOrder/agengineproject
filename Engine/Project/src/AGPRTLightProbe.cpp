@@ -39,56 +39,86 @@ struct SHCubeProj
 AGPRTLightProbe::AGPRTLightProbe()
 : AGSkybox()
 {
-	
+	_mpSkyBoxLightSH = new float* [3]; 
+	for ( int i=0 ; i < 3 ; i++) 
+		_mpSkyBoxLightSH[i] = new float [AGSHMaxOrder*AGSHMaxOrder];
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
 AGPRTLightProbe::~AGPRTLightProbe()
 {
+	for ( int i=0 ; i < 3 ; i++) 
+		delete _mpSkyBoxLightSH [i]; 
+	delete _mpSkyBoxLightSH; 
+
+	SAFE_RELEASE(_mpYlmCoeff0);
+	SAFE_RELEASE(_mpYlmCoeff4);
+	SAFE_RELEASE(_mpYlmCoeff8);
+	SAFE_RELEASE(_mpYlmCoeff12);
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
-void AGPRTLightProbe::ComputeSHFromCubeMap(AGPTextureCube _CubeMap)
+float** AGPRTLightProbe::ComputeSHFromCubeMap(AGPTextureCube _CubeMap)
 {
 	AGSHProjectCubeMap(6, _CubeMap, _mpSkyBoxLightSH[0], _mpSkyBoxLightSH[1], _mpSkyBoxLightSH[2]);
-
-	// Now compute the SH projection of the skybox...
-	_mpSHCubeTex=NULL;
-	AGCreateTextureCube(&_mpSHCubeTex, 256);
 
 	SHCubeProj projData;
 	projData.Init(_mpSkyBoxLightSH[0],_mpSkyBoxLightSH[1],_mpSkyBoxLightSH[2]);
 
-	AGFillCubeTexture(_mpSHCubeTex,SHCubeFill,&projData);
+	return _mpSkyBoxLightSH;
 }
 
-void WINAPI SHCubeFill(AGVector4f* pOut, 
-					   CONST AGVector3f* pTexCoord, 
-					   CONST AGVector3f* pTexelSize, 
-					   LPVOID pData)
+//------------------------------------------------------------------------------------------------------------------------------
+AGPTextureCube AGPRTLightProbe::GetYlmCoeff0()
 {
-	SHCubeProj* pCP = (SHCubeProj*) pData;
-	D3DXVECTOR3 vDir;
+	AGCreateTextureCube(&_mpYlmCoeff0, 32);
+	AGFillCubeTexture(_mpYlmCoeff0,myFillBF,(LPVOID)(INT_PTR)(0*4));
+
+	return _mpYlmCoeff0;
+}
+
+//------------------------------------------------------------------------------------------------------------------------------
+AGPTextureCube AGPRTLightProbe::GetYlmCoeff4()
+{
+	AGCreateTextureCube(&_mpYlmCoeff4, 32);
+	AGFillCubeTexture(_mpYlmCoeff4,myFillBF,(LPVOID)(INT_PTR)(1*4));
+
+	return _mpYlmCoeff4;
+}
+
+//------------------------------------------------------------------------------------------------------------------------------
+AGPTextureCube AGPRTLightProbe::GetYlmCoeff8()
+{
+	AGCreateTextureCube(&_mpYlmCoeff8, 32);
+	AGFillCubeTexture(_mpYlmCoeff8,myFillBF,(LPVOID)(INT_PTR)(2*4));
+
+	return _mpYlmCoeff8;
+}
+
+//------------------------------------------------------------------------------------------------------------------------------
+AGPTextureCube AGPRTLightProbe::GetYlmCoeff12()
+{
+	AGCreateTextureCube(&_mpYlmCoeff12, 32);
+	AGFillCubeTexture(_mpYlmCoeff12,myFillBF,(LPVOID)(INT_PTR)(3*4));
+
+	return _mpYlmCoeff12;
+}
+
+//------------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------------------------------------------------------------------------------
+void WINAPI myFillBF(AGVector4f* pOut, 
+					 CONST AGVector3f* pTexCoord, 
+					 CONST AGVector3f* pTexelSize, 
+					 LPVOID pData)
+{
+	AGVector3f vDir;
+
+	int iBase = (int)(INT_PTR)pData;
 
 	AGVec3Normalize(&vDir,pTexCoord);
 
-	float fVals[36];
-	AGSHEvalDirection( fVals, pCP->iOrderUse, &vDir );
+	float fVals[16];
+	AGSHEvalDirection( fVals, 4, &vDir );
 
-	(*pOut) = AGVector4f(0,0,0,0); // just clear it out...
-
-	int l, m, uIndex = 0;
-	for( l=0; l<pCP->iOrderUse; l++ ) 
-	{
-		const float fConvUse = pCP->fConvCoeffs[l];
-		for( m=0; m<2*l+1; m++ ) 
-		{
-			pOut->x += fConvUse*fVals[uIndex]*pCP->pRed[uIndex];
-			pOut->y += fConvUse*fVals[uIndex]*pCP->pGreen[uIndex];
-			pOut->z += fConvUse*fVals[uIndex]*pCP->pBlue[uIndex];
-			pOut->w = 1;
-
-			uIndex++;
-		}
-	}
+	(*pOut) = AGVector4f(fVals[iBase+0],fVals[iBase+1],fVals[iBase+2],fVals[iBase+3]);
 }

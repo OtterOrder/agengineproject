@@ -24,7 +24,9 @@ sampler_state
 {
     MipFilter = LINEAR;
     MinFilter = LINEAR;
-    MagFilter = POINT;
+    MagFilter = LINEAR;
+    ADDRESSU = CLAMP;
+    ADDRESSV = CLAMP;
 };
 
 samplerCUBE YlmCoeff4Sampler = 
@@ -32,7 +34,9 @@ sampler_state
 {
     MipFilter = LINEAR;
     MinFilter = LINEAR;
-    MagFilter = POINT;
+    MagFilter = LINEAR;
+    ADDRESSU = CLAMP;
+    ADDRESSV = CLAMP;
 };
 
 samplerCUBE YlmCoeff8Sampler = 
@@ -40,7 +44,9 @@ sampler_state
 {
     MipFilter = LINEAR;
     MinFilter = LINEAR;
-    MagFilter = POINT;
+    MagFilter = LINEAR;
+    ADDRESSU = CLAMP;
+    ADDRESSV = CLAMP;
 };
 
 samplerCUBE YlmCoeff12Sampler = 
@@ -48,8 +54,15 @@ sampler_state
 {
     MipFilter = LINEAR;
     MinFilter = LINEAR;
-    MagFilter = POINT;
+    MagFilter = LINEAR;
+    ADDRESSU = CLAMP;
+    ADDRESSV = CLAMP;
 };
+float3  gTransmitColor;
+
+float4   gLightCoeffsR[4];            // SH lighting coefficients
+float4   gLightCoeffsG[4];            // SH lighting coefficients
+float4   gLightCoeffsB[4];            // SH lighting coefficients
 
 void BuildSHTransferVector(float4 vLDPRTCoeffs, float4 vSHCoeffs[4], out float4 vTransferVector[4]) 
 {
@@ -77,7 +90,7 @@ float4 LDPRTCoeffLighting(float2 vTexCoord, float3 vSHCoeffDir)
     Ylm(vSHCoeffDir, vYlm);
 
     // A 4 channel texture can hold a cubics worth of LDPRT coefficients.
-    float4 vLDPRTCoeffs = { 1,  2.0/3.0, 0.25, 0};
+    float4 vLDPRTCoeffs = { 1,  2.0/3.0, 0.25, 0.01};
     BuildSHTransferVector(vLDPRTCoeffs, vYlm, vTransferVector);
     
     // Calculate sub-surface contribution
@@ -98,22 +111,22 @@ float4 LDPRTCoeffLighting(float2 vTexCoord, float3 vSHCoeffDir)
     }
 
     // Red
-    vExitRadiance[0] += /*g_vLightCoeffsR[0] **/ (vTransferVector[0] + /*g_vColorTransmit.r **/ vTransferVectorBehind[0]);
-    vExitRadiance[0] += /*g_vLightCoeffsR[1] **/ (vTransferVector[1] + /*g_vColorTransmit.r **/ vTransferVectorBehind[1]);
-    vExitRadiance[0] += /*g_vLightCoeffsR[2] **/ (vTransferVector[2] + /*g_vColorTransmit.r **/ vTransferVectorBehind[2]);
-    vExitRadiance[0] += /*g_vLightCoeffsR[3] **/ (vTransferVector[3] + /*g_vColorTransmit.r **/ vTransferVectorBehind[3]);
+    vExitRadiance[0] += gLightCoeffsR[0] * (vTransferVector[0] + gTransmitColor.r  * vTransferVectorBehind[0]);
+    vExitRadiance[0] += gLightCoeffsR[1] * (vTransferVector[1] + gTransmitColor.r  * vTransferVectorBehind[1]);
+    vExitRadiance[0] += gLightCoeffsR[2] * (vTransferVector[2] + gTransmitColor.r  * vTransferVectorBehind[2]);
+    vExitRadiance[0] += gLightCoeffsR[3] * (vTransferVector[3] + gTransmitColor.r  * vTransferVectorBehind[3]);
 
     // Green
-    vExitRadiance[1] += /*g_vLightCoeffsG[0] **/ (vTransferVector[0] + /*g_vColorTransmit.g **/ vTransferVectorBehind[0]);
-    vExitRadiance[1] += /*g_vLightCoeffsG[1] **/ (vTransferVector[1] + /*g_vColorTransmit.g **/ vTransferVectorBehind[1]);
-    vExitRadiance[1] += /*g_vLightCoeffsG[2] **/ (vTransferVector[2] + /*g_vColorTransmit.g **/ vTransferVectorBehind[2]);
-    vExitRadiance[1] += /*g_vLightCoeffsG[3] **/ (vTransferVector[3] + /*g_vColorTransmit.g **/ vTransferVectorBehind[3]);
+    vExitRadiance[1] += gLightCoeffsG[0] * (vTransferVector[0] + gTransmitColor.g  * vTransferVectorBehind[0]);
+    vExitRadiance[1] += gLightCoeffsG[1] * (vTransferVector[1] + gTransmitColor.g  * vTransferVectorBehind[1]);
+    vExitRadiance[1] += gLightCoeffsG[2] * (vTransferVector[2] + gTransmitColor.g  * vTransferVectorBehind[2]);
+    vExitRadiance[1] += gLightCoeffsG[3] * (vTransferVector[3] + gTransmitColor.g  * vTransferVectorBehind[3]);
 
     // Blue
-    vExitRadiance[2] += /*g_vLightCoeffsB[0] **/ (vTransferVector[0] + /*g_vColorTransmit.b **/ vTransferVectorBehind[0]);
-    vExitRadiance[2] += /*g_vLightCoeffsB[1] **/ (vTransferVector[1] + /*g_vColorTransmit.b **/ vTransferVectorBehind[1]);
-    vExitRadiance[2] += /*g_vLightCoeffsB[2] **/ (vTransferVector[2] + /*g_vColorTransmit.b **/ vTransferVectorBehind[2]);
-    vExitRadiance[2] += /*g_vLightCoeffsB[3] **/ (vTransferVector[3] + /*g_vColorTransmit.b **/ vTransferVectorBehind[3]);
+    vExitRadiance[2] += gLightCoeffsB[0] * (vTransferVector[0] + gTransmitColor.b  * vTransferVectorBehind[0]);
+    vExitRadiance[2] += gLightCoeffsB[1] * (vTransferVector[1] + gTransmitColor.b  * vTransferVectorBehind[1]);
+    vExitRadiance[2] += gLightCoeffsB[2] * (vTransferVector[2] + gTransmitColor.b  * vTransferVectorBehind[2]);
+    vExitRadiance[2] += gLightCoeffsB[3] * (vTransferVector[3] + gTransmitColor.b  * vTransferVectorBehind[3]);
 
     return float4( dot(vExitRadiance[0], 1), 
                    dot(vExitRadiance[1], 1), 
@@ -133,8 +146,13 @@ struct PS_INPUT
 float4 PSMain (PS_INPUT _Input)	: COLOR0
 {
 	// Albedo
-    float4 Color = tex2D(DiffuseSampler, _Input.UV);
+    float4 Color = /*tex2D(DiffuseSampler, _Input.UV)*/float4(1.0f, 1.0f, 1.0f, 1.0f);
+	
 	float3 Normal = tex2D(NormalSampler, _Input.UV);
-	Color *= LDPRTCoeffLighting( _Input.UV, Normal );
+	Normal = (Normal * 2) - 1;
+	float3x3 mTangentFrame = {_Input.Tangent,_Input.Binormal, normalize(_Input.WorldNormal) };
+    Normal = mul( Normal, mTangentFrame );
+	
+	Color *= LDPRTCoeffLighting( _Input.UV, Normal);
 	return Color;
 }

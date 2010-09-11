@@ -123,6 +123,19 @@ void AGDeviceManager::SetFloat (AGPConstantTable& _ConstTable, cStr _VarName, fl
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
+void AGDeviceManager::SetFloatArray (AGPConstantTable& _ConstTable, cStr _VarName, float* _Float, UINT _Count)
+{
+	assert(_ConstTable);
+
+	AGHandle varHdl = _ConstTable->GetConstantByName(0, _VarName);
+
+	if( AGWarning(varHdl == NULL, "Set FloatArray. Variable handle not found. Variable : %s", _VarName) )
+		return;
+
+	_ConstTable->SetFloatArray(_mpDevice, varHdl, _Float, _Count);
+}
+
+//------------------------------------------------------------------------------------------------------------------------------
 void AGDeviceManager::SetVector2f (AGPConstantTable& _ConstTable, cStr _VarName, AGVector2f& _Vector)
 {
 	assert(_ConstTable);
