@@ -146,7 +146,7 @@ struct PS_INPUT
 float4 PSMain (PS_INPUT _Input)	: COLOR0
 {
 	// Albedo
-    float4 Color = /*tex2D(DiffuseSampler, _Input.UV)*/float4(1.0f, 1.0f, 1.0f, 1.0f);
+    float4 Color = tex2D(DiffuseSampler, _Input.UV)/*float4(1.0f, 1.0f, 1.0f, 1.0f)*/;
 	
 	float3 Normal = tex2D(NormalSampler, _Input.UV);
 	Normal = (Normal * 2) - 1;

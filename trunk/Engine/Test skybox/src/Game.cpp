@@ -40,7 +40,8 @@ void Game::Init()
 	
 	// Skybox
 	SkyboxMaterial* pSkyMaterial = new SkyboxMaterial();
-	pSkyMaterial->SetCubeMapFromFile(".\\Data\\rnl_cross.dds");
+	//pSkyMaterial->SetCubeMapFromFile(".\\Data\\rnl_cross.dds");
+	pSkyMaterial->SetCubeMapFromFile(".\\Data\\galileo_cross.dds");
 	//pSkyMaterial->SetCubeMapFromFile(".\\Data\\uffizi_cross.dds");
 
 	AGPRTLightProbe* pLightProbe = _mScene->GetNewPRTSkybox();
@@ -51,22 +52,22 @@ void Game::Init()
 
 	// Object
 	pGraphicEntity = _mScene->GetNewGraphicEntity();
-	pGraphicEntity->SetMesh(".\\Data\\bat.x");
+	pGraphicEntity->SetMesh(".\\Data\\bunny.x");
 
 	PRTLightMaterial* pPRTMaterial = new PRTLightMaterial();
 	pGraphicEntity->SetMaterial(pPRTMaterial);
-	pPRTMaterial->SetDiffuse(".\\Data\\batalbedo.dds");
-	pPRTMaterial->SetNormal	(".\\Data\\BatNormalMap.dds");
+	pPRTMaterial->SetDiffuse(".\\Data\\marble.dds");
+	pPRTMaterial->SetNormal	(".\\Data\\marble_normal.dds");
 	pPRTMaterial->SetSHCoefFromCubeMap(SHCoef);
 	pPRTMaterial->SetYlmCoef0(pLightProbe->GetYlmCoeff0());
 	pPRTMaterial->SetYlmCoef4(pLightProbe->GetYlmCoeff4());
 	pPRTMaterial->SetYlmCoef8(pLightProbe->GetYlmCoeff8());
 	pPRTMaterial->SetYlmCoef12(pLightProbe->GetYlmCoeff12());
 	pPRTMaterial->SetTransmitColor(AGVector3f(1.0f, 1.0f, 1.0f));
-	pPRTMaterial->SetLightContribution(0.0f);
-	pPRTMaterial->SetEnvironmentContribution(0.5f);
+	pPRTMaterial->SetLightContribution(2.0f);
+	pPRTMaterial->SetEnvironmentContribution(0.3f);
 
-	//Light
+	// Light
 	AGSpotLight* pSpotLight = _mScene->GetNewSpotLight();
 	pSpotLight->mPosition = AGVector3f(0.f, 300.f, 0.f);
 	pSpotLight->SetDiffuse (0.7f, 0.7f, 0.7f);
