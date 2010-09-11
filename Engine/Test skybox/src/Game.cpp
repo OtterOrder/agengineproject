@@ -87,7 +87,7 @@ void Game::Init()
 	_mMouseInputsId = AGInputManager::GetSingleton()->AddInputs(new MouseInputs());
 
 	AGRenderer::GetSingleton()->mCamera.SetProjParams(AGDegToRad(45.f), 1280.f / 1024.f, 0.1f, 100000.f);
-	D3DXVECTOR3 Eye    (0.0f, 0.0f, -10.0f);
+	D3DXVECTOR3 Eye    (0.0f, 0.0f, -70.0f);
 	D3DXVECTOR3 LookAt (0.0f, 0.0f, 0.0f);
 	AGRenderer::GetSingleton()->mCamera.SetViewParams(&Eye, &LookAt);
 }
