@@ -44,7 +44,7 @@ void NormalMapMaterial::Apply (AG3DScene* _pScene, AG3DGraphicEntity* _pEntity)
 	/*_mpPixelShader->SetTexture("NormalSampler",  _mpNormalTex);
 	_mpPixelShader->SetTexture("SpecularSampler",  _mpSpecularTex);*/
 
-	AGTextureFilter Filter;
+	//AGTextureFilter Filter;
 	//_mpPixelShader->SetTexture("ShadowSampler",  AGShadowManager::GetSingleton()->GetShadows(), &Filter);
 
 	_mpPixelShader->SetFloat("gBumpCoef", mBumpCoef);
