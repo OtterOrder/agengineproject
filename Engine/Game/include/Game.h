@@ -17,6 +17,9 @@ private:
 
 	u32					_mMouseInputsId;
 
+	float				_mResX;
+	float				_mResY;
+
 public:
 	Game	()	{};
 	~Game	()	{};

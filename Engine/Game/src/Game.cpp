@@ -31,7 +31,9 @@ void Game::InitEngine()
 {
 	cout << "Game Init Engine" << endl;
 
-	AGWindowManager::GetSingleton()->SetSize(1920, 1000);
+	_mResX = 1920.f;	//1920
+	_mResY = 1000.f;	//1000
+	AGWindowManager::GetSingleton()->SetSize((u32)_mResX, (u32)_mResY);
 }
 
 //------------------------------------------------------------------------------------------------------------------------------
@@ -105,7 +107,7 @@ void Game::Init()
 	pShadowMaterial = new NormalMapShadowMaterial();
 	pGraphicEntity->SetShadowMaterial(pShadowMaterial);
 	pGraphicEntity->mPosition = AGVector3f(-289.f, -10.f, 300.f);
-*/
+//*/
 
 	//Light
 	AGSpotLight* pSpotLight = _mScene->GetNewSpotLight();
@@ -129,11 +131,16 @@ void Game::Init()
 
 	_mMouseInputsId = AGInputManager::GetSingleton()->AddInputs(new MouseInputs());
 
-	AGRenderer::GetSingleton()->mCamera.SetProjParams(AGDegToRad(45.f), 1920.f / 1080.f, 10.f, 10000.f);
-	D3DXVECTOR3 Eye    (572.883f, 281.734f, -745.927f);
+	AGRenderer::GetSingleton()->mCamera.SetProjParams(AGDegToRad(45.f), _mResX/_mResY, 10.f, 10000.f);
+	D3DXVECTOR3 Eye    (572.883f, 281.734f, -745.927f);		// global
 	D3DXVECTOR3 LookAt (572.398f, 281.624f, -745.059f);
-	/*D3DXVECTOR3 Eye    (-29.0710f, 362.870f, 570.376f);
+	/*D3DXVECTOR3 Eye    (215.188f, 170.307f, 118.412f);		// ZBias
+	D3DXVECTOR3 LookAt (214.499f, 169.793f, 117.900f);*/
+	/*D3DXVECTOR3 Eye    (-29.0710f, 362.870f, 570.376f);	// Blur change
 	D3DXVECTOR3 LookAt (-29.1035f, 362.233f, 569.606f);*/
+	/*D3DXVECTOR3 Eye    (253.462f, 462.741f, 141.285f);			// HBlur & VBlur
+	D3DXVECTOR3 LookAt (252.950f, 462.351f, 142.051f);*/
+
 	AGRenderer::GetSingleton()->mCamera.SetViewParams(&Eye, &LookAt);
 
 	_mScene->Get3DCamera()->mPosition  = AGVector3f(-1193.999756f, 292.999969f, 191.999969f);
