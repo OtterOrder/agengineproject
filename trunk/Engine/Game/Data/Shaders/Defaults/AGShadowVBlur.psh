@@ -14,7 +14,7 @@ float4 PSMain (	float2 vUV : TEXCOORD0 )	: COLOR0
 	float Blurred1	= Blurred0;
 
 	if (BlurFactor == 0.f)
-		return float4( Blurred0.xxx, 1.f);	
+		return float4( Blurred0.xxx, 1.f);
 
 	for (int i= 1; i < NBSAMPLES; i++)
 	{
