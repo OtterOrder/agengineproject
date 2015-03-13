@@ -1,0 +1,1 @@
+This project's aim is to try to develeop our own game engine to implement some knowledges learned in courses en interships.
